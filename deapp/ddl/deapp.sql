@@ -2,6 +2,7 @@
 -- PostgreSQL database dump
 --
 
+/*
 -- Dumped from database version 9.2.3
 -- Dumped by pg_dump version 9.2.3
 -- Started on 2013-07-24 09:36:34 BST
@@ -199,6 +200,8 @@ SET default_tablespace = deapp;
 
 SET default_with_oids = false;
 
+*/
+
 --
 -- TOC entry 294 (class 1259 OID 24763)
 -- Name: de_chromosomal_region; Type: TABLE; Schema: deapp; Owner: deapp; Tablespace: deapp
@@ -218,22 +221,17 @@ CREATE TABLE de_chromosomal_region (
 );
 
 
-ALTER TABLE deapp.de_chromosomal_region OWNER TO deapp;
+--ALTER TABLE deapp.de_chromosomal_region OWNER TO deapp;
 
 --
 -- TOC entry 295 (class 1259 OID 24766)
 -- Name: de_chromosomal_region_region_id_seq; Type: SEQUENCE; Schema: deapp; Owner: deapp
 --
 
-CREATE SEQUENCE de_chromosomal_region_region_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+CREATE SEQUENCE de_chromosomal_region_region_id_seq;
 
 
-ALTER TABLE deapp.de_chromosomal_region_region_id_seq OWNER TO deapp;
+--ALTER TABLE deapp.de_chromosomal_region_region_id_seq OWNER TO deapp;
 
 --
 -- TOC entry 3914 (class 0 OID 0)
@@ -241,7 +239,7 @@ ALTER TABLE deapp.de_chromosomal_region_region_id_seq OWNER TO deapp;
 -- Name: de_chromosomal_region_region_id_seq; Type: SEQUENCE OWNED BY; Schema: deapp; Owner: deapp
 --
 
-ALTER SEQUENCE de_chromosomal_region_region_id_seq OWNED BY de_chromosomal_region.region_id;
+-- ALTER SEQUENCE de_chromosomal_region_region_id_seq OWNED BY de_chromosomal_region.region_id;
 
 
 --
@@ -253,14 +251,14 @@ CREATE TABLE de_gpl_info (
     platform character varying(50) NOT NULL,
     title character varying(500),
     organism character varying(100),
-    annotation_date timestamp without time zone,
+    annotation_date timestamp, -- without time zone,
     marker_type character varying(100),
     genome_build character varying(20),
     release_nbr numeric
 );
 
 
-ALTER TABLE deapp.de_gpl_info OWNER TO deapp;
+--ALTER TABLE deapp.de_gpl_info OWNER TO deapp;
 
 --
 -- TOC entry 297 (class 1259 OID 24774)
@@ -277,22 +275,17 @@ CREATE TABLE de_mrna_annotation (
 );
 
 
-ALTER TABLE deapp.de_mrna_annotation OWNER TO deapp;
+--ALTER TABLE deapp.de_mrna_annotation OWNER TO deapp;
 
 --
 -- TOC entry 298 (class 1259 OID 24780)
 -- Name: de_parent_cd_seq; Type: SEQUENCE; Schema: deapp; Owner: deapp
 --
 
-CREATE SEQUENCE de_parent_cd_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 20;
+CREATE SEQUENCE de_parent_cd_seq;
 
 
-ALTER TABLE deapp.de_parent_cd_seq OWNER TO deapp;
+--ALTER TABLE deapp.de_parent_cd_seq OWNER TO deapp;
 
 --
 -- TOC entry 299 (class 1259 OID 24782)
@@ -311,7 +304,7 @@ CREATE TABLE de_pathway (
 );
 
 
-ALTER TABLE deapp.de_pathway OWNER TO deapp;
+--ALTER TABLE deapp.de_pathway OWNER TO deapp;
 
 --
 -- TOC entry 300 (class 1259 OID 24788)
@@ -326,7 +319,7 @@ CREATE TABLE de_pathway_gene (
 );
 
 
-ALTER TABLE deapp.de_pathway_gene OWNER TO deapp;
+--ALTER TABLE deapp.de_pathway_gene OWNER TO deapp;
 
 --
 -- TOC entry 301 (class 1259 OID 24791)
@@ -340,7 +333,7 @@ CREATE TABLE de_saved_comparison (
 );
 
 
-ALTER TABLE deapp.de_saved_comparison OWNER TO deapp;
+--ALTER TABLE deapp.de_saved_comparison OWNER TO deapp;
 
 --
 -- TOC entry 302 (class 1259 OID 24794)
@@ -355,7 +348,7 @@ CREATE TABLE de_snp_calls_by_gsm (
 );
 
 
-ALTER TABLE deapp.de_snp_calls_by_gsm OWNER TO deapp;
+--ALTER TABLE deapp.de_snp_calls_by_gsm OWNER TO deapp;
 
 --
 -- TOC entry 303 (class 1259 OID 24797)
@@ -371,7 +364,7 @@ CREATE TABLE de_snp_copy_number (
 );
 
 
-ALTER TABLE deapp.de_snp_copy_number OWNER TO deapp;
+--ALTER TABLE deapp.de_snp_copy_number OWNER TO deapp;
 
 --
 -- TOC entry 304 (class 1259 OID 24800)
@@ -384,12 +377,12 @@ CREATE TABLE de_snp_data_by_patient (
     trial_name character varying(255),
     patient_num bigint,
     chrom character varying(16),
-    data_by_patient_chr text,
-    ped_by_patient_chr text
+    data_by_patient_chr varchar(4000),
+    ped_by_patient_chr varchar(4000)
 );
 
 
-ALTER TABLE deapp.de_snp_data_by_patient OWNER TO deapp;
+--ALTER TABLE deapp.de_snp_data_by_patient OWNER TO deapp;
 
 --
 -- TOC entry 305 (class 1259 OID 24806)
@@ -403,11 +396,11 @@ CREATE TABLE de_snp_data_by_probe (
     snp_id bigint,
     snp_name character varying(255),
     trial_name character varying(255),
-    data_by_probe text
+    data_by_probe varchar(4000)
 );
 
 
-ALTER TABLE deapp.de_snp_data_by_probe OWNER TO deapp;
+--ALTER TABLE deapp.de_snp_data_by_probe OWNER TO deapp;
 
 --
 -- TOC entry 306 (class 1259 OID 24812)
@@ -422,7 +415,7 @@ CREATE TABLE de_snp_data_dataset_loc (
 );
 
 
-ALTER TABLE deapp.de_snp_data_dataset_loc OWNER TO deapp;
+--ALTER TABLE deapp.de_snp_data_dataset_loc OWNER TO deapp;
 
 --
 -- TOC entry 307 (class 1259 OID 24815)
@@ -436,7 +429,7 @@ CREATE TABLE de_snp_gene_map (
 );
 
 
-ALTER TABLE deapp.de_snp_gene_map OWNER TO deapp;
+--ALTER TABLE deapp.de_snp_gene_map OWNER TO deapp;
 
 --
 -- TOC entry 308 (class 1259 OID 24818)
@@ -451,7 +444,7 @@ CREATE TABLE de_snp_info (
 );
 
 
-ALTER TABLE deapp.de_snp_info OWNER TO deapp;
+--ALTER TABLE deapp.de_snp_info OWNER TO deapp;
 
 --
 -- TOC entry 309 (class 1259 OID 24821)
@@ -467,7 +460,7 @@ CREATE TABLE de_snp_probe (
 );
 
 
-ALTER TABLE deapp.de_snp_probe OWNER TO deapp;
+--ALTER TABLE deapp.de_snp_probe OWNER TO deapp;
 
 --
 -- TOC entry 310 (class 1259 OID 24827)
@@ -479,12 +472,12 @@ CREATE TABLE de_snp_probe_sorted_def (
     platform_name character varying(255),
     num_probe bigint,
     chrom character varying(16),
-    probe_def text,
-    snp_id_def text
+    probe_def varchar(4000),
+    snp_id_def varchar(4000)
 );
 
 
-ALTER TABLE deapp.de_snp_probe_sorted_def OWNER TO deapp;
+--ALTER TABLE deapp.de_snp_probe_sorted_def OWNER TO deapp;
 
 --
 -- TOC entry 311 (class 1259 OID 24833)
@@ -500,7 +493,7 @@ CREATE TABLE de_snp_subject_sorted_def (
 );
 
 
-ALTER TABLE deapp.de_snp_subject_sorted_def OWNER TO deapp;
+--ALTER TABLE deapp.de_snp_subject_sorted_def OWNER TO deapp;
 
 --
 -- TOC entry 312 (class 1259 OID 24839)
@@ -522,7 +515,7 @@ CREATE TABLE de_subject_acgh_data (
 );
 
 
-ALTER TABLE deapp.de_subject_acgh_data OWNER TO deapp;
+--ALTER TABLE deapp.de_subject_acgh_data OWNER TO deapp;
 
 --
 -- TOC entry 3931 (class 0 OID 0)
@@ -569,7 +562,7 @@ CREATE TABLE de_subject_microarray_data (
 );
 
 
-ALTER TABLE deapp.de_subject_microarray_data OWNER TO deapp;
+--ALTER TABLE deapp.de_subject_microarray_data OWNER TO deapp;
 
 --
 -- TOC entry 314 (class 1259 OID 24845)
@@ -591,7 +584,7 @@ CREATE TABLE de_subject_microarray_logs (
 );
 
 
-ALTER TABLE deapp.de_subject_microarray_logs OWNER TO deapp;
+--ALTER TABLE deapp.de_subject_microarray_logs OWNER TO deapp;
 
 --
 -- TOC entry 315 (class 1259 OID 24848)
@@ -617,7 +610,7 @@ CREATE TABLE de_subject_microarray_med (
 );
 
 
-ALTER TABLE deapp.de_subject_microarray_med OWNER TO deapp;
+--ALTER TABLE deapp.de_subject_microarray_med OWNER TO deapp;
 
 --
 -- TOC entry 316 (class 1259 OID 24851)
@@ -642,7 +635,7 @@ CREATE TABLE de_subject_protein_data (
 );
 
 
-ALTER TABLE deapp.de_subject_protein_data OWNER TO deapp;
+--ALTER TABLE deapp.de_subject_protein_data OWNER TO deapp;
 
 --
 -- TOC entry 317 (class 1259 OID 24854)
@@ -671,7 +664,7 @@ CREATE TABLE de_subject_rbm_data (
 );
 
 
-ALTER TABLE deapp.de_subject_rbm_data OWNER TO deapp;
+--ALTER TABLE deapp.de_subject_rbm_data OWNER TO deapp;
 
 --
 -- TOC entry 318 (class 1259 OID 24860)
@@ -709,7 +702,7 @@ CREATE TABLE de_subject_sample_mapping (
 );
 
 
-ALTER TABLE deapp.de_subject_sample_mapping OWNER TO deapp;
+--ALTER TABLE deapp.de_subject_sample_mapping OWNER TO deapp;
 
 --
 -- TOC entry 319 (class 1259 OID 24866)
@@ -731,7 +724,7 @@ CREATE TABLE de_subject_snp_dataset (
 );
 
 
-ALTER TABLE deapp.de_subject_snp_dataset OWNER TO deapp;
+--ALTER TABLE deapp.de_subject_snp_dataset OWNER TO deapp;
 
 --
 -- TOC entry 320 (class 1259 OID 24872)
@@ -746,7 +739,7 @@ CREATE TABLE de_xtrial_child_map (
 );
 
 
-ALTER TABLE deapp.de_xtrial_child_map OWNER TO deapp;
+--ALTER TABLE deapp.de_xtrial_child_map OWNER TO deapp;
 
 --
 -- TOC entry 321 (class 1259 OID 24875)
@@ -760,7 +753,7 @@ CREATE TABLE de_xtrial_parent_names (
 );
 
 
-ALTER TABLE deapp.de_xtrial_parent_names OWNER TO deapp;
+--ALTER TABLE deapp.de_xtrial_parent_names OWNER TO deapp;
 
 --
 -- TOC entry 322 (class 1259 OID 24881)
@@ -775,7 +768,7 @@ CREATE TABLE deapp_annotation (
 );
 
 
-ALTER TABLE deapp.deapp_annotation OWNER TO deapp;
+--ALTER TABLE deapp.deapp_annotation OWNER TO deapp;
 
 --
 -- TOC entry 323 (class 1259 OID 24884)
@@ -792,67 +785,55 @@ CREATE TABLE haploview_data (
     chromosome character varying(10),
     gene character varying(50),
     release smallint,
-    release_date timestamp without time zone,
+    release_date timestamp, -- without time zone,
     trial_name character varying(50),
-    snp_data text
+    snp_data varchar(4000)
 );
 
 
-ALTER TABLE deapp.haploview_data OWNER TO deapp;
+--ALTER TABLE deapp.haploview_data OWNER TO deapp;
 
 --
 -- TOC entry 324 (class 1259 OID 24890)
 -- Name: seq_assay_id; Type: SEQUENCE; Schema: deapp; Owner: deapp
 --
 
-CREATE SEQUENCE seq_assay_id
-    START WITH 41
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 20;
+CREATE SEQUENCE seq_assay_id;
 
 
-ALTER TABLE deapp.seq_assay_id OWNER TO deapp;
+--ALTER TABLE deapp.seq_assay_id OWNER TO deapp;
 
 --
 -- TOC entry 325 (class 1259 OID 24892)
 -- Name: seq_data_id; Type: SEQUENCE; Schema: deapp; Owner: deapp
 --
 
-CREATE SEQUENCE seq_data_id
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 20;
+CREATE SEQUENCE seq_data_id;
 
 
-ALTER TABLE deapp.seq_data_id OWNER TO deapp;
+--ALTER TABLE deapp.seq_data_id OWNER TO deapp;
 
-CREATE SEQUENCE deapp.seq_mrna_partition_id
-	START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 20;
-ALTER TABLE deapp.seq_mrna_partition_id OWNER TO deapp;
+CREATE SEQUENCE deapp.seq_mrna_partition_id;
+
+--ALTER TABLE deapp.seq_mrna_partition_id OWNER TO deapp;
 --
 -- TOC entry 3841 (class 2604 OID 25734)
 -- Name: region_id; Type: DEFAULT; Schema: deapp; Owner: deapp
 --
+--
+-- ALTER TABLE  de_chromosomal_region
+-- ALTER COLUMN region_id
+-- SET DEFAULT next value for ('de_chromosomal_region_region_id_seq'::regclass);
 
-ALTER TABLE ONLY de_chromosomal_region ALTER COLUMN region_id SET DEFAULT nextval('de_chromosomal_region_region_id_seq'::regclass);
 
-
-SET default_tablespace = '';
+-- SET default_tablespace = '';
 
 --
 -- TOC entry 3843 (class 2606 OID 25853)
 -- Name: de_chromosomal_region_pkey; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: 
 --
 
-ALTER TABLE ONLY de_chromosomal_region
+ALTER TABLE de_chromosomal_region
     ADD CONSTRAINT de_chromosomal_region_pkey PRIMARY KEY (region_id);
 
 
@@ -861,7 +842,7 @@ ALTER TABLE ONLY de_chromosomal_region
 -- Name: de_gpl_info_pkey; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: 
 --
 
-ALTER TABLE ONLY de_gpl_info
+ALTER TABLE   de_gpl_info
     ADD CONSTRAINT de_gpl_info_pkey PRIMARY KEY (platform);
 
 
@@ -870,18 +851,18 @@ ALTER TABLE ONLY de_gpl_info
 -- Name: de_subject_acgh_data_pkey; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: 
 --
 
-ALTER TABLE ONLY de_subject_acgh_data
+ALTER TABLE   de_subject_acgh_data
     ADD CONSTRAINT de_subject_acgh_data_pkey PRIMARY KEY (assay_id, region_id);
 
 
-SET default_tablespace = deapp;
+-- SET default_tablespace = deapp;
 
 --
 -- TOC entry 3882 (class 2606 OID 25859)
 -- Name: dextpn_parent_node_u; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: deapp
 --
 
-ALTER TABLE ONLY de_xtrial_parent_names
+ALTER TABLE   de_xtrial_parent_names
     ADD CONSTRAINT dextpn_parent_node_u UNIQUE (across_path);
 
 
@@ -890,7 +871,7 @@ ALTER TABLE ONLY de_xtrial_parent_names
 -- Name: sys_c0020600; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: deapp
 --
 
-ALTER TABLE ONLY de_snp_probe_sorted_def
+ALTER TABLE   de_snp_probe_sorted_def
     ADD CONSTRAINT sys_c0020600 PRIMARY KEY (snp_probe_sorted_def_id);
 
 
@@ -899,7 +880,7 @@ ALTER TABLE ONLY de_snp_probe_sorted_def
 -- Name: sys_c0020601; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: deapp
 --
 
-ALTER TABLE ONLY de_snp_data_by_probe
+ALTER TABLE   de_snp_data_by_probe
     ADD CONSTRAINT sys_c0020601 PRIMARY KEY (snp_data_by_probe_id);
 
 
@@ -908,7 +889,7 @@ ALTER TABLE ONLY de_snp_data_by_probe
 -- Name: sys_c0020602; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: deapp
 --
 
-ALTER TABLE ONLY de_snp_data_by_patient
+ALTER TABLE   de_snp_data_by_patient
     ADD CONSTRAINT sys_c0020602 PRIMARY KEY (snp_data_by_patient_id);
 
 
@@ -917,7 +898,7 @@ ALTER TABLE ONLY de_snp_data_by_patient
 -- Name: sys_c0020604; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: deapp
 --
 
-ALTER TABLE ONLY de_xtrial_parent_names
+ALTER TABLE   de_xtrial_parent_names
     ADD CONSTRAINT sys_c0020604 PRIMARY KEY (parent_cd);
 
 
@@ -926,7 +907,7 @@ ALTER TABLE ONLY de_xtrial_parent_names
 -- Name: sys_c0020605; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: deapp
 --
 
-ALTER TABLE ONLY de_xtrial_child_map
+ALTER TABLE   de_xtrial_child_map
     ADD CONSTRAINT sys_c0020605 PRIMARY KEY (concept_cd);
 
 
@@ -935,7 +916,7 @@ ALTER TABLE ONLY de_xtrial_child_map
 -- Name: sys_c0020606; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: deapp
 --
 
-ALTER TABLE ONLY de_subject_snp_dataset
+ALTER TABLE   de_subject_snp_dataset
     ADD CONSTRAINT sys_c0020606 PRIMARY KEY (subject_snp_dataset_id);
 
 
@@ -944,29 +925,29 @@ ALTER TABLE ONLY de_subject_snp_dataset
 -- Name: sys_c0020607; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: deapp
 --
 
-ALTER TABLE ONLY de_snp_subject_sorted_def
+ALTER TABLE   de_snp_subject_sorted_def
     ADD CONSTRAINT sys_c0020607 PRIMARY KEY (snp_subject_sorted_def_id);
 
 
-SET default_tablespace = transmart;
+-- SET default_tablespace = transmart;
 
 --
 -- TOC entry 3859 (class 2606 OID 25875)
 -- Name: sys_c0020609; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: transmart
 --
 
-ALTER TABLE ONLY de_snp_probe
+ALTER TABLE   de_snp_probe
     ADD CONSTRAINT sys_c0020609 PRIMARY KEY (snp_probe_id);
 
 
-SET default_tablespace = deapp;
+-- SET default_tablespace = deapp;
 
 --
 -- TOC entry 3855 (class 2606 OID 25877)
 -- Name: sys_c0020611; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: deapp
 --
 
-ALTER TABLE ONLY de_snp_info
+ALTER TABLE   de_snp_info
     ADD CONSTRAINT sys_c0020611 PRIMARY KEY (snp_info_id);
 
 
@@ -975,22 +956,22 @@ ALTER TABLE ONLY de_snp_info
 -- Name: u_snp_info_name; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: deapp
 --
 
-ALTER TABLE ONLY de_snp_info
+ALTER TABLE   de_snp_info
     ADD CONSTRAINT u_snp_info_name UNIQUE (name);
 
 
-SET default_tablespace = indx;
+-- SET default_tablespace = indx;
 
 --
 -- TOC entry 3861 (class 2606 OID 25881)
 -- Name: u_snp_probe_name; Type: CONSTRAINT; Schema: deapp; Owner: deapp; Tablespace: indx
 --
 
-ALTER TABLE ONLY de_snp_probe
+ALTER TABLE   de_snp_probe
     ADD CONSTRAINT u_snp_probe_name UNIQUE (probe_name);
 
 
-SET default_tablespace = deapp;
+-- SET default_tablespace = deapp;
 
 --
 -- TOC entry 3870 (class 1259 OID 26105)
@@ -1000,6 +981,7 @@ SET default_tablespace = deapp;
 CREATE INDEX de_microarray_data_idx1 ON de_subject_microarray_data USING btree (trial_name, assay_id, probeset_id);
 
 
+/*
 --
 -- TOC entry 3871 (class 1259 OID 26106)
 -- Name: de_microarray_data_idx2; Type: INDEX; Schema: deapp; Owner: deapp; Tablespace: deapp
@@ -1175,16 +1157,17 @@ CREATE TRIGGER trg_snp_subject_sorted_def_id BEFORE INSERT ON de_snp_subject_sor
 -- Name: de_chromosomal_region_gpl_id_fkey; Type: FK CONSTRAINT; Schema: deapp; Owner: deapp
 --
 
-ALTER TABLE ONLY de_chromosomal_region
+ALTER TABLE   de_chromosomal_region
     ADD CONSTRAINT de_chromosomal_region_gpl_id_fkey FOREIGN KEY (gpl_id) REFERENCES de_gpl_info(platform);
 
+*/
 
 --
 -- TOC entry 3889 (class 2606 OID 26502)
 -- Name: de_subject_acgh_data_region_id_fkey; Type: FK CONSTRAINT; Schema: deapp; Owner: deapp
 --
 
-ALTER TABLE ONLY de_subject_acgh_data
+ALTER TABLE   de_subject_acgh_data
     ADD CONSTRAINT de_subject_acgh_data_region_id_fkey FOREIGN KEY (region_id) REFERENCES de_chromosomal_region(region_id);
 
 
@@ -1193,7 +1176,7 @@ ALTER TABLE ONLY de_subject_acgh_data
 -- Name: fk_snp_gene_map_snp_id; Type: FK CONSTRAINT; Schema: deapp; Owner: deapp
 --
 
-ALTER TABLE ONLY de_snp_gene_map
+ALTER TABLE   de_snp_gene_map
     ADD CONSTRAINT fk_snp_gene_map_snp_id FOREIGN KEY (snp_id) REFERENCES de_snp_info(snp_info_id);
 
 
@@ -1202,7 +1185,7 @@ ALTER TABLE ONLY de_snp_gene_map
 -- Name: fk_snp_loc_dataset_id; Type: FK CONSTRAINT; Schema: deapp; Owner: deapp
 --
 
-ALTER TABLE ONLY de_snp_data_dataset_loc
+ALTER TABLE   de_snp_data_dataset_loc
     ADD CONSTRAINT fk_snp_loc_dataset_id FOREIGN KEY (snp_dataset_id) REFERENCES de_subject_snp_dataset(subject_snp_dataset_id);
 
 
@@ -1211,7 +1194,7 @@ ALTER TABLE ONLY de_snp_data_dataset_loc
 -- Name: fk_snp_probe_snp_id; Type: FK CONSTRAINT; Schema: deapp; Owner: deapp
 --
 
-ALTER TABLE ONLY de_snp_probe
+ALTER TABLE   de_snp_probe
     ADD CONSTRAINT fk_snp_probe_snp_id FOREIGN KEY (snp_id) REFERENCES de_snp_info(snp_info_id);
 
 

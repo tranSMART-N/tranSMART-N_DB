@@ -8,12 +8,23 @@ delete from searchapp.SEARCH_AUTH_GROUP;
 delete from searchapp.SEARCH_AUTH_PRINCIPAL;
 
 -- insert into searchapp.SEARCH_AUTH_PRINCIPAL
-Insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESCRIPTION,LAST_UPDATED,NAME,UNIQUE_ID,ENABLED) values (1,'USER',to_timestamp('21-FEB-12','DD-MON-YY HH.MI.SS.FF AM'),'system admin',to_timestamp('21-FEB-12','DD-MON-YY HH.MI.SS.FF AM'),'Sys Admin','admin',true);
-Insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESCRIPTION,LAST_UPDATED,NAME,UNIQUE_ID,ENABLED) values (2,'USER',to_timestamp('21-FEB-12','DD-MON-YY HH.MI.SS.FF AM'),'Study Owner',to_timestamp('21-FEB-12','DD-MON-YY HH.MI.SS.FF AM'),'Study Owner','sowner',true);
-Insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESCRIPTION,LAST_UPDATED,NAME,UNIQUE_ID,ENABLED) values (3,'USER',to_timestamp('21-FEB-12','DD-MON-YY HH.MI.SS.FF AM'),'Study spectator',to_timestamp('21-FEB-12','DD-MON-YY HH.MI.SS.FF AM'),'spectator','spect',true);
-Insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESCRIPTION,LAST_UPDATED,NAME,UNIQUE_ID,ENABLED) values (701145587,'USER',to_timestamp('21-FEB-12','DD-MON-YY HH.MI.SS.FF AM'),'Demo',to_timestamp('28-FEB-12','DD-MON-YY HH.MI.SS.FF AM'),'tranSMART Demo','jnjuser',true);
-Insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESCRIPTION,LAST_UPDATED,NAME,UNIQUE_ID,ENABLED) values (-1,'GROUP',to_timestamp('21-FEB-12','DD-MON-YY HH.MI.SS.FF AM'),'EVERYONE GROUP',to_timestamp('21-FEB-12','DD-MON-YY HH.MI.SS.FF AM'),'EVERYONE GROUP','EVERYONEGROUP',true);
-Insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESCRIPTION,LAST_UPDATED,NAME,UNIQUE_ID,ENABLED) values (12345,'USER',to_timestamp('28-FEB-12','DD-MON-YY HH.MI.SS.FF AM'),'guest account',to_timestamp('28-FEB-12','DD-MON-YY HH.MI.SS.FF AM'),'Guest',null,true);
+insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESCRIPTION,LAST_UPDATED,NAME,UNIQUE_ID,ENABLED)
+values (1,'USER',now(),'system admin',now(),'Sys Admin','admin',true);
+
+Insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESCRIPTION,LAST_UPDATED,NAME,UNIQUE_ID,ENABLED)
+values (2,'USER',now(),'Study Owner',now(),'Study Owner','sowner',true);
+
+Insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESCRIPTION,LAST_UPDATED,NAME,UNIQUE_ID,ENABLED)
+values (3,'USER',now(),'Study spectator',now(),'spectator','spect',true);
+
+Insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESCRIPTION,LAST_UPDATED,NAME,UNIQUE_ID,ENABLED)
+values (701145587,'USER',now(),'Demo',now(),'tranSMART Demo','jnjuser',true);
+
+Insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESCRIPTION,LAST_UPDATED,NAME,UNIQUE_ID,ENABLED)
+values (-1,'GROUP',now(),'EVERYONE GROUP',now(),'EVERYONE GROUP','EVERYONEGROUP',true);
+
+Insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESCRIPTION,LAST_UPDATED,NAME,UNIQUE_ID,ENABLED)
+values (12345,'USER',now(),'guest account',now(),'Guest',null,true);
 
 
 -- insert into searchapp.SEARCH_AUTH_GROUP
@@ -21,11 +32,16 @@ Insert into searchapp.SEARCH_AUTH_GROUP (ID,GROUP_CATEGORY) values (-1,'EVERYONE
 
 
 -- insert into  into searchapp.SEARCH_AUTH_USER
-Insert into searchapp.SEARCH_AUTH_USER (ID,EMAIL,EMAIL_SHOW,PASSWD,USER_REAL_NAME,USERNAME) values (1,null,false,'bff5811e373694ac401008f1e6ddb65ee3e69fb2','Sys Admin','admin');
-Insert into searchapp.SEARCH_AUTH_USER (ID,EMAIL,EMAIL_SHOW,PASSWD,USER_REAL_NAME,USERNAME) values (2,null,false,'3c09192c55dfaedd146263a3c15958c633c84d90','Study Owner','sowner');
-Insert into searchapp.SEARCH_AUTH_USER (ID,EMAIL,EMAIL_SHOW,PASSWD,USER_REAL_NAME,USERNAME) values (3,null,false,'3c09192c55dfaedd146263a3c15958c633c84d90','spectator','spect');
-Insert into searchapp.SEARCH_AUTH_USER (ID,EMAIL,EMAIL_SHOW,PASSWD,USER_REAL_NAME,USERNAME) values (701145587,null,false,'3c09192c55dfaedd146263a3c15958c633c84d90','tranSMART Demo','tmuser');
-Insert into searchapp.SEARCH_AUTH_USER (ID,EMAIL,EMAIL_SHOW,PASSWD,USER_REAL_NAME,USERNAME) values (12345,null,false,'e97709e39773ebf126d2176080f38a2d45f03dfd','Guest','guest');
+Insert into searchapp.SEARCH_AUTH_USER (ID,EMAIL,EMAIL_SHOW,PASSWD,USER_REAL_NAME,USERNAME)
+values (1,null,false,'bff5811e373694ac401008f1e6ddb65ee3e69fb2','Sys Admin','admin');
+Insert into searchapp.SEARCH_AUTH_USER (ID,EMAIL,EMAIL_SHOW,PASSWD,USER_REAL_NAME,USERNAME)
+values (2,null,false,'3c09192c55dfaedd146263a3c15958c633c84d90','Study Owner','sowner');
+Insert into searchapp.SEARCH_AUTH_USER (ID,EMAIL,EMAIL_SHOW,PASSWD,USER_REAL_NAME,USERNAME)
+values (3,null,false,'3c09192c55dfaedd146263a3c15958c633c84d90','spectator','spect');
+Insert into searchapp.SEARCH_AUTH_USER (ID,EMAIL,EMAIL_SHOW,PASSWD,USER_REAL_NAME,USERNAME)
+values (701145587,null,false,'3c09192c55dfaedd146263a3c15958c633c84d90','tranSMART Demo','tmuser');
+Insert into searchapp.SEARCH_AUTH_USER (ID,EMAIL,EMAIL_SHOW,PASSWD,USER_REAL_NAME,USERNAME)
+values (12345,null,false,'e97709e39773ebf126d2176080f38a2d45f03dfd','Guest','guest');
 
 
 -- insert into into searchapp.SEARCH_REQUEST_MAP

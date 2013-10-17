@@ -6,266 +6,234 @@
 -- Dumped by pg_dump version 9.2.3
 -- Started on 2013-07-24 10:10:18 BST
 
-SET statement_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
+-- SET statement_timeout = 0;
+-- SET client_encoding = 'UTF8';
+-- SET standard_conforming_strings = on;
+-- SET check_function_bodies = false;
+-- SET client_min_messages = warning;
 
 --
 -- TOC entry 17 (class 2615 OID 24072)
 -- Name: searchapp; Type: SCHEMA; Schema: -; Owner: searchapp
 --
 
-CREATE SCHEMA searchapp;
+-- CREATE SCHEMA searchapp;
 
+-- ALTER SCHEMA searchapp OWNER TO searchapp;
 
-ALTER SCHEMA searchapp OWNER TO searchapp;
-
-SET search_path = searchapp, pg_catalog;
+-- SET search_path = searchapp, pg_catalog;
 
 --
 -- TOC entry 732 (class 1255 OID 24193)
 -- Name: bio_clinical_trial_uid(text, text, text); Type: FUNCTION; Schema: searchapp; Owner: searchapp
 --
 
-CREATE FUNCTION bio_clinical_trial_uid(trial_number text, title text, condition text) RETURNS character varying
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-  RETURN coalesce(TRIAL_NUMBER || '|', '') || coalesce(TITLE || '|', '') || coalesce(CONDITION, '');
-END;
- 
- 
- 
-$$;
+-- CREATE FUNCTION bio_clinical_trial_uid(trial_number text, title text, condition text) RETURNS character varying
+--     LANGUAGE plpgsql
+--     AS $$
+-- BEGIN
+--   RETURN coalesce(TRIAL_NUMBER || '|', '') || coalesce(TITLE || '|', '') || coalesce(CONDITION, '');
+-- END;
+-- $$;
 
 
-ALTER FUNCTION searchapp.bio_clinical_trial_uid(trial_number text, title text, condition text) OWNER TO searchapp;
+-- ALTER FUNCTION searchapp.bio_clinical_trial_uid(trial_number text, title text, condition text) OWNER TO searchapp;
 
 --
 -- TOC entry 733 (class 1255 OID 24194)
 -- Name: bio_compound_uid(text, text, text); Type: FUNCTION; Schema: searchapp; Owner: searchapp
 --
 
-CREATE FUNCTION bio_compound_uid(cas_registry text, jnj_number text, cnto_number text) RETURNS character varying
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
-  RETURN coalesce(CAS_REGISTRY || '|', '') || coalesce(JNJ_NUMBER || '|', '') || coalesce(CNTO_NUMBER, '');
-END;
- 
- 
- 
- 
- 
-$$;
+-- CREATE FUNCTION bio_compound_uid(cas_registry text, jnj_number text, cnto_number text) RETURNS character varying
+--     LANGUAGE plpgsql
+--     AS $$
+-- BEGIN
+--   RETURN coalesce(CAS_REGISTRY || '|', '') || coalesce(JNJ_NUMBER || '|', '') || coalesce(CNTO_NUMBER, '');
+-- END;
+-- $$;
 
 
-ALTER FUNCTION searchapp.bio_compound_uid(cas_registry text, jnj_number text, cnto_number text) OWNER TO searchapp;
+-- ALTER FUNCTION searchapp.bio_compound_uid(cas_registry text, jnj_number text, cnto_number text) OWNER TO searchapp;
 
 --
 -- TOC entry 734 (class 1255 OID 24195)
 -- Name: refresh_search_bio_mkr_correl_fast_mv(); Type: FUNCTION; Schema: searchapp; Owner: searchapp
 --
 
-CREATE FUNCTION refresh_search_bio_mkr_correl_fast_mv() RETURNS character varying
-    LANGUAGE plpgsql
-    AS $$
-BEGIN
+-- CREATE FUNCTION refresh_search_bio_mkr_correl_fast_mv() RETURNS character varying
+--     LANGUAGE plpgsql
+--     AS $$
+-- BEGIN
 
   -- populate the fake "materialized view" (i.e. actually a table) by deleting everything from it and then re-populating
   -- eventually we need a smarter algorithm for doing this
 
-    delete from searchapp.search_bio_mkr_correl_fast_mv;
+--     delete from searchapp.search_bio_mkr_correl_fast_mv;
 
-    insert into searchapp.search_bio_mkr_correl_fast_mv
-    (domain_object_id, asso_bio_marker_id, correl_type, value_metric,  mv_id)    
-    select domain_object_id, asso_bio_marker_id, correl_type, value_metric,  mv_id
-       from searchapp.search_bio_mkr_correl_fast_view;  
+--     insert into searchapp.search_bio_mkr_correl_fast_mv
+--     (domain_object_id, asso_bio_marker_id, correl_type, value_metric,  mv_id)
+--     select domain_object_id, asso_bio_marker_id, correl_type, value_metric,  mv_id
+--        from searchapp.search_bio_mkr_correl_fast_view;
 
-    return true;
-END;
- 
- 
- 
-$$;
+--     return true;
+-- END;
+-- $$;
 
 
-ALTER FUNCTION searchapp.refresh_search_bio_mkr_correl_fast_mv() OWNER TO searchapp;
+-- ALTER FUNCTION searchapp.refresh_search_bio_mkr_correl_fast_mv() OWNER TO searchapp;
 
 --
 -- TOC entry 735 (class 1255 OID 24196)
 -- Name: tf_trgi_search_a_u_sec_access_id(); Type: FUNCTION; Schema: searchapp; Owner: searchapp
 --
 
-CREATE FUNCTION tf_trgi_search_a_u_sec_access_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin     if NEW.SEARCH_AUTH_USER_SEC_ACCESS_ID is null then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_AUTH_USER_SEC_ACCESS_ID ;       end if;    RETURN NEW; end;
+-- CREATE FUNCTION tf_trgi_search_a_u_sec_access_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin     if NEW.SEARCH_AUTH_USER_SEC_ACCESS_ID is null then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_AUTH_USER_SEC_ACCESS_ID ;       end if;    RETURN NEW; end;
+-- $$;
 
 
-
-$$;
-
-
-ALTER FUNCTION searchapp.tf_trgi_search_a_u_sec_access_id() OWNER TO searchapp;
+-- ALTER FUNCTION searchapp.tf_trgi_search_a_u_sec_access_id() OWNER TO searchapp;
 
 --
 -- TOC entry 736 (class 1255 OID 24197)
 -- Name: tf_trgi_search_au_obj_access_id(); Type: FUNCTION; Schema: searchapp; Owner: searchapp
 --
 
-CREATE FUNCTION tf_trgi_search_au_obj_access_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin     if coalesce(NEW.AUTH_SEC_OBJ_ACCESS_ID::text, '') = '' then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.AUTH_SEC_OBJ_ACCESS_ID ;       end if;    RETURN NEW;
-end;
-$$;
+-- CREATE FUNCTION tf_trgi_search_au_obj_access_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin     if coalesce(NEW.AUTH_SEC_OBJ_ACCESS_ID::text, '') = '' then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.AUTH_SEC_OBJ_ACCESS_ID ;       end if;    RETURN NEW;
+-- end;
+-- $$;
 
 
-ALTER FUNCTION searchapp.tf_trgi_search_au_obj_access_id() OWNER TO searchapp;
+-- ALTER FUNCTION searchapp.tf_trgi_search_au_obj_access_id() OWNER TO searchapp;
 
 --
 -- TOC entry 729 (class 1255 OID 24198)
 -- Name: tf_trgi_search_au_prcpl_id(); Type: FUNCTION; Schema: searchapp; Owner: searchapp
 --
+--
+-- CREATE FUNCTION tf_trgi_search_au_prcpl_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin
+-- if(coalesce(NEW.ID::text, '') = '' or NEW.ID = -2000) then
+-- select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.ID ;
+-- end if;     RETURN NEW;
+-- end;
+-- $$;
 
-CREATE FUNCTION tf_trgi_search_au_prcpl_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin     
- if(coalesce(NEW.ID::text, '') = '' or NEW.ID = -2000) then       
- select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.ID ;      
- end if;     RETURN NEW;
-end;
-$$;
 
-
-ALTER FUNCTION searchapp.tf_trgi_search_au_prcpl_id() OWNER TO searchapp;
+-- ALTER FUNCTION searchapp.tf_trgi_search_au_prcpl_id() OWNER TO searchapp;
 
 --
 -- TOC entry 737 (class 1255 OID 24199)
 -- Name: tf_trgi_search_cust_fil_item_id(); Type: FUNCTION; Schema: searchapp; Owner: searchapp
 --
 
-CREATE FUNCTION tf_trgi_search_cust_fil_item_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin 
-    if NEW.SEARCH_CUSTOM_FILTER_ITEM_ID is null then select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_CUSTOM_FILTER_ITEM_ID ; end if; RETURN NEW;
-end;
+-- CREATE FUNCTION tf_trgi_search_cust_fil_item_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin
+--     if NEW.SEARCH_CUSTOM_FILTER_ITEM_ID is null then select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_CUSTOM_FILTER_ITEM_ID ; end if; RETURN NEW;
+-- end;
 
 
 
-$$;
+-- $$;
 
 
-ALTER FUNCTION searchapp.tf_trgi_search_cust_fil_item_id() OWNER TO searchapp;
+-- ALTER FUNCTION searchapp.tf_trgi_search_cust_fil_item_id() OWNER TO searchapp;
 
 --
 -- TOC entry 738 (class 1255 OID 24200)
 -- Name: tf_trgi_search_custom_filter_id(); Type: FUNCTION; Schema: searchapp; Owner: searchapp
 --
 
-CREATE FUNCTION tf_trgi_search_custom_filter_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin 
-    if NEW.SEARCH_CUSTOM_FILTER_ID is null then select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_CUSTOM_FILTER_ID ; end if; RETURN NEW;
-end;
+-- CREATE FUNCTION tf_trgi_search_custom_filter_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin
+--     if NEW.SEARCH_CUSTOM_FILTER_ID is null then select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_CUSTOM_FILTER_ID ; end if; RETURN NEW;
+-- end;
+-- $$;
 
 
-
-$$;
-
-
-ALTER FUNCTION searchapp.tf_trgi_search_custom_filter_id() OWNER TO searchapp;
+-- ALTER FUNCTION searchapp.tf_trgi_search_custom_filter_id() OWNER TO searchapp;
 
 --
 -- TOC entry 739 (class 1255 OID 24201)
 -- Name: tf_trgi_search_keyword_id(); Type: FUNCTION; Schema: searchapp; Owner: searchapp
 --
 
-CREATE FUNCTION tf_trgi_search_keyword_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin     if NEW.SEARCH_KEYWORD_ID is null then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_KEYWORD_ID ;       end if;   RETURN NEW; end;
+-- CREATE FUNCTION tf_trgi_search_keyword_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin     if NEW.SEARCH_KEYWORD_ID is null then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_KEYWORD_ID ;       end if;   RETURN NEW; end;
+-- $$;
 
 
-
-
-$$;
-
-
-ALTER FUNCTION searchapp.tf_trgi_search_keyword_id() OWNER TO searchapp;
+-- ALTER FUNCTION searchapp.tf_trgi_search_keyword_id() OWNER TO searchapp;
 
 --
 -- TOC entry 740 (class 1255 OID 24202)
 -- Name: tf_trgi_search_keyword_term_id(); Type: FUNCTION; Schema: searchapp; Owner: searchapp
 --
 
-CREATE FUNCTION tf_trgi_search_keyword_term_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin     if NEW.SEARCH_KEYWORD_TERM_ID is null then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_KEYWORD_TERM_ID ;       end if;    RETURN NEW;
-end;
+-- CREATE FUNCTION tf_trgi_search_keyword_term_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin     if NEW.SEARCH_KEYWORD_TERM_ID is null then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_KEYWORD_TERM_ID ;       end if;    RETURN NEW;
+-- end;
+-- $$;
 
-$$;
 
-
-ALTER FUNCTION searchapp.tf_trgi_search_keyword_term_id() OWNER TO searchapp;
+-- ALTER FUNCTION searchapp.tf_trgi_search_keyword_term_id() OWNER TO searchapp;
 
 --
 -- TOC entry 741 (class 1255 OID 24203)
 -- Name: tf_trgi_search_sec_acc_level_id(); Type: FUNCTION; Schema: searchapp; Owner: searchapp
 --
 
-CREATE FUNCTION tf_trgi_search_sec_acc_level_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin     if NEW.SEARCH_SEC_ACCESS_LEVEL_ID is null then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_SEC_ACCESS_LEVEL_ID ;       end if;   RETURN NEW; end;
+-- CREATE FUNCTION tf_trgi_search_sec_acc_level_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin     if NEW.SEARCH_SEC_ACCESS_LEVEL_ID is null then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_SEC_ACCESS_LEVEL_ID ;       end if;   RETURN NEW; end;
+-- $$;
 
 
-
-$$;
-
-
-ALTER FUNCTION searchapp.tf_trgi_search_sec_acc_level_id() OWNER TO searchapp;
+-- ALTER FUNCTION searchapp.tf_trgi_search_sec_acc_level_id() OWNER TO searchapp;
 
 --
 -- TOC entry 742 (class 1255 OID 24204)
 -- Name: tf_trgi_search_sec_obj_id(); Type: FUNCTION; Schema: searchapp; Owner: searchapp
 --
 
-CREATE FUNCTION tf_trgi_search_sec_obj_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin     if NEW.SEARCH_SECURE_OBJECT_ID is null then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_SECURE_OBJECT_ID ;       end if;  RETURN NEW;  end;
+-- CREATE FUNCTION tf_trgi_search_sec_obj_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin     if NEW.SEARCH_SECURE_OBJECT_ID is null then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_SECURE_OBJECT_ID ;       end if;  RETURN NEW;  end;
+-- $$;
 
 
-
-$$;
-
-
-ALTER FUNCTION searchapp.tf_trgi_search_sec_obj_id() OWNER TO searchapp;
+-- ALTER FUNCTION searchapp.tf_trgi_search_sec_obj_id() OWNER TO searchapp;
 
 --
 -- TOC entry 743 (class 1255 OID 24205)
 -- Name: tf_trgi_search_sec_obj_path_id(); Type: FUNCTION; Schema: searchapp; Owner: searchapp
 --
 
-CREATE FUNCTION tf_trgi_search_sec_obj_path_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin     if NEW.SEARCH_SECURE_OBJ_PATH_ID is null then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_SECURE_OBJ_PATH_ID ;       end if;  RETURN NEW;  end;
+-- CREATE FUNCTION tf_trgi_search_sec_obj_path_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin     if NEW.SEARCH_SECURE_OBJ_PATH_ID is null then          select nextval('searchapp.SEQ_SEARCH_DATA_ID') into NEW.SEARCH_SECURE_OBJ_PATH_ID ;       end if;  RETURN NEW;  end;
+-- $$;
 
 
-
-$$;
-
-
-ALTER FUNCTION searchapp.tf_trgi_search_sec_obj_path_id() OWNER TO searchapp;
+-- ALTER FUNCTION searchapp.tf_trgi_search_sec_obj_path_id() OWNER TO searchapp;
 
 --
 -- TOC entry 2866 (class 2617 OID 24206)
@@ -287,18 +255,19 @@ ALTER FUNCTION searchapp.tf_trgi_search_sec_obj_path_id() OWNER TO searchapp;
 --
 
 CREATE SEQUENCE hibernate_sequence
-    START WITH 100041
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 20;
+--     START WITH 100041
+--     INCREMENT BY 1
+--     NO MINVALUE
+--     NO MAXVALUE
+--     CACHE 20
+    ;
 
 
-ALTER TABLE searchapp.hibernate_sequence OWNER TO searchapp;
+-- ALTER TABLE searchapp.hibernate_sequence OWNER TO searchapp;
 
-SET default_tablespace = search_app;
+-- SET default_tablespace = search_app;
 
-SET default_with_oids = false;
+-- SET default_with_oids = false;
 
 --
 -- TOC entry 492 (class 1259 OID 25596)
@@ -318,7 +287,7 @@ CREATE TABLE plugin (
 );
 
 
-ALTER TABLE searchapp.plugin OWNER TO searchapp;
+-- ALTER TABLE searchapp.plugin OWNER TO searchapp;
 
 --
 -- TOC entry 493 (class 1259 OID 25604)
@@ -329,7 +298,7 @@ CREATE TABLE plugin_module (
     module_seq bigint NOT NULL,
     plugin_seq bigint NOT NULL,
     name character varying(70) NOT NULL,
-    params text,
+    params varchar(4000),
     version character varying(10) DEFAULT 0.1,
     active character(1) DEFAULT 'Y'::bpchar,
     has_form character(1) DEFAULT 'N'::bpchar,
@@ -340,7 +309,7 @@ CREATE TABLE plugin_module (
 );
 
 
-ALTER TABLE searchapp.plugin_module OWNER TO searchapp;
+-- ALTER TABLE searchapp.plugin_module OWNER TO searchapp;
 
 --
 -- TOC entry 494 (class 1259 OID 25613)
@@ -348,14 +317,15 @@ ALTER TABLE searchapp.plugin_module OWNER TO searchapp;
 --
 
 CREATE SEQUENCE plugin_module_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 20;
+--     START WITH 1
+--     INCREMENT BY 1
+--     NO MINVALUE
+--     NO MAXVALUE
+--     CACHE 20
+    ;
 
 
-ALTER TABLE searchapp.plugin_module_seq OWNER TO searchapp;
+-- ALTER TABLE searchapp.plugin_module_seq OWNER TO searchapp;
 
 --
 -- TOC entry 495 (class 1259 OID 25615)
@@ -363,14 +333,15 @@ ALTER TABLE searchapp.plugin_module_seq OWNER TO searchapp;
 --
 
 CREATE SEQUENCE plugin_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 20;
+--     START WITH 1
+--     INCREMENT BY 1
+--     NO MINVALUE
+--     NO MAXVALUE
+--     CACHE 20
+  ;
 
 
-ALTER TABLE searchapp.plugin_seq OWNER TO searchapp;
+-- ALTER TABLE searchapp.plugin_seq OWNER TO searchapp;
 
 --
 -- TOC entry 496 (class 1259 OID 25617)
@@ -379,15 +350,15 @@ ALTER TABLE searchapp.plugin_seq OWNER TO searchapp;
 
 CREATE TABLE search_app_access_log (
     id bigint,
-    access_time timestamp without time zone,
+    access_time timestamp,
     event character varying(255),
     request_url character varying(255),
     user_name character varying(255),
-    event_message text
+    event_message varchar(2000)
 );
 
 
-ALTER TABLE searchapp.search_app_access_log OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_app_access_log OWNER TO searchapp;
 
 --
 -- TOC entry 497 (class 1259 OID 25623)
@@ -400,7 +371,7 @@ CREATE TABLE search_auth_group (
 );
 
 
-ALTER TABLE searchapp.search_auth_group OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_auth_group OWNER TO searchapp;
 
 --
 -- TOC entry 498 (class 1259 OID 25626)
@@ -413,7 +384,7 @@ CREATE TABLE search_auth_group_member (
 );
 
 
-ALTER TABLE searchapp.search_auth_group_member OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_auth_group_member OWNER TO searchapp;
 
 --
 -- TOC entry 499 (class 1259 OID 25629)
@@ -423,16 +394,16 @@ ALTER TABLE searchapp.search_auth_group_member OWNER TO searchapp;
 CREATE TABLE search_auth_principal (
     id bigint NOT NULL,
     principal_type character varying(255),
-    date_created timestamp without time zone NOT NULL,
+    date_created timestamp, -- without time zone NOT NULL,
     description character varying(255),
-    last_updated timestamp without time zone NOT NULL,
+    last_updated timestamp, -- without time zone NOT NULL,
     name character varying(255),
     unique_id character varying(255),
     enabled boolean
 );
 
 
-ALTER TABLE searchapp.search_auth_principal OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_auth_principal OWNER TO searchapp;
 
 --
 -- TOC entry 500 (class 1259 OID 25635)
@@ -447,7 +418,7 @@ CREATE TABLE search_auth_sec_object_access (
 );
 
 
-ALTER TABLE searchapp.search_auth_sec_object_access OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_auth_sec_object_access OWNER TO searchapp;
 
 --
 -- TOC entry 501 (class 1259 OID 25638)
@@ -464,7 +435,7 @@ CREATE TABLE search_auth_user (
 );
 
 
-ALTER TABLE searchapp.search_auth_user OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_auth_user OWNER TO searchapp;
 
 --
 -- TOC entry 502 (class 1259 OID 25644)
@@ -479,7 +450,7 @@ CREATE TABLE search_auth_user_sec_access (
 );
 
 
-ALTER TABLE searchapp.search_auth_user_sec_access OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_auth_user_sec_access OWNER TO searchapp;
 
 --
 -- TOC entry 503 (class 1259 OID 25647)
@@ -490,7 +461,7 @@ CREATE VIEW search_auth_user_sec_access_v AS
     (SELECT sasoa.auth_sec_obj_access_id AS search_auth_user_sec_access_id, sasoa.auth_principal_id AS search_auth_user_id, sasoa.secure_object_id AS search_secure_object_id, sasoa.secure_access_level_id AS search_sec_access_level_id FROM search_auth_user sau, search_auth_sec_object_access sasoa WHERE (sau.id = sasoa.auth_principal_id) UNION SELECT sasoa.auth_sec_obj_access_id AS search_auth_user_sec_access_id, sagm.auth_user_id AS search_auth_user_id, sasoa.secure_object_id AS search_secure_object_id, sasoa.secure_access_level_id AS search_sec_access_level_id FROM search_auth_group sag, search_auth_group_member sagm, search_auth_sec_object_access sasoa WHERE ((sag.id = sagm.auth_group_id) AND (sag.id = sasoa.auth_principal_id))) UNION SELECT sasoa.auth_sec_obj_access_id AS search_auth_user_sec_access_id, NULL::bigint AS search_auth_user_id, sasoa.secure_object_id AS search_secure_object_id, sasoa.secure_access_level_id AS search_sec_access_level_id FROM search_auth_group sag, search_auth_sec_object_access sasoa WHERE (((sag.group_category)::text = 'EVERYONE_GROUP'::text) AND (sag.id = sasoa.auth_principal_id));
 
 
-ALTER TABLE searchapp.search_auth_user_sec_access_v OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_auth_user_sec_access_v OWNER TO searchapp;
 
 --
 -- TOC entry 504 (class 1259 OID 25652)
@@ -506,7 +477,7 @@ CREATE TABLE search_bio_mkr_correl_fast_mv (
 );
 
 
-ALTER TABLE searchapp.search_bio_mkr_correl_fast_mv OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_bio_mkr_correl_fast_mv OWNER TO searchapp;
 
 --
 -- TOC entry 505 (class 1259 OID 25655)
@@ -518,9 +489,9 @@ CREATE TABLE search_gene_signature (
     name character varying(100) NOT NULL,
     description character varying(1000),
     unique_id character varying(50),
-    create_date timestamp without time zone NOT NULL,
+    create_date timestamp, -- without time zone NOT NULL,
     created_by_auth_user_id bigint NOT NULL,
-    last_modified_date timestamp without time zone,
+    last_modified_date timestamp, -- without time zone,
     modified_by_auth_user_id bigint,
     version_number character varying(50),
     public_flag boolean DEFAULT false,
@@ -560,7 +531,7 @@ CREATE TABLE search_gene_signature (
 );
 
 
-ALTER TABLE searchapp.search_gene_signature OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_gene_signature OWNER TO searchapp;
 
 --
 -- TOC entry 506 (class 1259 OID 25664)
@@ -577,7 +548,7 @@ CREATE TABLE search_gene_signature_item (
 );
 
 
-ALTER TABLE searchapp.search_gene_signature_item OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_gene_signature_item OWNER TO searchapp;
 
 --
 -- TOC entry 507 (class 1259 OID 25667)
@@ -588,7 +559,7 @@ CREATE VIEW search_bio_mkr_correl_fast_view AS
     SELECT i.search_gene_signature_id AS domain_object_id, i.bio_marker_id AS asso_bio_marker_id, 'GENE_SIGNATURE_ITEM' AS correl_type, CASE WHEN (i.fold_chg_metric IS NULL) THEN (1)::bigint ELSE i.fold_chg_metric END AS value_metric, 3 AS mv_id FROM search_gene_signature_item i, search_gene_signature gs WHERE ((i.search_gene_signature_id = gs.search_gene_signature_id) AND (gs.deleted_flag = false));
 
 
-ALTER TABLE searchapp.search_bio_mkr_correl_fast_view OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_bio_mkr_correl_fast_view OWNER TO searchapp;
 
 --
 -- TOC entry 508 (class 1259 OID 25672)
@@ -619,7 +590,7 @@ CREATE TABLE search_custom_filter_item (
 );
 
 
-ALTER TABLE searchapp.search_custom_filter_item OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_custom_filter_item OWNER TO searchapp;
 
 --
 -- TOC entry 510 (class 1259 OID 25682)
@@ -635,7 +606,7 @@ CREATE TABLE search_gene_sig_file_schema (
 );
 
 
-ALTER TABLE searchapp.search_gene_sig_file_schema OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_gene_sig_file_schema OWNER TO searchapp;
 
 --
 -- TOC entry 511 (class 1259 OID 25687)
@@ -654,7 +625,7 @@ CREATE TABLE search_keyword (
 );
 
 
-ALTER TABLE searchapp.search_keyword OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_keyword OWNER TO searchapp;
 
 --
 -- TOC entry 512 (class 1259 OID 25693)
@@ -671,7 +642,7 @@ CREATE TABLE search_keyword_term (
 );
 
 
-ALTER TABLE searchapp.search_keyword_term OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_keyword_term OWNER TO searchapp;
 
 --
 -- TOC entry 513 (class 1259 OID 25696)
@@ -686,7 +657,7 @@ CREATE TABLE search_request_map (
 );
 
 
-ALTER TABLE searchapp.search_request_map OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_request_map OWNER TO searchapp;
 
 --
 -- TOC entry 514 (class 1259 OID 25702)
@@ -701,7 +672,7 @@ CREATE TABLE search_role (
 );
 
 
-ALTER TABLE searchapp.search_role OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_role OWNER TO searchapp;
 
 --
 -- TOC entry 515 (class 1259 OID 25708)
@@ -714,7 +685,7 @@ CREATE TABLE search_role_auth_user (
 );
 
 
-ALTER TABLE searchapp.search_role_auth_user OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_role_auth_user OWNER TO searchapp;
 
 --
 -- TOC entry 516 (class 1259 OID 25711)
@@ -728,7 +699,7 @@ CREATE TABLE search_sec_access_level (
 );
 
 
-ALTER TABLE searchapp.search_sec_access_level OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_sec_access_level OWNER TO searchapp;
 
 --
 -- TOC entry 517 (class 1259 OID 25714)
@@ -744,7 +715,7 @@ CREATE TABLE search_secure_object (
 );
 
 
-ALTER TABLE searchapp.search_secure_object OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_secure_object OWNER TO searchapp;
 
 --
 -- TOC entry 518 (class 1259 OID 25720)
@@ -758,9 +729,9 @@ CREATE TABLE search_secure_object_path (
 );
 
 
-ALTER TABLE searchapp.search_secure_object_path OWNER TO searchapp;
+-- ALTER TABLE searchapp.search_secure_object_path OWNER TO searchapp;
 
-SET default_tablespace = '';
+-- SET default_tablespace = '';
 
 --
 -- TOC entry 519 (class 1259 OID 25726)
@@ -775,7 +746,7 @@ CREATE TABLE search_user_settings (
 );
 
 
-ALTER TABLE searchapp.search_user_settings OWNER TO biomart_user;
+-- ALTER TABLE searchapp.search_user_settings OWNER TO biomart_user;
 
 --
 -- TOC entry 520 (class 1259 OID 25732)
@@ -783,23 +754,24 @@ ALTER TABLE searchapp.search_user_settings OWNER TO biomart_user;
 --
 
 CREATE SEQUENCE seq_search_data_id
-    START WITH 1789472
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 20;
+--     START WITH 1789472
+--     INCREMENT BY 1
+--     NO MINVALUE
+--     NO MAXVALUE
+--     CACHE 20
+;
 
 
-ALTER TABLE searchapp.seq_search_data_id OWNER TO searchapp;
+-- ALTER TABLE searchapp.seq_search_data_id OWNER TO searchapp;
 
-SET default_tablespace = search_app;
+-- SET default_tablespace = search_app;
 
 --
 -- TOC entry 3855 (class 2606 OID 25989)
 -- Name: pk_auth_usr_group; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_auth_group
+ALTER TABLE  search_auth_group
     ADD CONSTRAINT pk_auth_usr_group PRIMARY KEY (id);
 
 
@@ -808,7 +780,7 @@ ALTER TABLE ONLY search_auth_group
 -- Name: pk_search_principal; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_auth_principal
+ALTER TABLE  search_auth_principal
     ADD CONSTRAINT pk_search_principal PRIMARY KEY (id);
 
 
@@ -817,7 +789,7 @@ ALTER TABLE ONLY search_auth_principal
 -- Name: plugin_module_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY plugin_module
+ALTER TABLE  plugin_module
     ADD CONSTRAINT plugin_module_pk PRIMARY KEY (module_seq);
 
 
@@ -826,7 +798,7 @@ ALTER TABLE ONLY plugin_module
 -- Name: plugin_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY plugin
+ALTER TABLE  plugin
     ADD CONSTRAINT plugin_pk PRIMARY KEY (plugin_seq);
 
 
@@ -835,7 +807,7 @@ ALTER TABLE ONLY plugin
 -- Name: sch_sec_a_a_s_a_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_auth_sec_object_access
+ALTER TABLE  search_auth_sec_object_access
     ADD CONSTRAINT sch_sec_a_a_s_a_pk PRIMARY KEY (auth_sec_obj_access_id);
 
 
@@ -844,7 +816,7 @@ ALTER TABLE ONLY search_auth_sec_object_access
 -- Name: search_cust_fil_item_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_custom_filter_item
+ALTER TABLE  search_custom_filter_item
     ADD CONSTRAINT search_cust_fil_item_pk PRIMARY KEY (search_custom_filter_item_id);
 
 
@@ -853,7 +825,7 @@ ALTER TABLE ONLY search_custom_filter_item
 -- Name: search_custom_filter_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_custom_filter
+ALTER TABLE  search_custom_filter
     ADD CONSTRAINT search_custom_filter_pk PRIMARY KEY (search_custom_filter_id);
 
 
@@ -862,7 +834,7 @@ ALTER TABLE ONLY search_custom_filter
 -- Name: search_gene_sig_descr_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_gene_signature
+ALTER TABLE  search_gene_signature
     ADD CONSTRAINT search_gene_sig_descr_pk PRIMARY KEY (search_gene_signature_id);
 
 
@@ -871,7 +843,7 @@ ALTER TABLE ONLY search_gene_signature
 -- Name: search_gene_sig_file_sche_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_gene_sig_file_schema
+ALTER TABLE  search_gene_sig_file_schema
     ADD CONSTRAINT search_gene_sig_file_sche_pk PRIMARY KEY (search_gene_sig_file_schema_id);
 
 
@@ -880,7 +852,7 @@ ALTER TABLE ONLY search_gene_sig_file_schema
 -- Name: search_gene_signature_ite_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_gene_signature_item
+ALTER TABLE  search_gene_signature_item
     ADD CONSTRAINT search_gene_signature_ite_pk PRIMARY KEY (id);
 
 
@@ -889,7 +861,7 @@ ALTER TABLE ONLY search_gene_signature_item
 -- Name: search_keyword_uk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_keyword
+ALTER TABLE  search_keyword
     ADD CONSTRAINT search_keyword_uk UNIQUE (unique_id, data_category);
 
 
@@ -898,7 +870,7 @@ ALTER TABLE ONLY search_keyword
 -- Name: search_kw_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_keyword
+ALTER TABLE  search_keyword
     ADD CONSTRAINT search_kw_pk PRIMARY KEY (search_keyword_id);
 
 
@@ -907,7 +879,7 @@ ALTER TABLE ONLY search_keyword
 -- Name: search_kw_term_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_keyword_term
+ALTER TABLE  search_keyword_term
     ADD CONSTRAINT search_kw_term_pk PRIMARY KEY (search_keyword_term_id);
 
 
@@ -916,7 +888,7 @@ ALTER TABLE ONLY search_keyword_term
 -- Name: search_sec_a_u_s_a_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_auth_user_sec_access
+ALTER TABLE  search_auth_user_sec_access
     ADD CONSTRAINT search_sec_a_u_s_a_pk PRIMARY KEY (search_auth_user_sec_access_id);
 
 
@@ -925,7 +897,7 @@ ALTER TABLE ONLY search_auth_user_sec_access
 -- Name: search_sec_ac_level_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_sec_access_level
+ALTER TABLE  search_sec_access_level
     ADD CONSTRAINT search_sec_ac_level_pk PRIMARY KEY (search_sec_access_level_id);
 
 
@@ -934,7 +906,7 @@ ALTER TABLE ONLY search_sec_access_level
 -- Name: search_sec_obj__path_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_secure_object_path
+ALTER TABLE  search_secure_object_path
     ADD CONSTRAINT search_sec_obj__path_pk PRIMARY KEY (search_secure_obj_path_id);
 
 
@@ -943,29 +915,29 @@ ALTER TABLE ONLY search_secure_object_path
 -- Name: search_sec_obj_pk; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_secure_object
+ALTER TABLE  search_secure_object
     ADD CONSTRAINT search_sec_obj_pk PRIMARY KEY (search_secure_object_id);
 
 
-SET default_tablespace = '';
+-- SET default_tablespace = '';
 
 --
 -- TOC entry 3893 (class 2606 OID 26023)
 -- Name: search_user_settings_pkey; Type: CONSTRAINT; Schema: searchapp; Owner: biomart_user; Tablespace: 
 --
 
-ALTER TABLE ONLY search_user_settings
+ALTER TABLE  search_user_settings
     ADD CONSTRAINT search_user_settings_pkey PRIMARY KEY (id);
 
 
-SET default_tablespace = search_app;
+-- SET default_tablespace = search_app;
 
 --
 -- TOC entry 3861 (class 2606 OID 26025)
 -- Name: sys_c0011119; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_auth_user
+ALTER TABLE  search_auth_user
     ADD CONSTRAINT sys_c0011119 PRIMARY KEY (id);
 
 
@@ -974,7 +946,7 @@ ALTER TABLE ONLY search_auth_user
 -- Name: sys_c0011120; Type: CONSTRAINT; Schema: searchapp; Owner: searchapp; Tablespace: search_app
 --
 
-ALTER TABLE ONLY search_role
+ALTER TABLE  search_role
     ADD CONSTRAINT sys_c0011120 PRIMARY KEY (id);
 
 
@@ -1015,7 +987,7 @@ CREATE INDEX search_kw_term_skid_idx ON search_keyword_term USING btree (search_
 -- Name: trgi_search_a_u_sec_access_id; Type: TRIGGER; Schema: searchapp; Owner: searchapp
 --
 
-CREATE TRIGGER trgi_search_a_u_sec_access_id BEFORE INSERT ON search_auth_user_sec_access FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_a_u_sec_access_id();
+-- CREATE TRIGGER trgi_search_a_u_sec_access_id BEFORE INSERT ON search_auth_user_sec_access FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_a_u_sec_access_id();
 
 
 --
@@ -1023,7 +995,7 @@ CREATE TRIGGER trgi_search_a_u_sec_access_id BEFORE INSERT ON search_auth_user_s
 -- Name: trgi_search_au_obj_access_id; Type: TRIGGER; Schema: searchapp; Owner: searchapp
 --
 
-CREATE TRIGGER trgi_search_au_obj_access_id BEFORE INSERT ON search_auth_sec_object_access FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_au_obj_access_id();
+-- CREATE TRIGGER trgi_search_au_obj_access_id BEFORE INSERT ON search_auth_sec_object_access FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_au_obj_access_id();
 
 
 --
@@ -1031,7 +1003,7 @@ CREATE TRIGGER trgi_search_au_obj_access_id BEFORE INSERT ON search_auth_sec_obj
 -- Name: trgi_search_au_prcpl_id; Type: TRIGGER; Schema: searchapp; Owner: searchapp
 --
 
-CREATE TRIGGER trgi_search_au_prcpl_id BEFORE INSERT ON search_auth_principal FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_au_prcpl_id();
+-- CREATE TRIGGER trgi_search_au_prcpl_id BEFORE INSERT ON search_auth_principal FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_au_prcpl_id();
 
 
 --
@@ -1039,7 +1011,7 @@ CREATE TRIGGER trgi_search_au_prcpl_id BEFORE INSERT ON search_auth_principal FO
 -- Name: trgi_search_cust_fil_item_id; Type: TRIGGER; Schema: searchapp; Owner: searchapp
 --
 
-CREATE TRIGGER trgi_search_cust_fil_item_id BEFORE INSERT ON search_custom_filter_item FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_cust_fil_item_id();
+-- CREATE TRIGGER trgi_search_cust_fil_item_id BEFORE INSERT ON search_custom_filter_item FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_cust_fil_item_id();
 
 
 --
@@ -1047,7 +1019,7 @@ CREATE TRIGGER trgi_search_cust_fil_item_id BEFORE INSERT ON search_custom_filte
 -- Name: trgi_search_custom_filter_id; Type: TRIGGER; Schema: searchapp; Owner: searchapp
 --
 
-CREATE TRIGGER trgi_search_custom_filter_id BEFORE INSERT ON search_custom_filter FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_custom_filter_id();
+-- CREATE TRIGGER trgi_search_custom_filter_id BEFORE INSERT ON search_custom_filter FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_custom_filter_id();
 
 
 --
@@ -1055,7 +1027,7 @@ CREATE TRIGGER trgi_search_custom_filter_id BEFORE INSERT ON search_custom_filte
 -- Name: trgi_search_keyword_id; Type: TRIGGER; Schema: searchapp; Owner: searchapp
 --
 
-CREATE TRIGGER trgi_search_keyword_id BEFORE INSERT ON search_keyword FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_keyword_id();
+-- CREATE TRIGGER trgi_search_keyword_id BEFORE INSERT ON search_keyword FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_keyword_id();
 
 
 --
@@ -1063,7 +1035,7 @@ CREATE TRIGGER trgi_search_keyword_id BEFORE INSERT ON search_keyword FOR EACH R
 -- Name: trgi_search_keyword_term_id; Type: TRIGGER; Schema: searchapp; Owner: searchapp
 --
 
-CREATE TRIGGER trgi_search_keyword_term_id BEFORE INSERT ON search_keyword_term FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_keyword_term_id();
+-- CREATE TRIGGER trgi_search_keyword_term_id BEFORE INSERT ON search_keyword_term FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_keyword_term_id();
 
 
 --
@@ -1071,7 +1043,7 @@ CREATE TRIGGER trgi_search_keyword_term_id BEFORE INSERT ON search_keyword_term 
 -- Name: trgi_search_sec_acc_level_id; Type: TRIGGER; Schema: searchapp; Owner: searchapp
 --
 
-CREATE TRIGGER trgi_search_sec_acc_level_id BEFORE INSERT ON search_sec_access_level FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_sec_acc_level_id();
+-- CREATE TRIGGER trgi_search_sec_acc_level_id BEFORE INSERT ON search_sec_access_level FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_sec_acc_level_id();
 
 
 --
@@ -1079,7 +1051,7 @@ CREATE TRIGGER trgi_search_sec_acc_level_id BEFORE INSERT ON search_sec_access_l
 -- Name: trgi_search_sec_obj_id; Type: TRIGGER; Schema: searchapp; Owner: searchapp
 --
 
-CREATE TRIGGER trgi_search_sec_obj_id BEFORE INSERT ON search_secure_object FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_sec_obj_id();
+-- CREATE TRIGGER trgi_search_sec_obj_id BEFORE INSERT ON search_secure_object FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_sec_obj_id();
 
 
 --
@@ -1087,7 +1059,7 @@ CREATE TRIGGER trgi_search_sec_obj_id BEFORE INSERT ON search_secure_object FOR 
 -- Name: trgi_search_sec_obj_path_id; Type: TRIGGER; Schema: searchapp; Owner: searchapp
 --
 
-CREATE TRIGGER trgi_search_sec_obj_path_id BEFORE INSERT ON search_secure_object_path FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_sec_obj_path_id();
+-- CREATE TRIGGER trgi_search_sec_obj_path_id BEFORE INSERT ON search_secure_object_path FOR EACH ROW EXECUTE PROCEDURE tf_trgi_search_sec_obj_path_id();
 
 
 --
@@ -1095,7 +1067,7 @@ CREATE TRIGGER trgi_search_sec_obj_path_id BEFORE INSERT ON search_secure_object
 -- Name: fkfb14ef79287e0cac; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_role_auth_user
+ALTER TABLE  search_role_auth_user
     ADD CONSTRAINT fkfb14ef79287e0cac FOREIGN KEY (authorities_id) REFERENCES search_auth_user(id);
 
 
@@ -1104,7 +1076,7 @@ ALTER TABLE ONLY search_role_auth_user
 -- Name: fkfb14ef798f01f561; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_role_auth_user
+ALTER TABLE  search_role_auth_user
     ADD CONSTRAINT fkfb14ef798f01f561 FOREIGN KEY (people_id) REFERENCES search_role(id);
 
 
@@ -1113,7 +1085,7 @@ ALTER TABLE ONLY search_role_auth_user
 -- Name: gene_sig_create_auth_user_fk1; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_gene_signature
+ALTER TABLE  search_gene_signature
     ADD CONSTRAINT gene_sig_create_auth_user_fk1 FOREIGN KEY (created_by_auth_user_id) REFERENCES search_auth_user(id);
 
 
@@ -1122,7 +1094,7 @@ ALTER TABLE ONLY search_gene_signature
 -- Name: gene_sig_file_schema_fk1; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_gene_signature
+ALTER TABLE  search_gene_signature
     ADD CONSTRAINT gene_sig_file_schema_fk1 FOREIGN KEY (search_gene_sig_file_schema_id) REFERENCES search_gene_sig_file_schema(search_gene_sig_file_schema_id);
 
 
@@ -1131,7 +1103,7 @@ ALTER TABLE ONLY search_gene_signature
 -- Name: gene_sig_mod_auth_user_fk1; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_gene_signature
+ALTER TABLE  search_gene_signature
     ADD CONSTRAINT gene_sig_mod_auth_user_fk1 FOREIGN KEY (modified_by_auth_user_id) REFERENCES search_auth_user(id);
 
 
@@ -1140,7 +1112,7 @@ ALTER TABLE ONLY search_gene_signature
 -- Name: gene_sig_parent_fk1; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_gene_signature
+ALTER TABLE  search_gene_signature
     ADD CONSTRAINT gene_sig_parent_fk1 FOREIGN KEY (parent_gene_signature_id) REFERENCES search_gene_signature(search_gene_signature_id);
 
 
@@ -1149,7 +1121,7 @@ ALTER TABLE ONLY search_gene_signature
 -- Name: plugin_module_plugin_fk1; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY plugin_module
+ALTER TABLE  plugin_module
     ADD CONSTRAINT plugin_module_plugin_fk1 FOREIGN KEY (plugin_seq) REFERENCES plugin(plugin_seq);
 
 
@@ -1158,7 +1130,7 @@ ALTER TABLE ONLY plugin_module
 -- Name: sch_sec_a_u_fk; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_auth_sec_object_access
+ALTER TABLE  search_auth_sec_object_access
     ADD CONSTRAINT sch_sec_a_u_fk FOREIGN KEY (auth_principal_id) REFERENCES search_auth_principal(id);
 
 
@@ -1167,7 +1139,7 @@ ALTER TABLE ONLY search_auth_sec_object_access
 -- Name: sch_sec_s_a_l_fk; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_auth_sec_object_access
+ALTER TABLE  search_auth_sec_object_access
     ADD CONSTRAINT sch_sec_s_a_l_fk FOREIGN KEY (secure_access_level_id) REFERENCES search_sec_access_level(search_sec_access_level_id);
 
 
@@ -1176,7 +1148,7 @@ ALTER TABLE ONLY search_auth_sec_object_access
 -- Name: sch_sec_s_o_fk; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_auth_sec_object_access
+ALTER TABLE  search_auth_sec_object_access
     ADD CONSTRAINT sch_sec_s_o_fk FOREIGN KEY (secure_object_id) REFERENCES search_secure_object(search_secure_object_id);
 
 
@@ -1185,7 +1157,7 @@ ALTER TABLE ONLY search_auth_sec_object_access
 -- Name: sch_user_gp_m_grp_fk; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_auth_group_member
+ALTER TABLE  search_auth_group_member
     ADD CONSTRAINT sch_user_gp_m_grp_fk FOREIGN KEY (auth_group_id) REFERENCES search_auth_group(id);
 
 
@@ -1194,7 +1166,7 @@ ALTER TABLE ONLY search_auth_group_member
 -- Name: sch_user_gp_m_usr_fk; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_auth_group_member
+ALTER TABLE  search_auth_group_member
     ADD CONSTRAINT sch_user_gp_m_usr_fk FOREIGN KEY (auth_user_id) REFERENCES search_auth_principal(id);
 
 
@@ -1203,7 +1175,7 @@ ALTER TABLE ONLY search_auth_group_member
 -- Name: search_kw_fk; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_keyword_term
+ALTER TABLE  search_keyword_term
     ADD CONSTRAINT search_kw_fk FOREIGN KEY (search_keyword_id) REFERENCES search_keyword(search_keyword_id);
 
 
@@ -1212,7 +1184,7 @@ ALTER TABLE ONLY search_keyword_term
 -- Name: search_sec_a_u_fk; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_auth_user_sec_access
+ALTER TABLE  search_auth_user_sec_access
     ADD CONSTRAINT search_sec_a_u_fk FOREIGN KEY (search_auth_user_id) REFERENCES search_auth_user(id);
 
 
@@ -1221,7 +1193,7 @@ ALTER TABLE ONLY search_auth_user_sec_access
 -- Name: search_sec_s_a_l_fk; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_auth_user_sec_access
+ALTER TABLE  search_auth_user_sec_access
     ADD CONSTRAINT search_sec_s_a_l_fk FOREIGN KEY (search_sec_access_level_id) REFERENCES search_sec_access_level(search_sec_access_level_id);
 
 
@@ -1230,7 +1202,7 @@ ALTER TABLE ONLY search_auth_user_sec_access
 -- Name: search_sec_s_o_fk; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_auth_user_sec_access
+ALTER TABLE  search_auth_user_sec_access
     ADD CONSTRAINT search_sec_s_o_fk FOREIGN KEY (search_secure_object_id) REFERENCES search_secure_object(search_secure_object_id);
 
 
@@ -1239,7 +1211,7 @@ ALTER TABLE ONLY search_auth_user_sec_access
 -- Name: sh_auth_gp_id_fk; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_auth_group
+ALTER TABLE  search_auth_group
     ADD CONSTRAINT sh_auth_gp_id_fk FOREIGN KEY (id) REFERENCES search_auth_principal(id);
 
 
@@ -1248,7 +1220,7 @@ ALTER TABLE ONLY search_auth_group
 -- Name: sh_auth_user_id_fk; Type: FK CONSTRAINT; Schema: searchapp; Owner: searchapp
 --
 
-ALTER TABLE ONLY search_auth_user
+ALTER TABLE  search_auth_user
     ADD CONSTRAINT sh_auth_user_id_fk FOREIGN KEY (id) REFERENCES search_auth_principal(id);
 
 

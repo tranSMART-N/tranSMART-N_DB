@@ -2,59 +2,60 @@
 -- PostgreSQL database dump
 --
 
+/*
 -- Dumped from database version 9.2.3
 -- Dumped by pg_dump version 9.2.3
 -- Started on 2013-07-24 09:35:24 BST
 
-SET statement_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
+-- SET statement_timeout = 0;
+-- SET client_encoding = 'UTF8';
+-- SET standard_conforming_strings = on;
+-- SET check_function_bodies = false;
+-- SET client_min_messages = warning;
 
 --
 -- TOC entry 8 (class 2615 OID 24065)
 -- Name: biomart; Type: SCHEMA; Schema: -; Owner: biomart
 --
 
-CREATE SCHEMA biomart;
+-- CREATE SCHEMA biomart;
 
 
-ALTER SCHEMA biomart OWNER TO biomart;
+-- ALTER SCHEMA biomart OWNER TO biomart;
 
-SET search_path = biomart, pg_catalog;
+-- SET search_path = biomart, pg_catalog;
 
 --
 -- TOC entry 642 (class 1255 OID 24094)
 -- Name: bio_assay_analysis_uid(text); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
 
-CREATE FUNCTION bio_assay_analysis_uid(analysis_name text) RETURNS character varying
-    LANGUAGE plpgsql
-    AS $_$
-BEGIN
+-- CREATE FUNCTION bio_assay_analysis_uid(analysis_name text) RETURNS character varying
+--     LANGUAGE plpgsql
+--     AS $_$
+-- BEGIN
   -- $Id$
   -- Creates uid for bio_experiment.
 
-  RETURN 'BAA:' || coalesce(ANALYSIS_NAME, 'ERROR');
-END;
-$_$;
+--   RETURN 'BAA:' || coalesce(ANALYSIS_NAME, 'ERROR');
+-- END;
+-- $_$;
 
 
-ALTER FUNCTION biomart.bio_assay_analysis_uid(analysis_name text) OWNER TO biomart;
+-- ALTER FUNCTION biomart.bio_assay_analysis_uid(analysis_name text) OWNER TO biomart;
 
 --
 -- TOC entry 643 (class 1255 OID 24095)
 -- Name: bio_assay_platform_uid(text); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
 
-CREATE FUNCTION bio_assay_platform_uid(platform_name text) RETURNS character varying
-    LANGUAGE plpgsql
-    AS $_$
-BEGIN
+-- CREATE FUNCTION bio_assay_platform_uid(platform_name text) RETURNS character varying
+--     LANGUAGE plpgsql
+--     AS $_$
+-- BEGIN
   -- $Id$
   -- Creates uid for bio_experiment.
-
+ 
   RETURN 'BAP:' || coalesce(PLATFORM_NAME, 'ERROR');
 END;
 $_$;
@@ -915,206 +916,209 @@ ALTER FUNCTION biomart.tf_trg_bio_mkr_correl_descr_id() OWNER TO biomart;
 -- Name: tf_trg_bio_patient_event_id(); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
 
-CREATE FUNCTION tf_trg_bio_patient_event_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin  if NEW.BIO_PATIENT_EVENT_ID is null then          select nextval('biomart.SEQ_BIO_DATA_ID') into NEW.BIO_PATIENT_EVENT_ID ;       end if;  RETURN NEW;  end;
-$$;
+-- CREATE FUNCTION tf_trg_bio_patient_event_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin  if NEW.BIO_PATIENT_EVENT_ID is null then          select nextval('biomart.SEQ_BIO_DATA_ID') into NEW.BIO_PATIENT_EVENT_ID ;       end if;  RETURN NEW;  end;
+-- $$;
 
 
-ALTER FUNCTION biomart.tf_trg_bio_patient_event_id() OWNER TO biomart;
+-- ALTER FUNCTION biomart.tf_trg_bio_patient_event_id() OWNER TO biomart;
 
 --
 -- TOC entry 695 (class 1255 OID 24144)
 -- Name: tf_trg_bio_patient_id(); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
 
-CREATE FUNCTION tf_trg_bio_patient_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin  if NEW.BIO_PATIENT_ID is null then          select nextval('biomart.SEQ_BIO_DATA_ID') into NEW.BIO_PATIENT_ID ;       end if; RETURN NEW;   end;
-$$;
+-- CREATE FUNCTION tf_trg_bio_patient_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin  if NEW.BIO_PATIENT_ID is null then          select nextval('biomart.SEQ_BIO_DATA_ID') into NEW.BIO_PATIENT_ID ;       end if; RETURN NEW;   end;
+-- $$;
 
 
-ALTER FUNCTION biomart.tf_trg_bio_patient_id() OWNER TO biomart;
+-- ALTER FUNCTION biomart.tf_trg_bio_patient_id() OWNER TO biomart;
 
 --
 -- TOC entry 696 (class 1255 OID 24145)
 -- Name: tf_trg_bio_pt_evt_attr_id(); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
 
-CREATE FUNCTION tf_trg_bio_pt_evt_attr_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin if NEW.BIO_CLINIC_TRIAL_ATTRIBUTE_ID is null then          select nextval('biomart.SEQ_BIO_DATA_ID') into NEW.BIO_CLINIC_TRIAL_ATTRIBUTE_ID ;       end if; RETURN NEW;  end;
-$$;
+-- CREATE FUNCTION tf_trg_bio_pt_evt_attr_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin if NEW.BIO_CLINIC_TRIAL_ATTRIBUTE_ID is null then          select nextval('biomart.SEQ_BIO_DATA_ID') into NEW.BIO_CLINIC_TRIAL_ATTRIBUTE_ID ;       end if; RETURN NEW;  end;
+-- $$;
 
 
-ALTER FUNCTION biomart.tf_trg_bio_pt_evt_attr_id() OWNER TO biomart;
+-- ALTER FUNCTION biomart.tf_trg_bio_pt_evt_attr_id() OWNER TO biomart;
 
 --
 -- TOC entry 697 (class 1255 OID 24146)
 -- Name: tf_trg_bio_sample_id(); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
 
-CREATE FUNCTION tf_trg_bio_sample_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin   if NEW.BIO_SAMPLE_ID is null then          select nextval('biomart.SEQ_BIO_DATA_ID') into NEW.BIO_SAMPLE_ID ;       end if; RETURN NEW;   end;
-$$;
+-- CREATE FUNCTION tf_trg_bio_sample_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin   if NEW.BIO_SAMPLE_ID is null then          select nextval('biomart.SEQ_BIO_DATA_ID') into NEW.BIO_SAMPLE_ID ;       end if; RETURN NEW;   end;
+-- $$;
 
 
-ALTER FUNCTION biomart.tf_trg_bio_sample_id() OWNER TO biomart;
+-- ALTER FUNCTION biomart.tf_trg_bio_sample_id() OWNER TO biomart;
 
 --
 -- TOC entry 698 (class 1255 OID 24147)
 -- Name: tf_trg_bio_subject_id(); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
 
-CREATE FUNCTION tf_trg_bio_subject_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin if NEW.BIO_SUBJECT_ID is null then          select nextval('biomart.SEQ_BIO_DATA_ID') into NEW.BIO_SUBJECT_ID ;       end if;  RETURN NEW;  end;
-$$;
+-- CREATE FUNCTION tf_trg_bio_subject_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin if NEW.BIO_SUBJECT_ID is null then
+--           select nextval('biomart.SEQ_BIO_DATA_ID') into NEW.BIO_SUBJECT_ID ;
+--                  end if;  RETURN NEW;  end;
+-- $$;
 
 
-ALTER FUNCTION biomart.tf_trg_bio_subject_id() OWNER TO biomart;
+-- ALTER FUNCTION biomart.tf_trg_bio_subject_id() OWNER TO biomart;
 
 --
 -- TOC entry 699 (class 1255 OID 24148)
 -- Name: tf_trg_bio_taxon_id(); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
 
-CREATE FUNCTION tf_trg_bio_taxon_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN IF NEW.BIO_TAXONOMY_ID IS NULL THEN
-  select nextval('biomart.SEQ_BIO_DATA_ID') INTO NEW.BIO_TAXONOMY_ID ;
-END IF;
-RETURN NEW;
-END;
-$$;
+-- CREATE FUNCTION tf_trg_bio_taxon_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- BEGIN IF NEW.BIO_TAXONOMY_ID IS NULL THEN
+--   select nextval('biomart.SEQ_BIO_DATA_ID') INTO NEW.BIO_TAXONOMY_ID ;
+-- END IF;
+-- RETURN NEW;
+-- END;
+-- $$;
 
 
-ALTER FUNCTION biomart.tf_trg_bio_taxon_id() OWNER TO biomart;
+-- ALTER FUNCTION biomart.tf_trg_bio_taxon_id() OWNER TO biomart;
 
 --
 -- TOC entry 700 (class 1255 OID 24149)
 -- Name: tf_trg_ctd2_clin_inhib_effect(); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
 
-CREATE FUNCTION tf_trg_ctd2_clin_inhib_effect() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN     
- 	IF NEW.CTD_CIE_SEQ IS NULL THEN 
-		select nextval('biomart.SEQ_CLINICAL_TRIAL_DESIGN_ID') INTO NEW.CTD_CIE_SEQ ;  
-	END IF;  
-	RETURN NEW;  
-END;
-$$;
+-- CREATE FUNCTION tf_trg_ctd2_clin_inhib_effect() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- BEGIN
+--  	IF NEW.CTD_CIE_SEQ IS NULL THEN
+-- 		select nextval('biomart.SEQ_CLINICAL_TRIAL_DESIGN_ID') INTO NEW.CTD_CIE_SEQ ;
+-- 	END IF;
+-- 	RETURN NEW;
+-- END;
+-- $$;
 
 
-ALTER FUNCTION biomart.tf_trg_ctd2_clin_inhib_effect() OWNER TO biomart;
+-- ALTER FUNCTION biomart.tf_trg_ctd2_clin_inhib_effect() OWNER TO biomart;
 
 --
 -- TOC entry 701 (class 1255 OID 24150)
 -- Name: tf_trg_ctd2_disease(); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
 
-CREATE FUNCTION tf_trg_ctd2_disease() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN     
-	IF NEW.CTD_DISEASE_SEQ IS NULL THEN 
-		select nextval('biomart.SEQ_CLINICAL_TRIAL_DESIGN_ID') INTO NEW.CTD_DISEASE_SEQ ;  
-	END IF;    
-	RETURN NEW;
-END;
-$$;
+-- CREATE FUNCTION tf_trg_ctd2_disease() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- BEGIN
+-- 	IF NEW.CTD_DISEASE_SEQ IS NULL THEN
+-- 		select nextval('biomart.SEQ_CLINICAL_TRIAL_DESIGN_ID') INTO NEW.CTD_DISEASE_SEQ ;
+-- 	END IF;
+-- 	RETURN NEW;
+-- END;
+-- $$;
 
 
-ALTER FUNCTION biomart.tf_trg_ctd2_disease() OWNER TO biomart;
+-- ALTER FUNCTION biomart.tf_trg_ctd2_disease() OWNER TO biomart;
 
 --
 -- TOC entry 702 (class 1255 OID 24151)
 -- Name: tf_trg_ctd2_inhib_details(); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
 
-CREATE FUNCTION tf_trg_ctd2_inhib_details() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN     
-	IF NEW.CTD_INHIB_SEQ IS NULL THEN 
-		select nextval('biomart.SEQ_CLINICAL_TRIAL_DESIGN_ID') INTO NEW.CTD_INHIB_SEQ ;  
-	END IF;    
-	RETURN NEW;
-END;
-$$;
+-- CREATE FUNCTION tf_trg_ctd2_inhib_details() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- BEGIN
+-- 	IF NEW.CTD_INHIB_SEQ IS NULL THEN
+-- 		select nextval('biomart.SEQ_CLINICAL_TRIAL_DESIGN_ID') INTO NEW.CTD_INHIB_SEQ ;
+-- 	END IF;
+-- 	RETURN NEW;
+-- END;
+-- $$;
 
 
-ALTER FUNCTION biomart.tf_trg_ctd2_inhib_details() OWNER TO biomart;
+-- ALTER FUNCTION biomart.tf_trg_ctd2_inhib_details() OWNER TO biomart;
 
 --
 -- TOC entry 703 (class 1255 OID 24152)
 -- Name: tf_trg_ctd2_study_id(); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
 
-CREATE FUNCTION tf_trg_ctd2_study_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN     
-	IF NEW.CTD_STUDY_ID IS NULL THEN 
-		select nextval('biomart.SEQ_CLINICAL_TRIAL_DESIGN_ID') INTO NEW.CTD_STUDY_ID ;  
-	END IF;    
-	RETURN NEW;
-END;
-$$;
+-- CREATE FUNCTION tf_trg_ctd2_study_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- BEGIN
+-- 	IF NEW.CTD_STUDY_ID IS NULL THEN
+-- 		select nextval('biomart.SEQ_CLINICAL_TRIAL_DESIGN_ID') INTO NEW.CTD_STUDY_ID ;
+-- 	END IF;
+-- 	RETURN NEW;
+-- END;
+-- $$;
 
 
-ALTER FUNCTION biomart.tf_trg_ctd2_study_id() OWNER TO biomart;
+-- ALTER FUNCTION biomart.tf_trg_ctd2_study_id() OWNER TO biomart;
 
 --
 -- TOC entry 704 (class 1255 OID 24153)
 -- Name: tf_trg_ctd2_trial_details(); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
 
-CREATE FUNCTION tf_trg_ctd2_trial_details() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-BEGIN     
-	IF NEW.CTD_TD_SEQ IS NULL THEN 
-		select nextval('biomart.SEQ_CLINICAL_TRIAL_DESIGN_ID') INTO NEW.CTD_TD_SEQ ;  
-	END IF;   
-	RETURN NEW; 
-END;
-$$;
+-- CREATE FUNCTION tf_trg_ctd2_trial_details() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- BEGIN
+-- 	IF NEW.CTD_TD_SEQ IS NULL THEN
+-- 		select nextval('biomart.SEQ_CLINICAL_TRIAL_DESIGN_ID') INTO NEW.CTD_TD_SEQ ;
+-- 	END IF;
+-- 	RETURN NEW;
+-- END;
+-- $$;
 
 
-ALTER FUNCTION biomart.tf_trg_ctd2_trial_details() OWNER TO biomart;
+-- ALTER FUNCTION biomart.tf_trg_ctd2_trial_details() OWNER TO biomart;
 
 --
 -- TOC entry 705 (class 1255 OID 24154)
 -- Name: tf_trig_clinical_trial_design_id(); Type: FUNCTION; Schema: biomart; Owner: biomart
 --
+--
+-- CREATE FUNCTION tf_trig_clinical_trial_design_id() RETURNS trigger
+--     LANGUAGE plpgsql
+--     AS $$
+-- begin
+--     if NEW.CLINICAL_TRIAL_DESIGN_ID is null then
+--       select nextval('biomart.SEQ_CLINICAL_TRIAL_DESIGN_ID') into NEW.CLINICAL_TRIAL_DESIGN_ID ;
+--     end if;
+--     RETURN NEW;
+-- end;
+-- $$;
 
-CREATE FUNCTION tf_trig_clinical_trial_design_id() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-begin     
-    if NEW.CLINICAL_TRIAL_DESIGN_ID is null then          
-      select nextval('biomart.SEQ_CLINICAL_TRIAL_DESIGN_ID') into NEW.CLINICAL_TRIAL_DESIGN_ID ;  
-    end if; 
-    RETURN NEW;
-end;
-$$;
-
-
-ALTER FUNCTION biomart.tf_trig_clinical_trial_design_id() OWNER TO biomart;
-
-SET default_tablespace = biomart;
-
-SET default_with_oids = false;
+--
+-- ALTER FUNCTION biomart.tf_trig_clinical_trial_design_id() OWNER TO biomart;
+--
+-- --SET default_tablespace = biomart;
+--
+-- SET default_with_oids = false;
+*/
 
 --
 -- TOC entry 182 (class 1259 OID 24207)
@@ -1126,18 +1130,18 @@ CREATE TABLE bio_assay (
     etl_id character varying(100) NOT NULL,
     study character varying(200),
     protocol character varying(200),
-    description text,
+    description varchar(4000), --text,
     sample_type character varying(200),
     experiment_id bigint NOT NULL,
-    test_date timestamp without time zone,
-    sample_receive_date timestamp without time zone,
+    test_date timestamp, --, --without time zone,
+    sample_receive_date timestamp, --, --without time zone,
     requestor character varying(200),
     bio_assay_type character varying(200) NOT NULL,
     bio_assay_platform_id bigint
 );
 
 
-ALTER TABLE biomart.bio_assay OWNER TO biomart;
+-- ALTER TABLE biomart.bio_assay OWNER TO biomart;
 
 --
 -- TOC entry 183 (class 1259 OID 24213)
@@ -1147,7 +1151,7 @@ ALTER TABLE biomart.bio_assay OWNER TO biomart;
 CREATE TABLE bio_assay_analysis (
     analysis_name character varying(500),
     short_description character varying(510),
-    analysis_create_date timestamp without time zone,
+    analysis_create_date timestamp, --without time zone,
     analyst_id character varying(510),
     bio_assay_analysis_id bigint NOT NULL,
     analysis_version character varying(200),
@@ -1168,7 +1172,7 @@ CREATE TABLE bio_assay_analysis (
 );
 
 
-ALTER TABLE biomart.bio_assay_analysis OWNER TO biomart;
+-- ALTER TABLE biomart.bio_assay_analysis OWNER TO biomart;
 
 --
 -- TOC entry 184 (class 1259 OID 24219)
@@ -1198,7 +1202,7 @@ CREATE TABLE bio_assay_analysis_data (
 );
 
 
-ALTER TABLE biomart.bio_assay_analysis_data OWNER TO biomart;
+-- ALTER TABLE biomart.bio_assay_analysis_data OWNER TO biomart;
 
 --
 -- TOC entry 185 (class 1259 OID 24222)
@@ -1230,7 +1234,7 @@ CREATE TABLE bio_assay_analysis_data_tea (
 );
 
 
-ALTER TABLE biomart.bio_assay_analysis_data_tea OWNER TO biomart;
+-- ALTER TABLE biomart.bio_assay_analysis_data_tea OWNER TO biomart;
 
 --
 -- TOC entry 186 (class 1259 OID 24228)
@@ -1253,7 +1257,7 @@ CREATE TABLE bio_assay_data (
 );
 
 
-ALTER TABLE biomart.bio_assay_data OWNER TO biomart;
+-- ALTER TABLE biomart.bio_assay_data OWNER TO biomart;
 
 --
 -- TOC entry 187 (class 1259 OID 24231)
@@ -1267,7 +1271,7 @@ CREATE TABLE bio_assay_data_annotation (
 );
 
 
-ALTER TABLE biomart.bio_assay_data_annotation OWNER TO biomart;
+-- ALTER TABLE biomart.bio_assay_data_annotation OWNER TO biomart;
 
 --
 -- TOC entry 188 (class 1259 OID 24234)
@@ -1293,22 +1297,17 @@ CREATE TABLE bio_assay_data_stats (
 );
 
 
-ALTER TABLE biomart.bio_assay_data_stats OWNER TO biomart;
+-- ALTER TABLE biomart.bio_assay_data_stats OWNER TO biomart;
 
 --
 -- TOC entry 189 (class 1259 OID 24237)
 -- Name: bio_assay_data_stats_seq; Type: SEQUENCE; Schema: biomart; Owner: biomart
 --
 
-CREATE SEQUENCE bio_assay_data_stats_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 20;
+CREATE SEQUENCE bio_assay_data_stats_seq;
 
 
-ALTER TABLE biomart.bio_assay_data_stats_seq OWNER TO biomart;
+-- ALTER TABLE biomart.bio_assay_data_stats_seq OWNER TO biomart;
 
 --
 -- TOC entry 190 (class 1259 OID 24239)
@@ -1320,7 +1319,7 @@ CREATE TABLE bio_assay_dataset (
     dataset_name character varying(400),
     dataset_description character varying(1000),
     dataset_criteria character varying(1000),
-    create_date timestamp without time zone,
+    create_date timestamp, --without time zone,
     bio_experiment_id bigint NOT NULL,
     bio_assay_id bigint,
     etl_id character varying(100),
@@ -1328,7 +1327,7 @@ CREATE TABLE bio_assay_dataset (
 );
 
 
-ALTER TABLE biomart.bio_assay_dataset OWNER TO biomart;
+-- ALTER TABLE biomart.bio_assay_dataset OWNER TO biomart;
 
 --
 -- TOC entry 191 (class 1259 OID 24245)
@@ -1342,7 +1341,7 @@ CREATE TABLE bio_assay_feature_group (
 );
 
 
-ALTER TABLE biomart.bio_assay_feature_group OWNER TO biomart;
+-- ALTER TABLE biomart.bio_assay_feature_group OWNER TO biomart;
 
 --
 -- TOC entry 192 (class 1259 OID 24248)
@@ -1361,7 +1360,7 @@ CREATE TABLE bio_assay_platform (
 );
 
 
-ALTER TABLE biomart.bio_assay_platform OWNER TO biomart;
+-- ALTER TABLE biomart.bio_assay_platform OWNER TO biomart;
 
 --
 -- TOC entry 193 (class 1259 OID 24254)
@@ -1375,7 +1374,7 @@ CREATE TABLE bio_assay_sample (
 );
 
 
-ALTER TABLE biomart.bio_assay_sample OWNER TO biomart;
+-- ALTER TABLE biomart.bio_assay_sample OWNER TO biomart;
 
 --
 -- TOC entry 194 (class 1259 OID 24257)
@@ -1388,7 +1387,7 @@ CREATE TABLE bio_asy_analysis_dataset (
 );
 
 
-ALTER TABLE biomart.bio_asy_analysis_dataset OWNER TO biomart;
+-- ALTER TABLE biomart.bio_asy_analysis_dataset OWNER TO biomart;
 
 --
 -- TOC entry 195 (class 1259 OID 24260)
@@ -1403,7 +1402,7 @@ CREATE TABLE bio_asy_analysis_pltfm (
 );
 
 
-ALTER TABLE biomart.bio_asy_analysis_pltfm OWNER TO biomart;
+-- ALTER TABLE biomart.bio_asy_analysis_pltfm OWNER TO biomart;
 
 --
 -- TOC entry 196 (class 1259 OID 24266)
@@ -1428,7 +1427,7 @@ CREATE TABLE bio_asy_data_stats_all (
 );
 
 
-ALTER TABLE biomart.bio_asy_data_stats_all OWNER TO biomart;
+-- ALTER TABLE biomart.bio_asy_data_stats_all OWNER TO biomart;
 
 --
 -- TOC entry 197 (class 1259 OID 24269)
@@ -1452,7 +1451,7 @@ CREATE TABLE bio_cell_line (
 );
 
 
-ALTER TABLE biomart.bio_cell_line OWNER TO biomart;
+-- ALTER TABLE biomart.bio_cell_line OWNER TO biomart;
 
 --
 -- TOC entry 198 (class 1259 OID 24275)
@@ -1470,7 +1469,7 @@ CREATE TABLE bio_cgdcp_data (
 );
 
 
-ALTER TABLE biomart.bio_cgdcp_data OWNER TO biomart;
+-- ALTER TABLE biomart.bio_cgdcp_data OWNER TO biomart;
 
 --
 -- TOC entry 199 (class 1259 OID 24281)
@@ -1485,7 +1484,7 @@ CREATE TABLE bio_clinc_trial_attr (
 );
 
 
-ALTER TABLE biomart.bio_clinc_trial_attr OWNER TO biomart;
+-- ALTER TABLE biomart.bio_clinc_trial_attr OWNER TO biomart;
 
 --
 -- TOC entry 200 (class 1259 OID 24284)
@@ -1502,7 +1501,7 @@ CREATE TABLE bio_clinc_trial_pt_group (
 );
 
 
-ALTER TABLE biomart.bio_clinc_trial_pt_group OWNER TO biomart;
+-- ALTER TABLE biomart.bio_clinc_trial_pt_group OWNER TO biomart;
 
 --
 -- TOC entry 201 (class 1259 OID 24290)
@@ -1513,13 +1512,13 @@ CREATE TABLE bio_clinc_trial_time_pt (
     bio_clinc_trial_tm_pt_id bigint NOT NULL,
     time_point character varying(200),
     time_point_code character varying(200),
-    start_date timestamp without time zone,
-    end_date timestamp without time zone,
+    start_date timestamp, --without time zone,
+    end_date timestamp, --without time zone,
     bio_experiment_id bigint NOT NULL
 );
 
 
-ALTER TABLE biomart.bio_clinc_trial_time_pt OWNER TO biomart;
+-- ALTER TABLE biomart.bio_clinc_trial_time_pt OWNER TO biomart;
 
 --
 -- TOC entry 202 (class 1259 OID 24293)
@@ -1539,11 +1538,11 @@ CREATE TABLE bio_clinical_trial (
     dosing_regimen character varying(3500),
     group_assignment character varying(510),
     type_of_control character varying(510),
-    completion_date timestamp without time zone,
+    completion_date timestamp, --without time zone,
     primary_end_points character varying(2000),
     secondary_end_points character varying(3500),
-    inclusion_criteria text,
-    exclusion_criteria text,
+    inclusion_criteria varchar(4000),
+    exclusion_criteria varchar(4000),
     subjects character varying(2000),
     gender_restriction_mfb character varying(510),
     min_age integer,
@@ -1558,7 +1557,7 @@ CREATE TABLE bio_clinical_trial (
 );
 
 
-ALTER TABLE biomart.bio_clinical_trial OWNER TO biomart;
+-- ALTER TABLE biomart.bio_clinical_trial OWNER TO biomart;
 
 --
 -- TOC entry 203 (class 1259 OID 24299)
@@ -1566,188 +1565,188 @@ ALTER TABLE biomart.bio_clinical_trial OWNER TO biomart;
 --
 
 CREATE TABLE bio_clinical_trial_design (
-    ref_id character varying(4000),
-    ref_record_id character varying(4000),
-    ref_back_reference character varying(4000),
-    ref_article_pmid character varying(4000),
-    ref_protocol_id character varying(4000),
-    ref_title character varying(4000),
-    study_type character varying(4000),
-    common_name character varying(4000),
-    icd10 character varying(4000),
-    mesh character varying(4000),
-    disease_type character varying(4000),
-    physiology_name character varying(4000),
-    trial_status character varying(4000),
-    trial_phase character varying(4000),
-    nature_of_trial character varying(4000),
-    randomization character varying(4000),
-    blinded_trial character varying(4000),
-    trial_type character varying(4000),
-    run_n_period character varying(4000),
-    treatment_period character varying(4000),
-    washout_period character varying(4000),
-    open_label_extension character varying(4000),
-    sponsor character varying(4000),
-    trial_nbr_of_patients_studied character varying(4000),
-    source_type character varying(4000),
-    trial_age character varying(4000),
-    disease_severity character varying(4000),
-    difficult_to_treat character varying(4000),
-    asthma_diagnosis character varying(4000),
-    inhaled_steroid_dose character varying(4000),
-    laba character varying(4000),
-    ocs character varying(4000),
-    xolair character varying(4000),
-    ltra_inhibitors character varying(4000),
-    asthma_phenotype character varying(4000),
-    fev1 character varying(4000),
-    fev1_reversibility character varying(4000),
-    tlc character varying(4000),
-    fev1_fvc character varying(4000),
-    fvc character varying(4000),
-    dlco character varying(4000),
-    sgrq character varying(4000),
-    hrct character varying(4000),
-    biopsy character varying(4000),
-    dyspnea_on_exertion character varying(4000),
-    concomitant_med character varying(4000),
-    trial_smokers_pct character varying(4000),
-    trial_former_smokers_pct character varying(4000),
-    trial_never_smokers_pct character varying(4000),
-    trial_pack_years character varying(4000),
-    exclusion_criteria character varying(4000),
-    minimal_symptoms character varying(4000),
-    rescue_medication_use character varying(4000),
-    control_details character varying(4000),
-    blinding_procedure character varying(4000),
-    number_of_arms character varying(4000),
-    description character varying(4000),
-    arm character varying(4000),
-    arm_nbr_of_patients_studied character varying(4000),
-    arm_classification_type character varying(4000),
-    arm_classification_value character varying(4000),
-    arm_asthma_duration character varying(4000),
-    arm_geographic_region character varying(4000),
-    arm_age character varying(4000),
-    arm_gender character varying(4000),
-    arm_smokers_pct character varying(4000),
-    arm_former_smokers_pct character varying(4000),
-    arm_never_smokers_pct character varying(4000),
-    arm_pack_years character varying(4000),
-    minority_participation character varying(4000),
-    baseline_symptom_score character varying(4000),
-    baseline_rescue_medication_use character varying(4000),
-    clinical_variable character varying(4000),
-    clinical_variable_pct character varying(4000),
-    clinical_variable_value character varying(4000),
-    prior_med_drug_name character varying(4000),
-    prior_med_pct character varying(4000),
-    prior_med_value character varying(4000),
-    biomarker_name character varying(4000),
-    biomarker_pct character varying(4000),
-    biomarkervalue character varying(4000),
-    cellinfo_type character varying(4000),
-    cellinfo_count character varying(4000),
-    cellinfo_source character varying(4000),
-    pulmonary_pathology_name character varying(4000),
-    pulmpath_patient_pct character varying(4000),
-    pulmpath_value_unit character varying(4000),
-    pulmpath_method character varying(4000),
-    runin_ocs character varying(4000),
-    runin_ics character varying(4000),
-    runin_laba character varying(4000),
-    runin_ltra character varying(4000),
-    runin_corticosteroids character varying(4000),
-    runin_anti_fibrotics character varying(4000),
-    runin_immunosuppressive character varying(4000),
-    runin_cytotoxic character varying(4000),
-    runin_description character varying(4000),
-    trtmt_ocs character varying(4000),
-    trtmt_ics character varying(4000),
-    trtmt_laba character varying(4000),
-    trtmt_ltra character varying(4000),
-    trtmt_corticosteroids character varying(4000),
-    trtmt_anti_fibrotics character varying(4000),
-    trtmt_immunosuppressive character varying(4000),
-    trtmt_cytotoxic character varying(4000),
-    trtmt_description character varying(4000),
-    drug_inhibitor_common_name character varying(4000),
-    drug_inhibitor_standard_name character varying(4000),
-    drug_inhibitor_cas_id character varying(4000),
-    drug_inhibitor_dose character varying(4000),
-    drug_inhibitor_route_of_admin character varying(4000),
-    drug_inhibitor_trtmt_regime character varying(4000),
-    comparator_name character varying(4000),
-    comparator_dose character varying(4000),
-    comparator_time_period character varying(4000),
-    comparator_route_of_admin character varying(4000),
-    treatment_regime character varying(4000),
-    placebo character varying(4000),
-    experiment_description character varying(4000),
-    primary_endpoint_type character varying(4000),
-    primary_endpoint_definition character varying(4000),
-    primary_endpoint_time_period character varying(4000),
-    primary_endpoint_change character varying(4000),
-    primary_endpoint_p_value character varying(4000),
-    primary_endpoint_stat_test character varying(4000),
-    secondary_type character varying(4000),
-    secondary_type_definition character varying(4000),
-    secondary_type_time_period character varying(4000),
-    secondary_type_change character varying(4000),
-    secondary_type_p_value character varying(4000),
-    secondary_type_stat_test character varying(4000),
-    clinical_variable_name character varying(4000),
-    pct_change_from_baseline character varying(4000),
-    abs_change_from_baseline character varying(4000),
-    rate_of_change_from_baseline character varying(4000),
-    average_over_treatment_period character varying(4000),
-    within_group_changes character varying(4000),
-    stat_measure_p_value character varying(4000),
-    definition_of_the_event character varying(4000),
-    number_of_events character varying(4000),
-    event_rate character varying(4000),
-    time_to_event character varying(4000),
-    event_pct_reduction character varying(4000),
-    event_p_value character varying(4000),
-    event_description character varying(4000),
-    discontinuation_rate character varying(4000),
-    response_rate character varying(4000),
-    downstream_signaling_effects character varying(4000),
-    beneficial_effects character varying(4000),
-    adverse_effects character varying(4000),
-    pk_pd_parameter character varying(4000),
-    pk_pd_value character varying(4000),
-    effect_description character varying(4000),
-    biomolecule_name character varying(4000),
-    biomolecule_id character varying(4000),
-    biomolecule_type character varying(4000),
-    biomarker character varying(4000),
-    biomarker_type character varying(4000),
-    baseline_expr_pct character varying(4000),
-    baseline_expr_number character varying(4000),
-    baseline_expr_value_fold_mean character varying(4000),
-    baseline_expr_sd character varying(4000),
-    baseline_expr_sem character varying(4000),
-    baseline_expr_unit character varying(4000),
-    expr_after_trtmt_pct character varying(4000),
-    expr_after_trtmt_number character varying(4000),
-    expr_aftertrtmt_valuefold_mean character varying(4000),
-    expr_after_trtmt_sd character varying(4000),
-    expr_after_trtmt_sem character varying(4000),
-    expr_after_trtmt_unit character varying(4000),
-    expr_chg_source_type character varying(4000),
-    expr_chg_technique character varying(4000),
-    expr_chg_description character varying(4000),
-    clinical_correlation character varying(4000),
-    statistical_test character varying(4000),
-    statistical_coefficient_value character varying(4000),
-    statistical_test_p_value character varying(4000),
-    statistical_test_description character varying(4000)
+    ref_id character varying(100),
+    ref_record_id character varying(100),
+    ref_back_reference character varying(100),
+    ref_article_pmid character varying(100),
+    ref_protocol_id character varying(100),
+    ref_title character varying(100),
+    study_type character varying(100),
+    common_name character varying(100),
+    icd10 character varying(100),
+    mesh character varying(100),
+    disease_type character varying(100),
+    physiology_name character varying(100),
+    trial_status character varying(100),
+    trial_phase character varying(100),
+    nature_of_trial character varying(100),
+    randomization character varying(100),
+    blinded_trial character varying(100),
+    trial_type character varying(100),
+    run_n_period character varying(100),
+    treatment_period character varying(100),
+    washout_period character varying(100),
+    open_label_extension character varying(100),
+    sponsor character varying(100),
+    trial_nbr_of_patients_studied character varying(100),
+    source_type character varying(100),
+    trial_age character varying(100),
+    disease_severity character varying(100),
+    difficult_to_treat character varying(100),
+    asthma_diagnosis character varying(100),
+    inhaled_steroid_dose character varying(100),
+    laba character varying(100),
+    ocs character varying(100),
+    xolair character varying(100),
+    ltra_inhibitors character varying(100),
+    asthma_phenotype character varying(100),
+    fev1 character varying(100),
+    fev1_reversibility character varying(100),
+    tlc character varying(100),
+    fev1_fvc character varying(100),
+    fvc character varying(100),
+    dlco character varying(100),
+    sgrq character varying(100),
+    hrct character varying(100),
+    biopsy character varying(100),
+    dyspnea_on_exertion character varying(100),
+    concomitant_med character varying(100),
+    trial_smokers_pct character varying(100),
+    trial_former_smokers_pct character varying(100),
+    trial_never_smokers_pct character varying(100),
+    trial_pack_years character varying(100),
+    exclusion_criteria character varying(100),
+    minimal_symptoms character varying(100),
+    rescue_medication_use character varying(100),
+    control_details character varying(100),
+    blinding_procedure character varying(100),
+    number_of_arms character varying(100),
+    description character varying(100),
+    arm character varying(100),
+    arm_nbr_of_patients_studied character varying(100),
+    arm_classification_type character varying(100),
+    arm_classification_value character varying(100),
+    arm_asthma_duration character varying(100),
+    arm_geographic_region character varying(100),
+    arm_age character varying(100),
+    arm_gender character varying(100),
+    arm_smokers_pct character varying(100),
+    arm_former_smokers_pct character varying(100),
+    arm_never_smokers_pct character varying(100),
+    arm_pack_years character varying(100),
+    minority_participation character varying(100),
+    baseline_symptom_score character varying(100),
+    baseline_rescue_medication_use character varying(100),
+    clinical_variable character varying(100),
+    clinical_variable_pct character varying(100),
+    clinical_variable_value character varying(100),
+    prior_med_drug_name character varying(100),
+    prior_med_pct character varying(100),
+    prior_med_value character varying(100),
+    biomarker_name character varying(100),
+    biomarker_pct character varying(100),
+    biomarkervalue character varying(100),
+    cellinfo_type character varying(100),
+    cellinfo_count character varying(100),
+    cellinfo_source character varying(100),
+    pulmonary_pathology_name character varying(100),
+    pulmpath_patient_pct character varying(100),
+    pulmpath_value_unit character varying(100),
+    pulmpath_method character varying(100),
+    runin_ocs character varying(100),
+    runin_ics character varying(100),
+    runin_laba character varying(100),
+    runin_ltra character varying(100),
+    runin_corticosteroids character varying(100),
+    runin_anti_fibrotics character varying(100),
+    runin_immunosuppressive character varying(100),
+    runin_cytotoxic character varying(100),
+    runin_description character varying(100),
+    trtmt_ocs character varying(100),
+    trtmt_ics character varying(100),
+    trtmt_laba character varying(100),
+    trtmt_ltra character varying(100),
+    trtmt_corticosteroids character varying(100),
+    trtmt_anti_fibrotics character varying(100),
+    trtmt_immunosuppressive character varying(100),
+    trtmt_cytotoxic character varying(100),
+    trtmt_description character varying(100),
+    drug_inhibitor_common_name character varying(100),
+    drug_inhibitor_standard_name character varying(100),
+    drug_inhibitor_cas_id character varying(100),
+    drug_inhibitor_dose character varying(100),
+    drug_inhibitor_route_of_admin character varying(100),
+    drug_inhibitor_trtmt_regime character varying(100),
+    comparator_name character varying(100),
+    comparator_dose character varying(100),
+    comparator_time_period character varying(100),
+    comparator_route_of_admin character varying(100),
+    treatment_regime character varying(100),
+    placebo character varying(100),
+    experiment_description character varying(100),
+    primary_endpoint_type character varying(100),
+    primary_endpoint_definition character varying(100),
+    primary_endpoint_time_period character varying(100),
+    primary_endpoint_change character varying(100),
+    primary_endpoint_p_value character varying(100),
+    primary_endpoint_stat_test character varying(100),
+    secondary_type character varying(100),
+    secondary_type_definition character varying(100),
+    secondary_type_time_period character varying(100),
+    secondary_type_change character varying(100),
+    secondary_type_p_value character varying(100),
+    secondary_type_stat_test character varying(100),
+    clinical_variable_name character varying(100),
+    pct_change_from_baseline character varying(100),
+    abs_change_from_baseline character varying(100),
+    rate_of_change_from_baseline character varying(100),
+    average_over_treatment_period character varying(100),
+    within_group_changes character varying(100),
+    stat_measure_p_value character varying(100),
+    definition_of_the_event character varying(100),
+    number_of_events character varying(100),
+    event_rate character varying(100),
+    time_to_event character varying(100),
+    event_pct_reduction character varying(100),
+    event_p_value character varying(100),
+    event_description character varying(100),
+    discontinuation_rate character varying(100),
+    response_rate character varying(100),
+    downstream_signaling_effects character varying(100),
+    beneficial_effects character varying(100),
+    adverse_effects character varying(100),
+    pk_pd_parameter character varying(100),
+    pk_pd_value character varying(100),
+    effect_description character varying(100),
+    biomolecule_name character varying(100),
+    biomolecule_id character varying(100),
+    biomolecule_type character varying(100),
+    biomarker character varying(100),
+    biomarker_type character varying(100),
+    baseline_expr_pct character varying(100),
+    baseline_expr_number character varying(100),
+    baseline_expr_value_fold_mean character varying(100),
+    baseline_expr_sd character varying(100),
+    baseline_expr_sem character varying(100),
+    baseline_expr_unit character varying(100),
+    expr_after_trtmt_pct character varying(100),
+    expr_after_trtmt_number character varying(100),
+    expr_aftertrtmt_valuefold_mean character varying(100),
+    expr_after_trtmt_sd character varying(100),
+    expr_after_trtmt_sem character varying(100),
+    expr_after_trtmt_unit character varying(100),
+    expr_chg_source_type character varying(100),
+    expr_chg_technique character varying(100),
+    expr_chg_description character varying(100),
+    clinical_correlation character varying(100),
+    statistical_test character varying(100),
+    statistical_coefficient_value character varying(100),
+    statistical_test_p_value character varying(100),
+    statistical_test_description character varying(100)
 );
 
 
-ALTER TABLE biomart.bio_clinical_trial_design OWNER TO biomart;
+-- ALTER TABLE biomart.bio_clinical_trial_design OWNER TO biomart;
 
 --
 -- TOC entry 204 (class 1259 OID 24305)
@@ -1762,7 +1761,7 @@ CREATE TABLE bio_compound (
     code_name character varying(300),
     generic_name character varying(200),
     brand_name character varying(200),
-    chemical_name character varying(1000),
+    chemical_name character varying(100),
     mechanism character varying(400),
     product_category character varying(200),
     description character varying(1000),
@@ -1772,7 +1771,7 @@ CREATE TABLE bio_compound (
 );
 
 
-ALTER TABLE biomart.bio_compound OWNER TO biomart;
+-- ALTER TABLE biomart.bio_compound OWNER TO biomart;
 
 --
 -- TOC entry 205 (class 1259 OID 24311)
@@ -1788,7 +1787,7 @@ CREATE TABLE bio_concept_code (
 );
 
 
-ALTER TABLE biomart.bio_concept_code OWNER TO biomart;
+-- ALTER TABLE biomart.bio_concept_code OWNER TO biomart;
 
 --
 -- TOC entry 206 (class 1259 OID 24317)
@@ -1811,7 +1810,7 @@ CREATE TABLE bio_content (
 );
 
 
-ALTER TABLE biomart.bio_content OWNER TO biomart;
+-- ALTER TABLE biomart.bio_content OWNER TO biomart;
 
 --
 -- TOC entry 207 (class 1259 OID 24323)
@@ -1828,7 +1827,7 @@ CREATE TABLE bio_content_reference (
 );
 
 
-ALTER TABLE biomart.bio_content_reference OWNER TO biomart;
+-- ALTER TABLE biomart.bio_content_reference OWNER TO biomart;
 
 --
 -- TOC entry 208 (class 1259 OID 24326)
@@ -1844,7 +1843,7 @@ CREATE TABLE bio_content_repository (
 );
 
 
-ALTER TABLE biomart.bio_content_repository OWNER TO biomart;
+-- ALTER TABLE biomart.bio_content_repository OWNER TO biomart;
 
 --
 -- TOC entry 209 (class 1259 OID 24332)
@@ -1852,7 +1851,7 @@ ALTER TABLE biomart.bio_content_repository OWNER TO biomart;
 --
 
 CREATE TABLE bio_curated_data (
-    statement text,
+    statement varchar(1000),
     statement_status character varying(200),
     bio_data_id bigint NOT NULL,
     bio_curation_dataset_id bigint NOT NULL,
@@ -1861,7 +1860,7 @@ CREATE TABLE bio_curated_data (
 );
 
 
-ALTER TABLE biomart.bio_curated_data OWNER TO biomart;
+-- ALTER TABLE biomart.bio_curated_data OWNER TO biomart;
 
 --
 -- TOC entry 210 (class 1259 OID 24338)
@@ -1873,14 +1872,14 @@ CREATE TABLE bio_curation_dataset (
     bio_asy_analysis_pltfm_id bigint,
     bio_source_import_id bigint,
     bio_curation_type character varying(200) NOT NULL,
-    create_date timestamp without time zone,
+    create_date timestamp, --without time zone,
     creator bigint,
     bio_curation_name character varying(500),
     data_type character varying(100)
 );
 
 
-ALTER TABLE biomart.bio_curation_dataset OWNER TO biomart;
+-- ALTER TABLE biomart.bio_curation_dataset OWNER TO biomart;
 
 --
 -- TOC entry 211 (class 1259 OID 24344)
@@ -1896,7 +1895,7 @@ CREATE TABLE bio_data_attribute (
 );
 
 
-ALTER TABLE biomart.bio_data_attribute OWNER TO biomart;
+-- ALTER TABLE biomart.bio_data_attribute OWNER TO biomart;
 
 --
 -- TOC entry 212 (class 1259 OID 24350)
@@ -1910,7 +1909,7 @@ CREATE TABLE bio_data_compound (
 );
 
 
-ALTER TABLE biomart.bio_data_compound OWNER TO biomart;
+-- ALTER TABLE biomart.bio_data_compound OWNER TO biomart;
 
 --
 -- TOC entry 213 (class 1259 OID 24353)
@@ -1928,7 +1927,7 @@ CREATE TABLE bio_data_correl_descr (
 );
 
 
-ALTER TABLE biomart.bio_data_correl_descr OWNER TO biomart;
+-- ALTER TABLE biomart.bio_data_correl_descr OWNER TO biomart;
 
 --
 -- TOC entry 214 (class 1259 OID 24359)
@@ -1943,7 +1942,7 @@ CREATE TABLE bio_data_correlation (
 );
 
 
-ALTER TABLE biomart.bio_data_correlation OWNER TO biomart;
+-- ALTER TABLE biomart.bio_data_correlation OWNER TO biomart;
 
 --
 -- TOC entry 215 (class 1259 OID 24362)
@@ -1957,7 +1956,7 @@ CREATE TABLE bio_data_disease (
 );
 
 
-ALTER TABLE biomart.bio_data_disease OWNER TO biomart;
+-- ALTER TABLE biomart.bio_data_disease OWNER TO biomart;
 
 --
 -- TOC entry 216 (class 1259 OID 24365)
@@ -1975,7 +1974,7 @@ CREATE TABLE bio_data_ext_code (
 );
 
 
-ALTER TABLE biomart.bio_data_ext_code OWNER TO biomart;
+-- ALTER TABLE biomart.bio_data_ext_code OWNER TO biomart;
 
 --
 -- TOC entry 217 (class 1259 OID 24371)
@@ -1986,13 +1985,13 @@ CREATE TABLE bio_data_literature (
     bio_data_id bigint NOT NULL,
     bio_lit_ref_data_id bigint,
     bio_curation_dataset_id bigint NOT NULL,
-    statement text,
+    statement varchar(4000),
     statement_status character varying(200),
     data_type character varying(200)
 );
 
 
-ALTER TABLE biomart.bio_data_literature OWNER TO biomart;
+-- ALTER TABLE biomart.bio_data_literature OWNER TO biomart;
 
 --
 -- TOC entry 218 (class 1259 OID 24377)
@@ -2006,7 +2005,7 @@ CREATE TABLE bio_data_omic_marker (
 );
 
 
-ALTER TABLE biomart.bio_data_omic_marker OWNER TO biomart;
+-- ALTER TABLE biomart.bio_data_omic_marker OWNER TO biomart;
 
 --
 -- TOC entry 219 (class 1259 OID 24380)
@@ -2020,7 +2019,7 @@ CREATE TABLE bio_data_taxonomy (
 );
 
 
-ALTER TABLE biomart.bio_data_taxonomy OWNER TO biomart;
+-- ALTER TABLE biomart.bio_data_taxonomy OWNER TO biomart;
 
 --
 -- TOC entry 220 (class 1259 OID 24383)
@@ -2034,7 +2033,7 @@ CREATE TABLE bio_data_uid (
 );
 
 
-ALTER TABLE biomart.bio_data_uid OWNER TO biomart;
+-- ALTER TABLE biomart.bio_data_uid OWNER TO biomart;
 
 --
 -- TOC entry 221 (class 1259 OID 24386)
@@ -2055,7 +2054,7 @@ CREATE TABLE bio_disease (
 );
 
 
-ALTER TABLE biomart.bio_disease OWNER TO biomart;
+-- ALTER TABLE biomart.bio_disease OWNER TO biomart;
 
 --
 -- TOC entry 222 (class 1259 OID 24392)
@@ -2068,16 +2067,16 @@ CREATE TABLE bio_experiment (
     title character varying(1000),
     description character varying(2000),
     design character varying(2000),
-    start_date timestamp without time zone,
-    completion_date timestamp without time zone,
+    start_date timestamp, --without time zone,
+    completion_date timestamp, --without time zone,
     primary_investigator character varying(400),
     contact_field character varying(400),
     etl_id character varying(100),
     status character varying(100),
     overall_design character varying(2000),
     accession character varying(100),
-    entrydt timestamp without time zone,
-    updated timestamp without time zone,
+    entrydt timestamp, --without time zone,
+    updated timestamp, --without time zone,
     institution character varying(100),
     country character varying(50),
     biomarker_type character varying(255),
@@ -2086,7 +2085,7 @@ CREATE TABLE bio_experiment (
 );
 
 
-ALTER TABLE biomart.bio_experiment OWNER TO biomart;
+-- ALTER TABLE biomart.bio_experiment OWNER TO biomart;
 
 --
 -- TOC entry 223 (class 1259 OID 24398)
@@ -2173,7 +2172,7 @@ CREATE TABLE bio_lit_alt_data (
 );
 
 
-ALTER TABLE biomart.bio_lit_alt_data OWNER TO biomart;
+-- ALTER TABLE biomart.bio_lit_alt_data OWNER TO biomart;
 
 --
 -- TOC entry 224 (class 1259 OID 24404)
@@ -2221,7 +2220,7 @@ CREATE TABLE bio_lit_amd_data (
 );
 
 
-ALTER TABLE biomart.bio_lit_amd_data OWNER TO biomart;
+-- ALTER TABLE biomart.bio_lit_amd_data OWNER TO biomart;
 
 --
 -- TOC entry 225 (class 1259 OID 24410)
@@ -2269,7 +2268,7 @@ CREATE TABLE bio_lit_inh_data (
 );
 
 
-ALTER TABLE biomart.bio_lit_inh_data OWNER TO biomart;
+-- ALTER TABLE biomart.bio_lit_inh_data OWNER TO biomart;
 
 --
 -- TOC entry 226 (class 1259 OID 24416)
@@ -2296,7 +2295,7 @@ CREATE TABLE bio_lit_int_data (
 );
 
 
-ALTER TABLE biomart.bio_lit_int_data OWNER TO biomart;
+-- ALTER TABLE biomart.bio_lit_int_data OWNER TO biomart;
 
 --
 -- TOC entry 227 (class 1259 OID 24422)
@@ -2309,7 +2308,7 @@ CREATE TABLE bio_lit_int_model_mv (
 );
 
 
-ALTER TABLE biomart.bio_lit_int_model_mv OWNER TO biomart;
+-- ALTER TABLE biomart.bio_lit_int_model_mv OWNER TO biomart;
 
 --
 -- TOC entry 228 (class 1259 OID 24425)
@@ -2337,7 +2336,7 @@ CREATE TABLE bio_lit_model_data (
 );
 
 
-ALTER TABLE biomart.bio_lit_model_data OWNER TO biomart;
+-- ALTER TABLE biomart.bio_lit_model_data OWNER TO biomart;
 
 --
 -- TOC entry 229 (class 1259 OID 24431)
@@ -2348,7 +2347,7 @@ CREATE VIEW bio_lit_int_model_view AS
     SELECT DISTINCT s.bio_lit_int_data_id, s.experimental_model FROM (SELECT a.bio_lit_int_data_id, b.experimental_model FROM (bio_lit_int_data a JOIN bio_lit_model_data b ON ((a.in_vivo_model_id = b.bio_lit_model_data_id))) WHERE (b.experimental_model IS NOT NULL) UNION SELECT a.bio_lit_int_data_id, b.experimental_model FROM (bio_lit_int_data a JOIN bio_lit_model_data b ON ((a.in_vitro_model_id = b.bio_lit_model_data_id))) WHERE (b.experimental_model IS NOT NULL)) s;
 
 
-ALTER TABLE biomart.bio_lit_int_model_view OWNER TO biomart;
+-- ALTER TABLE biomart.bio_lit_int_model_view OWNER TO biomart;
 
 --
 -- TOC entry 230 (class 1259 OID 24436)
@@ -2365,7 +2364,7 @@ CREATE TABLE bio_lit_pe_data (
 );
 
 
-ALTER TABLE biomart.bio_lit_pe_data OWNER TO biomart;
+-- ALTER TABLE biomart.bio_lit_pe_data OWNER TO biomart;
 
 --
 -- TOC entry 231 (class 1259 OID 24442)
@@ -2403,7 +2402,7 @@ CREATE TABLE bio_lit_ref_data (
 );
 
 
-ALTER TABLE biomart.bio_lit_ref_data OWNER TO biomart;
+-- ALTER TABLE biomart.bio_lit_ref_data OWNER TO biomart;
 
 --
 -- TOC entry 232 (class 1259 OID 24448)
@@ -2424,7 +2423,7 @@ CREATE TABLE bio_lit_sum_data (
 );
 
 
-ALTER TABLE biomart.bio_lit_sum_data OWNER TO biomart;
+-- ALTER TABLE biomart.bio_lit_sum_data OWNER TO biomart;
 
 --
 -- TOC entry 233 (class 1259 OID 24454)
@@ -2442,7 +2441,7 @@ CREATE TABLE bio_marker (
 );
 
 
-ALTER TABLE biomart.bio_marker OWNER TO biomart;
+-- ALTER TABLE biomart.bio_marker OWNER TO biomart;
 
 --
 -- TOC entry 234 (class 1259 OID 24460)
@@ -2457,7 +2456,7 @@ CREATE TABLE bio_marker_correl_mv (
 );
 
 
-ALTER TABLE biomart.bio_marker_correl_mv OWNER TO biomart;
+-- ALTER TABLE biomart.bio_marker_correl_mv OWNER TO biomart;
 
 --
 -- TOC entry 235 (class 1259 OID 24463)
@@ -2468,7 +2467,7 @@ CREATE VIEW bio_marker_correl_view AS
     (SELECT DISTINCT b.bio_marker_id, b.bio_marker_id AS asso_bio_marker_id, 'GENE'::text AS correl_type, 1 AS mv_id FROM bio_marker b WHERE ((b.bio_marker_type)::text = 'GENE'::text) UNION SELECT DISTINCT c.bio_data_id AS bio_marker_id, c.asso_bio_data_id AS asso_bio_marker_id, 'PATHWAY_GENE'::text AS correl_type, 2 AS mv_id FROM bio_marker b, bio_data_correlation c, bio_data_correl_descr d WHERE ((((b.bio_marker_id = c.bio_data_id) AND (c.bio_data_correl_descr_id = d.bio_data_correl_descr_id)) AND ((b.primary_source_code)::text <> 'ARIADNE'::text)) AND ((d.correlation)::text = 'PATHWAY GENE'::text))) UNION SELECT DISTINCT c.bio_data_id AS bio_marker_id, c.asso_bio_data_id AS asso_bio_marker_id, 'HOMOLOGENE_GENE'::text AS correl_type, 3 AS mv_id FROM bio_marker b, bio_data_correlation c, bio_data_correl_descr d WHERE (((b.bio_marker_id = c.bio_data_id) AND (c.bio_data_correl_descr_id = d.bio_data_correl_descr_id)) AND ((d.correlation)::text = 'HOMOLOGENE GENE'::text));
 
 
-ALTER TABLE biomart.bio_marker_correl_view OWNER TO biomart;
+-- ALTER TABLE biomart.bio_marker_correl_view OWNER TO biomart;
 
 --
 -- TOC entry 236 (class 1259 OID 24468)
@@ -2479,7 +2478,7 @@ CREATE VIEW bio_marker_exp_analysis_mv AS
     SELECT DISTINCT t3.bio_marker_id, t1.bio_experiment_id, t1.bio_assay_analysis_id, ((t1.bio_assay_analysis_id * 100) + t3.bio_marker_id) AS mv_id FROM bio_assay_analysis_data t1, bio_experiment t2, bio_marker t3, bio_assay_data_annotation t4 WHERE ((((t1.bio_experiment_id = t2.bio_experiment_id) AND ((t2.bio_experiment_type)::text = 'Experiment'::text)) AND (t3.bio_marker_id = t4.bio_marker_id)) AND (t1.bio_assay_feature_group_id = t4.bio_assay_feature_group_id));
 
 
-ALTER TABLE biomart.bio_marker_exp_analysis_mv OWNER TO biomart;
+--ALTER TABLE biomart.bio_marker_exp_analysis_mv OWNER TO biomart;
 
 --
 -- TOC entry 237 (class 1259 OID 24473)
@@ -2491,7 +2490,7 @@ CREATE TABLE bio_patient (
     first_name character varying(200),
     last_name character varying(200),
     middle_name character varying(200),
-    birth_date timestamp without time zone,
+    birth_date timestamp, --without time zone,
     birth_date_orig character varying(200),
     gender_code character varying(200),
     race_code character varying(200),
@@ -2504,7 +2503,7 @@ CREATE TABLE bio_patient (
 );
 
 
-ALTER TABLE biomart.bio_patient OWNER TO biomart;
+--ALTER TABLE biomart.bio_patient OWNER TO biomart;
 
 --
 -- TOC entry 238 (class 1259 OID 24479)
@@ -2516,13 +2515,13 @@ CREATE TABLE bio_patient_event (
     bio_patient_id bigint NOT NULL,
     event_code character varying(200),
     event_type_code character varying(200),
-    event_date timestamp without time zone,
+    event_date timestamp, --without time zone,
     site character varying(400),
     bio_clinic_trial_timepoint_id bigint NOT NULL
 );
 
 
-ALTER TABLE biomart.bio_patient_event OWNER TO biomart;
+--ALTER TABLE biomart.bio_patient_event OWNER TO biomart;
 
 --
 -- TOC entry 239 (class 1259 OID 24485)
@@ -2539,7 +2538,7 @@ CREATE TABLE bio_patient_event_attr (
 );
 
 
-ALTER TABLE biomart.bio_patient_event_attr OWNER TO biomart;
+--ALTER TABLE biomart.bio_patient_event_attr OWNER TO biomart;
 
 --
 -- TOC entry 240 (class 1259 OID 24491)
@@ -2561,7 +2560,7 @@ CREATE TABLE bio_sample (
 );
 
 
-ALTER TABLE biomart.bio_sample OWNER TO biomart;
+--ALTER TABLE biomart.bio_sample OWNER TO biomart;
 
 --
 -- TOC entry 241 (class 1259 OID 24497)
@@ -2575,7 +2574,7 @@ CREATE TABLE bio_stats_exp_marker (
 );
 
 
-ALTER TABLE biomart.bio_stats_exp_marker OWNER TO biomart;
+--ALTER TABLE biomart.bio_stats_exp_marker OWNER TO biomart;
 
 --
 -- TOC entry 242 (class 1259 OID 24500)
@@ -2593,7 +2592,7 @@ CREATE TABLE bio_subject (
 );
 
 
-ALTER TABLE biomart.bio_subject OWNER TO biomart;
+--ALTER TABLE biomart.bio_subject OWNER TO biomart;
 
 --
 -- TOC entry 243 (class 1259 OID 24506)
@@ -2608,9 +2607,9 @@ CREATE TABLE bio_taxonomy (
 );
 
 
-ALTER TABLE biomart.bio_taxonomy OWNER TO biomart;
+--ALTER TABLE biomart.bio_taxonomy OWNER TO biomart;
 
-SET default_tablespace = '';
+-- --SET default_tablespace = '';
 
 --
 -- TOC entry 244 (class 1259 OID 24512)
@@ -2622,14 +2621,14 @@ CREATE TABLE biobank_sample (
     accession_number character varying(255) NOT NULL,
     client_sample_tube_id character varying(255) NOT NULL,
     container_id character varying(255) NOT NULL,
-    import_date timestamp without time zone NOT NULL,
+    import_date timestamp, -- without time zone NOT NULL,
     source_type character varying(255) NOT NULL
 );
 
 
-ALTER TABLE biomart.biobank_sample OWNER TO biomart_user;
+--ALTER TABLE biomart.biobank_sample OWNER TO biomart_user;
 
-SET default_tablespace = biomart;
+-- --SET default_tablespace = biomart;
 
 --
 -- TOC entry 245 (class 1259 OID 24518)
@@ -2639,14 +2638,14 @@ SET default_tablespace = biomart;
 CREATE TABLE ctd2_clin_inhib_effect (
     ctd_cie_seq bigint,
     ctd_study_id bigint,
-    event_description_name character varying(4000),
-    event_definition_name character varying(4000),
-    adverse_effect_name character varying(4000),
-    signal_effect_name character varying(4000),
+    event_description_name character varying(2000),
+    event_definition_name character varying(2000),
+    adverse_effect_name character varying(2000),
+    signal_effect_name character varying(2000),
     pharmaco_parameter_name character varying(500),
     discontinuation_rate_value character varying(250),
-    beneficial_effect_name character varying(4000),
-    drug_effect character varying(4000),
+    beneficial_effect_name character varying(2000),
+    drug_effect character varying(2000),
     clinical_variable_name character varying(250),
     qp_sm_percentage_change character varying(250),
     qp_sm_absolute_change character varying(250),
@@ -2662,23 +2661,23 @@ CREATE TABLE ctd2_clin_inhib_effect (
     clinical_correlation character varying(2000),
     coefficient_value character varying(250),
     statistics_p_value character varying(250),
-    statistics_description character varying(4000),
+    statistics_description character varying(2000),
     primary_endpoint_type character varying(250),
-    primary_endpoint_definition character varying(4000),
+    primary_endpoint_definition character varying(2000),
     primary_endpoint_test_name character varying(2000),
     primary_endpoint_time_period character varying(2000),
     primary_endpoint_change character varying(2000),
     primary_endpoint_p_value character varying(2000),
     secondary_endpoint_type character varying(2000),
-    secondary_endpoint_definition character varying(4000),
+    secondary_endpoint_definition character varying(2000),
     secondary_endpoint_test_name character varying(2000),
-    secondary_endpoint_time_period character varying(4000),
-    secondary_endpoint_change character varying(4000),
-    secondary_endpoint_p_value character varying(4000)
+    secondary_endpoint_time_period character varying(2000),
+    secondary_endpoint_change character varying(2000),
+    secondary_endpoint_p_value character varying(2000)
 );
 
 
-ALTER TABLE biomart.ctd2_clin_inhib_effect OWNER TO biomart;
+--ALTER TABLE biomart.ctd2_clin_inhib_effect OWNER TO biomart;
 
 --
 -- TOC entry 246 (class 1259 OID 24524)
@@ -2697,7 +2696,7 @@ CREATE TABLE ctd2_disease (
 );
 
 
-ALTER TABLE biomart.ctd2_disease OWNER TO biomart;
+--ALTER TABLE biomart.ctd2_disease OWNER TO biomart;
 
 --
 -- TOC entry 247 (class 1259 OID 24530)
@@ -2709,7 +2708,7 @@ CREATE TABLE ctd2_inhib_details (
     ctd_study_id bigint,
     common_name_name character varying(500),
     standard_name_name character varying(500),
-    experimental_detail_dose character varying(4000),
+    experimental_detail_dose character varying(2000),
     exp_detail_exposure_period character varying(4000),
     exp_detail_treatment_name character varying(4000),
     exp_detail_admin_route character varying(4000),
@@ -2723,7 +2722,7 @@ CREATE TABLE ctd2_inhib_details (
 );
 
 
-ALTER TABLE biomart.ctd2_inhib_details OWNER TO biomart;
+--ALTER TABLE biomart.ctd2_inhib_details OWNER TO biomart;
 
 --
 -- TOC entry 248 (class 1259 OID 24536)
@@ -2741,7 +2740,7 @@ CREATE TABLE ctd2_study (
 );
 
 
-ALTER TABLE biomart.ctd2_study OWNER TO biomart;
+--ALTER TABLE biomart.ctd2_study OWNER TO biomart;
 
 --
 -- TOC entry 249 (class 1259 OID 24542)
@@ -2751,13 +2750,13 @@ ALTER TABLE biomart.ctd2_study OWNER TO biomart;
 CREATE TABLE ctd2_trial_details (
     ctd_td_seq bigint,
     ctd_study_id bigint,
-    control character varying(2000),
-    blinding_procedure character varying(2000),
-    no_of_arms character varying(2000),
-    sponsor character varying(2000),
-    patient_studied character varying(2000),
-    source_type character varying(2000),
-    trial_description character varying(4000),
+    control character varying(1000),
+    blinding_procedure character varying(1000),
+    no_of_arms character varying(1000),
+    sponsor character varying(1000),
+    patient_studied character varying(1000),
+    source_type character varying(1000),
+    trial_description character varying(1000),
     arm_name character varying(250),
     patient_study character varying(250),
     class_type character varying(250),
@@ -2768,7 +2767,7 @@ CREATE TABLE ctd2_trial_details (
     gender character varying(100),
     minor_participation character varying(100),
     symptom_score character varying(100),
-    rescue_medication character varying(2000),
+    rescue_medication character varying(1000),
     therapeutic_intervention character varying(255),
     smokers character varying(255),
     former_smokers character varying(255),
@@ -2782,7 +2781,7 @@ CREATE TABLE ctd2_trial_details (
     allow_med_therapy_ics character varying(1000),
     allow_med_therapy_laba character varying(1000),
     allow_med_therapy_ltra character varying(1000),
-    allow_med_therapy_desc character varying(4000),
+    allow_med_therapy_desc character varying(1000),
     allow_med_therapy_cortster character varying(1000),
     allow_med_therapy_immuno character varying(1000),
     allow_med_therapy_cyto character varying(1000),
@@ -2790,7 +2789,7 @@ CREATE TABLE ctd2_trial_details (
     allow_med_treat_ics character varying(1000),
     allow_med_treat_laba character varying(1000),
     allow_med_treat_ltra character varying(1000),
-    allow_med_treat_desc character varying(4000),
+    allow_med_treat_desc character varying(1000),
     allow_med_treat_cortster character varying(1000),
     allow_med_treat_immuno character varying(1000),
     allow_med_treat_cyto character varying(1000),
@@ -2808,45 +2807,45 @@ CREATE TABLE ctd2_trial_details (
     pat_char_priormed_dose character varying(250),
     disease_phenotype_name character varying(1000),
     disease_severity_name character varying(500),
-    incl_age character varying(2000),
-    incl_difficult_to_treat character varying(2000),
-    incl_disease_diagnosis character varying(2000),
-    incl_steroid_dose character varying(2000),
-    incl_laba character varying(2000),
-    incl_ocs character varying(2000),
-    incl_xolair character varying(2000),
-    incl_ltra_inhibitor character varying(2000),
-    incl_fev1 character varying(2000),
-    incl_fev1_reversibility character varying(2000),
-    incl_smoking character varying(2000),
-    incl_tlc character varying(2000),
-    incl_fvc character varying(2000),
-    incl_dlco character varying(2000),
-    incl_sgrq character varying(2000),
-    incl_hrct character varying(2000),
-    incl_biopsy character varying(2000),
-    incl_dypsnea_on_exertion character varying(2000),
-    incl_concomitant_med character varying(2000),
-    incl_former_smokers character varying(2000),
-    incl_never_smokers character varying(2000),
-    incl_smoking_pack_years character varying(2000),
-    incl_fev_fvc character varying(2000),
-    trial_des_minimal_symptom character varying(2000),
-    trial_des_rescue_med character varying(4000),
-    trial_des_exclusion_criteria character varying(4000),
+    incl_age character varying(1000),
+    incl_difficult_to_treat character varying(1000),
+    incl_disease_diagnosis character varying(1000),
+    incl_steroid_dose character varying(1000),
+    incl_laba character varying(1000),
+    incl_ocs character varying(1000),
+    incl_xolair character varying(1000),
+    incl_ltra_inhibitor character varying(1000),
+    incl_fev1 character varying(1000),
+    incl_fev1_reversibility character varying(1000),
+    incl_smoking character varying(1000),
+    incl_tlc character varying(1000),
+    incl_fvc character varying(1000),
+    incl_dlco character varying(1000),
+    incl_sgrq character varying(1000),
+    incl_hrct character varying(1000),
+    incl_biopsy character varying(1000),
+    incl_dypsnea_on_exertion character varying(1000),
+    incl_concomitant_med character varying(1000),
+    incl_former_smokers character varying(1000),
+    incl_never_smokers character varying(1000),
+    incl_smoking_pack_years character varying(1000),
+    incl_fev_fvc character varying(1000),
+    trial_des_minimal_symptom character varying(1000),
+    trial_des_rescue_med character varying(1000),
+    trial_des_exclusion_criteria character varying(1000),
     trial_des_open_label_status character varying(250),
     trial_des_random_status character varying(250),
     trial_des_nature_of_trial character varying(250),
     trial_des_blinded_status character varying(250),
-    trial_des_run_in_period character varying(2000),
-    trial_des_treatment character varying(2000),
-    trial_des_washout_period character varying(2000),
-    trial_status_name character varying(2000),
-    trial_phase_name character varying(2000)
+    trial_des_run_in_period character varying(1000),
+    trial_des_treatment character varying(1000),
+    trial_des_washout_period character varying(1000),
+    trial_status_name character varying(1000),
+    trial_phase_name character varying(1000)
 );
 
 
-ALTER TABLE biomart.ctd2_trial_details OWNER TO biomart;
+--ALTER TABLE biomart.ctd2_trial_details OWNER TO biomart;
 
 --
 -- TOC entry 250 (class 1259 OID 24548)
@@ -2866,7 +2865,7 @@ CREATE TABLE ctd_allowed_meds_treatment (
 );
 
 
-ALTER TABLE biomart.ctd_allowed_meds_treatment OWNER TO biomart;
+--ALTER TABLE biomart.ctd_allowed_meds_treatment OWNER TO biomart;
 
 --
 -- TOC entry 251 (class 1259 OID 24554)
@@ -2875,189 +2874,189 @@ ALTER TABLE biomart.ctd_allowed_meds_treatment OWNER TO biomart;
 
 CREATE TABLE ctd_full (
     clinical_trial_design_id bigint,
-    ref_article_protocol_id character varying(4000),
-    ref_record_id character varying(4000),
-    ref_back_reference character varying(4000),
-    ref_article_pmid character varying(4000),
-    ref_protocol_id character varying(4000),
-    ref_title character varying(4000),
-    study_type character varying(4000),
-    common_name character varying(4000),
-    icd10 character varying(4000),
-    mesh character varying(4000),
-    disease_type character varying(4000),
-    physiology_name character varying(4000),
-    trial_status character varying(4000),
-    trial_phase character varying(4000),
-    nature_of_trial character varying(4000),
-    randomization character varying(4000),
-    blinded_trial character varying(4000),
-    trial_type character varying(4000),
-    run_in_period character varying(4000),
-    treatment_period character varying(4000),
-    washout_period character varying(4000),
-    open_label_extension character varying(4000),
-    sponsor character varying(4000),
-    trial_nbr_of_patients_studied character varying(4000),
-    source_type character varying(4000),
-    trial_age character varying(4000),
-    disease_severity character varying(4000),
-    difficult_to_treat character varying(4000),
-    asthma_diagnosis character varying(4000),
-    inhaled_steroid_dose character varying(4000),
-    laba character varying(4000),
-    ocs character varying(4000),
-    xolair character varying(4000),
-    ltra_inhibitors character varying(4000),
-    asthma_phenotype character varying(4000),
-    fev1 character varying(4000),
-    fev1_reversibility character varying(4000),
-    tlc character varying(4000),
-    fev1_fvc character varying(4000),
-    fvc character varying(4000),
-    dlco character varying(4000),
-    sgrq character varying(4000),
-    hrct character varying(4000),
-    biopsy character varying(4000),
-    dyspnea_on_exertion character varying(4000),
-    concomitant_med character varying(4000),
-    trial_smokers_pct character varying(4000),
-    trial_former_smokers_pct character varying(4000),
-    trial_never_smokers_pct character varying(4000),
-    trial_pack_years character varying(4000),
-    exclusion_criteria text,
-    minimal_symptoms character varying(4000),
-    rescue_medication_use character varying(4000),
-    control_details character varying(4000),
-    blinding_procedure character varying(4000),
-    number_of_arms character varying(4000),
-    description text,
-    arm character varying(4000),
-    arm_nbr_of_patients_studied character varying(4000),
-    arm_classification_type character varying(4000),
-    arm_classification_value character varying(4000),
-    arm_asthma_duration character varying(4000),
-    arm_geographic_region character varying(4000),
-    arm_age character varying(4000),
-    arm_gender character varying(4000),
-    arm_smokers_pct character varying(4000),
-    arm_former_smokers_pct character varying(4000),
-    arm_never_smokers_pct character varying(4000),
-    arm_pack_years character varying(4000),
-    minority_participation character varying(4000),
-    baseline_symptom_score character varying(4000),
-    baseline_rescue_medication_use character varying(4000),
-    clinical_variable character varying(4000),
-    clinical_variable_pct character varying(4000),
-    clinical_variable_value character varying(4000),
-    prior_med_drug_name character varying(4000),
-    prior_med_pct character varying(4000),
-    prior_med_value character varying(4000),
-    biomarker_name character varying(4000),
-    biomarker_pct character varying(4000),
-    biomarker_value character varying(4000),
-    cellinfo_type character varying(4000),
-    cellinfo_count character varying(4000),
-    cellinfo_source character varying(4000),
-    pulmonary_pathology_name character varying(4000),
-    pulmpath_patient_pct character varying(4000),
-    pulmpath_value_unit character varying(4000),
-    pulmpath_method character varying(4000),
-    runin_ocs character varying(4000),
-    runin_ics character varying(4000),
-    runin_laba character varying(4000),
-    runin_ltra character varying(4000),
-    runin_corticosteroids character varying(4000),
-    runin_anti_fibrotics character varying(4000),
-    runin_immunosuppressive character varying(4000),
-    runin_cytotoxic character varying(4000),
-    runin_description character varying(4000),
-    trtmt_ocs character varying(4000),
-    trtmt_ics character varying(4000),
-    trtmt_laba character varying(4000),
-    trtmt_ltra character varying(4000),
-    trtmt_corticosteroids character varying(4000),
-    trtmt_anti_fibrotics character varying(4000),
-    trtmt_immunosuppressive character varying(4000),
-    trtmt_cytotoxic character varying(4000),
-    trtmt_description character varying(4000),
-    drug_inhibitor_common_name character varying(4000),
-    drug_inhibitor_standard_name character varying(4000),
-    drug_inhibitor_cas_id character varying(4000),
-    drug_inhibitor_dose character varying(4000),
-    drug_inhibitor_route_of_admin character varying(4000),
-    drug_inhibitor_trtmt_regime character varying(4000),
-    comparator_name character varying(4000),
-    comparator_dose character varying(4000),
-    comparator_time_period character varying(4000),
-    comparator_route_of_admin character varying(4000),
-    treatment_regime character varying(4000),
-    placebo character varying(4000),
-    experiment_description character varying(4000),
-    primary_endpoint_type character varying(4000),
-    primary_endpoint_definition character varying(4000),
-    primary_endpoint_change character varying(4000),
-    primary_endpoint_time_period character varying(4000),
-    primary_endpoint_stat_test character varying(4000),
-    primary_endpoint_p_value character varying(4000),
-    secondary_type character varying(4000),
-    secondary_type_definition character varying(4000),
-    secondary_type_change character varying(4000),
-    secondary_type_time_period character varying(4000),
-    secondary_type_p_value character varying(4000),
-    secondary_type_stat_test character varying(4000),
-    clinical_variable_name character varying(4000),
-    pct_change_from_baseline character varying(4000),
-    abs_change_from_baseline character varying(4000),
-    rate_of_change_from_baseline character varying(4000),
-    average_over_treatment_period character varying(4000),
-    within_group_changes character varying(4000),
-    stat_measure_p_value character varying(4000),
-    definition_of_the_event character varying(4000),
-    number_of_events character varying(4000),
-    event_rate character varying(4000),
-    time_to_event character varying(4000),
-    event_pct_reduction character varying(4000),
-    event_p_value character varying(4000),
-    event_description character varying(4000),
-    discontinuation_rate character varying(4000),
-    response_rate character varying(4000),
-    downstream_signaling_effects character varying(4000),
-    beneficial_effects character varying(4000),
-    adverse_effects character varying(4000),
-    pk_pd_parameter character varying(4000),
-    pk_pd_value character varying(4000),
-    effect_description character varying(4000),
-    biomolecule_name character varying(4000),
-    biomolecule_id character varying(4000),
-    biomolecule_type character varying(4000),
-    biomarker character varying(4000),
-    biomarker_type character varying(4000),
-    baseline_expr_pct character varying(4000),
-    baseline_expr_number character varying(4000),
-    baseline_expr_value_fold_mean character varying(4000),
-    baseline_expr_sd character varying(4000),
-    baseline_expr_sem character varying(4000),
-    baseline_expr_unit character varying(4000),
-    expr_after_trtmt_pct character varying(4000),
-    expr_after_trtmt_number character varying(4000),
-    expr_aftertrtmt_valuefold_mean character varying(4000),
-    expr_after_trtmt_sd character varying(4000),
-    expr_after_trtmt_sem character varying(4000),
-    expr_after_trtmt_unit character varying(4000),
-    expr_chg_source_type character varying(4000),
-    expr_chg_technique character varying(4000),
-    expr_chg_description character varying(4000),
-    clinical_correlation character varying(4000),
-    statistical_test character varying(4000),
-    statistical_coefficient_value character varying(4000),
-    statistical_test_p_value character varying(4000),
-    statistical_test_description character varying(4000),
-    drug_inhibitor_time_period character varying(4000)
+    ref_article_protocol_id character varying(200),
+    ref_record_id character varying(200),
+    ref_back_reference character varying(200),
+    ref_article_pmid character varying(200),
+    ref_protocol_id character varying(200),
+    ref_title character varying(200),
+    study_type character varying(200),
+    common_name character varying(200),
+    icd10 character varying(200),
+    mesh character varying(200),
+    disease_type character varying(200),
+    physiology_name character varying(200),
+    trial_status character varying(200),
+    trial_phase character varying(200),
+    nature_of_trial character varying(200),
+    randomization character varying(200),
+    blinded_trial character varying(200),
+    trial_type character varying(200),
+    run_in_period character varying(200),
+    treatment_period character varying(200),
+    washout_period character varying(200),
+    open_label_extension character varying(200),
+    sponsor character varying(200),
+    trial_nbr_of_patients_studied character varying(200),
+    source_type character varying(200),
+    trial_age character varying(200),
+    disease_severity character varying(200),
+    difficult_to_treat character varying(200),
+    asthma_diagnosis character varying(200),
+    inhaled_steroid_dose character varying(200),
+    laba character varying(200),
+    ocs character varying(200),
+    xolair character varying(200),
+    ltra_inhibitors character varying(200),
+    asthma_phenotype character varying(200),
+    fev1 character varying(200),
+    fev1_reversibility character varying(200),
+    tlc character varying(200),
+    fev1_fvc character varying(200),
+    fvc character varying(200),
+    dlco character varying(200),
+    sgrq character varying(200),
+    hrct character varying(200),
+    biopsy character varying(200),
+    dyspnea_on_exertion character varying(200),
+    concomitant_med character varying(200),
+    trial_smokers_pct character varying(200),
+    trial_former_smokers_pct character varying(200),
+    trial_never_smokers_pct character varying(200),
+    trial_pack_years character varying(200),
+    exclusion_criteria varchar(200),
+    minimal_symptoms character varying(200),
+    rescue_medication_use character varying(200),
+    control_details character varying(200),
+    blinding_procedure character varying(200),
+    number_of_arms character varying(200),
+    description varchar(200),
+    arm character varying(200),
+    arm_nbr_of_patients_studied character varying(200),
+    arm_classification_type character varying(200),
+    arm_classification_value character varying(200),
+    arm_asthma_duration character varying(200),
+    arm_geographic_region character varying(200),
+    arm_age character varying(200),
+    arm_gender character varying(200),
+    arm_smokers_pct character varying(200),
+    arm_former_smokers_pct character varying(200),
+    arm_never_smokers_pct character varying(200),
+    arm_pack_years character varying(200),
+    minority_participation character varying(200),
+    baseline_symptom_score character varying(200),
+    baseline_rescue_medication_use character varying(200),
+    clinical_variable character varying(200),
+    clinical_variable_pct character varying(200),
+    clinical_variable_value character varying(200),
+    prior_med_drug_name character varying(200),
+    prior_med_pct character varying(200),
+    prior_med_value character varying(200),
+    biomarker_name character varying(200),
+    biomarker_pct character varying(200),
+    biomarker_value character varying(200),
+    cellinfo_type character varying(200),
+    cellinfo_count character varying(200),
+    cellinfo_source character varying(200),
+    pulmonary_pathology_name character varying(200),
+    pulmpath_patient_pct character varying(200),
+    pulmpath_value_unit character varying(200),
+    pulmpath_method character varying(200),
+    runin_ocs character varying(200),
+    runin_ics character varying(200),
+    runin_laba character varying(200),
+    runin_ltra character varying(200),
+    runin_corticosteroids character varying(200),
+    runin_anti_fibrotics character varying(200),
+    runin_immunosuppressive character varying(200),
+    runin_cytotoxic character varying(200),
+    runin_description character varying(200),
+    trtmt_ocs character varying(200),
+    trtmt_ics character varying(200),
+    trtmt_laba character varying(200),
+    trtmt_ltra character varying(200),
+    trtmt_corticosteroids character varying(200),
+    trtmt_anti_fibrotics character varying(200),
+    trtmt_immunosuppressive character varying(200),
+    trtmt_cytotoxic character varying(200),
+    trtmt_description character varying(200),
+    drug_inhibitor_common_name character varying(200),
+    drug_inhibitor_standard_name character varying(200),
+    drug_inhibitor_cas_id character varying(200),
+    drug_inhibitor_dose character varying(200),
+    drug_inhibitor_route_of_admin character varying(200),
+    drug_inhibitor_trtmt_regime character varying(200),
+    comparator_name character varying(200),
+    comparator_dose character varying(200),
+    comparator_time_period character varying(200),
+    comparator_route_of_admin character varying(200),
+    treatment_regime character varying(200),
+    placebo character varying(200),
+    experiment_description character varying(200),
+    primary_endpoint_type character varying(200),
+    primary_endpoint_definition character varying(200),
+    primary_endpoint_change character varying(200),
+    primary_endpoint_time_period character varying(200),
+    primary_endpoint_stat_test character varying(200),
+    primary_endpoint_p_value character varying(200),
+    secondary_type character varying(200),
+    secondary_type_definition character varying(200),
+    secondary_type_change character varying(200),
+    secondary_type_time_period character varying(200),
+    secondary_type_p_value character varying(200),
+    secondary_type_stat_test character varying(200),
+    clinical_variable_name character varying(200),
+    pct_change_from_baseline character varying(200),
+    abs_change_from_baseline character varying(200),
+    rate_of_change_from_baseline character varying(200),
+    average_over_treatment_period character varying(200),
+    within_group_changes character varying(200),
+    stat_measure_p_value character varying(200),
+    definition_of_the_event character varying(200),
+    number_of_events character varying(200),
+    event_rate character varying(200),
+    time_to_event character varying(200),
+    event_pct_reduction character varying(200),
+    event_p_value character varying(200),
+    event_description character varying(200),
+    discontinuation_rate character varying(200),
+    response_rate character varying(200),
+    downstream_signaling_effects character varying(200),
+    beneficial_effects character varying(200),
+    adverse_effects character varying(200),
+    pk_pd_parameter character varying(200),
+    pk_pd_value character varying(200),
+    effect_description character varying(200),
+    biomolecule_name character varying(200),
+    biomolecule_id character varying(200),
+    biomolecule_type character varying(200),
+    biomarker character varying(200),
+    biomarker_type character varying(200),
+    baseline_expr_pct character varying(200),
+    baseline_expr_number character varying(200),
+    baseline_expr_value_fold_mean character varying(200),
+    baseline_expr_sd character varying(200),
+    baseline_expr_sem character varying(200),
+    baseline_expr_unit character varying(200),
+    expr_after_trtmt_pct character varying(200),
+    expr_after_trtmt_number character varying(200),
+    expr_aftertrtmt_valuefold_mean character varying(200),
+    expr_after_trtmt_sd character varying(200),
+    expr_after_trtmt_sem character varying(200),
+    expr_after_trtmt_unit character varying(200),
+    expr_chg_source_type character varying(200),
+    expr_chg_technique character varying(200),
+    expr_chg_description character varying(200),
+    clinical_correlation character varying(200),
+    statistical_test character varying(200),
+    statistical_coefficient_value character varying(200),
+    statistical_test_p_value character varying(200),
+    statistical_test_description character varying(200),
+    drug_inhibitor_time_period character varying(200)
 );
 
 
-ALTER TABLE biomart.ctd_full OWNER TO biomart;
+--ALTER TABLE biomart.ctd_full OWNER TO biomart;
 
 --
 -- TOC entry 252 (class 1259 OID 24560)
@@ -3068,7 +3067,7 @@ CREATE VIEW ctd_arm_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.arm, v.arm_nbr_of_patients_studied) AS id, v.ref_article_protocol_id, v.arm, v.arm_nbr_of_patients_studied, v.arm_classification_type, v.arm_classification_value, v.arm_asthma_duration, v.arm_geographic_region, v.arm_age, v.arm_gender, v.arm_smokers_pct, v.arm_former_smokers_pct, v.arm_never_smokers_pct, v.arm_pack_years, v.minority_participation, v.baseline_symptom_score, v.baseline_rescue_medication_use FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.arm, to_number((ctd_full.arm_nbr_of_patients_studied)::text, '999999999999999'::text) AS arm_nbr_of_patients_studied, ctd_full.arm_classification_type, ctd_full.arm_classification_value, ctd_full.arm_asthma_duration, ctd_full.arm_geographic_region, ctd_full.arm_age, ctd_full.arm_gender, ctd_full.arm_smokers_pct, ctd_full.arm_former_smokers_pct, ctd_full.arm_never_smokers_pct, ctd_full.arm_pack_years, ctd_full.minority_participation, ctd_full.baseline_symptom_score, ctd_full.baseline_rescue_medication_use FROM ctd_full WHERE ((ctd_full.arm IS NOT NULL) AND ((ctd_full.arm)::text <> ''::text)) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.arm, to_number((ctd_full.arm_nbr_of_patients_studied)::text, '999999999999999'::text)) v;
 
 
-ALTER TABLE biomart.ctd_arm_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_arm_view OWNER TO biomart;
 
 --
 -- TOC entry 253 (class 1259 OID 24565)
@@ -3077,13 +3076,13 @@ ALTER TABLE biomart.ctd_arm_view OWNER TO biomart;
 
 CREATE TABLE ctd_biomarker (
     ctd_study_id bigint,
-    biomarker_name character varying(4000),
+    biomarker_name character varying(2000),
     biomarker_pct character varying(4000),
     biomarker_value character varying(4000)
 );
 
 
-ALTER TABLE biomart.ctd_biomarker OWNER TO biomart;
+--ALTER TABLE biomart.ctd_biomarker OWNER TO biomart;
 
 --
 -- TOC entry 254 (class 1259 OID 24571)
@@ -3094,7 +3093,7 @@ CREATE VIEW ctd_biomarker_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.biomarker_name) AS id, v.ref_article_protocol_id, v.biomarker_name, v.biomarker_pct, v.biomarker_value FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.biomarker_name, ctd_full.biomarker_pct, ctd_full.biomarker_value FROM ctd_full WHERE ((ctd_full.biomarker_name IS NOT NULL) AND ((ctd_full.biomarker_name)::text <> ''::text)) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.biomarker_name) v;
 
 
-ALTER TABLE biomart.ctd_biomarker_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_biomarker_view OWNER TO biomart;
 
 --
 -- TOC entry 255 (class 1259 OID 24576)
@@ -3105,7 +3104,7 @@ CREATE VIEW ctd_cell_info_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.cellinfo_type) AS id, v.ref_article_protocol_id, v.cellinfo_type, v.cellinfo_count, v.cellinfo_source FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.cellinfo_type, ctd_full.cellinfo_count, ctd_full.cellinfo_source FROM ctd_full WHERE ((ctd_full.cellinfo_type IS NOT NULL) AND ((ctd_full.cellinfo_type)::text <> ''::text)) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.cellinfo_type) v;
 
 
-ALTER TABLE biomart.ctd_cell_info_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_cell_info_view OWNER TO biomart;
 
 --
 -- TOC entry 256 (class 1259 OID 24581)
@@ -3116,7 +3115,7 @@ CREATE VIEW ctd_clinical_chars_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.clinical_variable) AS id, v.ref_article_protocol_id, v.clinical_variable, v.clinical_variable_pct, v.clinical_variable_value FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.clinical_variable, ctd_full.clinical_variable_pct, ctd_full.clinical_variable_value FROM ctd_full WHERE ((ctd_full.clinical_variable IS NOT NULL) AND ((ctd_full.clinical_variable)::text <> ''::text)) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.clinical_variable) v;
 
 
-ALTER TABLE biomart.ctd_clinical_chars_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_clinical_chars_view OWNER TO biomart;
 
 --
 -- TOC entry 257 (class 1259 OID 24586)
@@ -3132,7 +3131,7 @@ CREATE TABLE ctd_disease (
 );
 
 
-ALTER TABLE biomart.ctd_disease OWNER TO biomart;
+--ALTER TABLE biomart.ctd_disease OWNER TO biomart;
 
 --
 -- TOC entry 258 (class 1259 OID 24592)
@@ -3143,7 +3142,7 @@ CREATE VIEW ctd_drug_effects_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.beneficial_effects, v.adverse_effects) AS id, v.ref_article_protocol_id, v.discontinuation_rate, v.response_rate, v.downstream_signaling_effects, v.beneficial_effects, v.adverse_effects, v.pk_pd_parameter, v.pk_pd_value, v.effect_description FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.discontinuation_rate, ctd_full.response_rate, ctd_full.downstream_signaling_effects, ctd_full.beneficial_effects, ctd_full.adverse_effects, ctd_full.pk_pd_parameter, ctd_full.pk_pd_value, ctd_full.effect_description FROM ctd_full ORDER BY ctd_full.ref_article_protocol_id, ctd_full.beneficial_effects, ctd_full.adverse_effects) v;
 
 
-ALTER TABLE biomart.ctd_drug_effects_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_drug_effects_view OWNER TO biomart;
 
 --
 -- TOC entry 259 (class 1259 OID 24597)
@@ -3158,7 +3157,7 @@ CREATE TABLE ctd_drug_inhib (
 );
 
 
-ALTER TABLE biomart.ctd_drug_inhib OWNER TO biomart;
+--ALTER TABLE biomart.ctd_drug_inhib OWNER TO biomart;
 
 --
 -- TOC entry 260 (class 1259 OID 24603)
@@ -3169,7 +3168,7 @@ CREATE VIEW ctd_drug_inhibitor_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.drug_inhibitor_common_name) AS id, v.ref_article_protocol_id, v.drug_inhibitor_common_name, v.drug_inhibitor_standard_name, v.drug_inhibitor_cas_id FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.drug_inhibitor_common_name, ctd_full.drug_inhibitor_standard_name, ctd_full.drug_inhibitor_cas_id FROM ctd_full ORDER BY ctd_full.ref_article_protocol_id, ctd_full.drug_inhibitor_common_name) v;
 
 
-ALTER TABLE biomart.ctd_drug_inhibitor_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_drug_inhibitor_view OWNER TO biomart;
 
 --
 -- TOC entry 261 (class 1259 OID 24608)
@@ -3180,7 +3179,7 @@ CREATE VIEW ctd_events_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.definition_of_the_event) AS id, v.ref_article_protocol_id, v.definition_of_the_event, v.number_of_events, v.event_rate, v.time_to_event, v.event_pct_reduction, v.event_p_value, v.event_description FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.definition_of_the_event, ctd_full.number_of_events, ctd_full.event_rate, ctd_full.time_to_event, ctd_full.event_pct_reduction, ctd_full.event_p_value, ctd_full.event_description FROM ctd_full WHERE (((ctd_full.definition_of_the_event IS NOT NULL) AND ((ctd_full.definition_of_the_event)::text <> ''::text)) OR ((ctd_full.event_description IS NOT NULL) AND ((ctd_full.event_description)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.definition_of_the_event) v;
 
 
-ALTER TABLE biomart.ctd_events_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_events_view OWNER TO biomart;
 
 --
 -- TOC entry 262 (class 1259 OID 24613)
@@ -3191,7 +3190,7 @@ CREATE VIEW ctd_experiments_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.drug_inhibitor_common_name, v.drug_inhibitor_trtmt_regime) AS id, v.ref_article_protocol_id, v.drug_inhibitor_common_name, v.drug_inhibitor_dose, v.drug_inhibitor_time_period, v.drug_inhibitor_route_of_admin, v.drug_inhibitor_trtmt_regime, v.comparator_name, v.comparator_dose, v.comparator_time_period, v.comparator_route_of_admin, v.treatment_regime, v.placebo, v.experiment_description FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.drug_inhibitor_common_name, ctd_full.drug_inhibitor_time_period, ctd_full.drug_inhibitor_dose, ctd_full.drug_inhibitor_route_of_admin, ctd_full.drug_inhibitor_trtmt_regime, ctd_full.comparator_name, ctd_full.comparator_dose, ctd_full.comparator_time_period, ctd_full.comparator_route_of_admin, ctd_full.treatment_regime, ctd_full.placebo, ctd_full.experiment_description FROM ctd_full ORDER BY ctd_full.ref_article_protocol_id, ctd_full.drug_inhibitor_common_name, ctd_full.drug_inhibitor_trtmt_regime) v;
 
 
-ALTER TABLE biomart.ctd_experiments_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_experiments_view OWNER TO biomart;
 
 --
 -- TOC entry 263 (class 1259 OID 24618)
@@ -3202,7 +3201,7 @@ CREATE VIEW ctd_expr_after_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.biomolecule_name) AS id, v.ref_article_protocol_id, v.biomolecule_name, v.expr_after_trtmt_pct, v.expr_after_trtmt_number, v.expr_aftertrtmt_valuefold_mean, v.expr_after_trtmt_sd, v.expr_after_trtmt_sem, v.expr_after_trtmt_unit FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.biomolecule_name, ctd_full.expr_after_trtmt_pct, ctd_full.expr_after_trtmt_number, ctd_full.expr_aftertrtmt_valuefold_mean, ctd_full.expr_after_trtmt_sd, ctd_full.expr_after_trtmt_sem, ctd_full.expr_after_trtmt_unit FROM ctd_full WHERE (((ctd_full.biomolecule_name IS NOT NULL) AND ((ctd_full.biomolecule_name)::text <> ''::text)) OR ((ctd_full.expr_aftertrtmt_valuefold_mean IS NOT NULL) AND ((ctd_full.expr_aftertrtmt_valuefold_mean)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.biomolecule_name) v;
 
 
-ALTER TABLE biomart.ctd_expr_after_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_expr_after_view OWNER TO biomart;
 
 --
 -- TOC entry 264 (class 1259 OID 24623)
@@ -3213,7 +3212,7 @@ CREATE VIEW ctd_expr_baseline_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.biomolecule_name) AS id, v.ref_article_protocol_id, v.biomolecule_name, v.baseline_expr_pct, v.baseline_expr_number, v.baseline_expr_value_fold_mean, v.baseline_expr_sd, v.baseline_expr_sem, v.baseline_expr_unit FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.biomolecule_name, ctd_full.baseline_expr_pct, ctd_full.baseline_expr_number, ctd_full.baseline_expr_value_fold_mean, ctd_full.baseline_expr_sd, ctd_full.baseline_expr_sem, ctd_full.baseline_expr_unit FROM ctd_full WHERE (((ctd_full.biomolecule_name IS NOT NULL) AND ((ctd_full.biomolecule_name)::text <> ''::text)) OR ((ctd_full.baseline_expr_value_fold_mean IS NOT NULL) AND ((ctd_full.baseline_expr_value_fold_mean)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.biomolecule_name) v;
 
 
-ALTER TABLE biomart.ctd_expr_baseline_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_expr_baseline_view OWNER TO biomart;
 
 --
 -- TOC entry 265 (class 1259 OID 24628)
@@ -3224,7 +3223,7 @@ CREATE VIEW ctd_expr_bio_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.biomolecule_name) AS id, v.ref_article_protocol_id, v.biomolecule_name, v.biomolecule_id, v.biomolecule_type, v.biomarker, v.biomarker_type FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.biomolecule_name, ctd_full.biomolecule_id, ctd_full.biomolecule_type, ctd_full.biomarker, ctd_full.biomarker_type FROM ctd_full WHERE (((ctd_full.biomolecule_name IS NOT NULL) AND ((ctd_full.biomolecule_name)::text <> ''::text)) OR ((ctd_full.biomolecule_id IS NOT NULL) AND ((ctd_full.biomolecule_id)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.biomolecule_name) v;
 
 
-ALTER TABLE biomart.ctd_expr_bio_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_expr_bio_view OWNER TO biomart;
 
 --
 -- TOC entry 266 (class 1259 OID 24633)
@@ -3235,7 +3234,7 @@ CREATE VIEW ctd_expr_source_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.expr_chg_source_type) AS id, v.ref_article_protocol_id, v.expr_chg_source_type, v.expr_chg_technique, v.expr_chg_description FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.expr_chg_source_type, ctd_full.expr_chg_technique, ctd_full.expr_chg_description FROM ctd_full WHERE (((ctd_full.expr_chg_source_type IS NOT NULL) AND ((ctd_full.expr_chg_source_type)::text <> ''::text)) OR ((ctd_full.expr_chg_description IS NOT NULL) AND ((ctd_full.expr_chg_description)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.expr_chg_source_type) v;
 
 
-ALTER TABLE biomart.ctd_expr_source_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_expr_source_view OWNER TO biomart;
 
 --
 -- TOC entry 267 (class 1259 OID 24638)
@@ -3246,7 +3245,7 @@ CREATE VIEW ctd_full_clinical_endpts_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id) AS id, v.ref_article_protocol_id, v.primary_endpoint_type, v.primary_endpoint_definition, v.primary_endpoint_change, v.primary_endpoint_time_period, v.primary_endpoint_p_value, v.primary_endpoint_stat_test, v.secondary_type, v.secondary_type_definition, v.secondary_type_change, v.secondary_type_time_period, v.secondary_type_p_value, v.secondary_type_stat_test FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.primary_endpoint_type, ctd_full.primary_endpoint_definition, ctd_full.primary_endpoint_change, ctd_full.primary_endpoint_time_period, ctd_full.primary_endpoint_p_value, ctd_full.primary_endpoint_stat_test, ctd_full.secondary_type, ctd_full.secondary_type_definition, ctd_full.secondary_type_change, ctd_full.secondary_type_time_period, ctd_full.secondary_type_p_value, ctd_full.secondary_type_stat_test FROM ctd_full ORDER BY ctd_full.ref_article_protocol_id) v;
 
 
-ALTER TABLE biomart.ctd_full_clinical_endpts_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_full_clinical_endpts_view OWNER TO biomart;
 
 --
 -- TOC entry 268 (class 1259 OID 24643)
@@ -3257,7 +3256,7 @@ CREATE VIEW ctd_full_search_view AS
     SELECT row_number() OVER (ORDER BY t.ref_article_protocol_id) AS fact_id, t.ref_article_protocol_id, t.mesh, t.common_name, t.drug_inhibitor_standard_name, t.primary_endpoint_type, t.secondary_type, t.biomarker_name, t.disease_severity, t.inhaled_steroid_dose, t.fev1, t.primary_endpoint_time_period, t.primary_endpoint_change, t.primary_endpoint_p_value FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.mesh, ctd_full.common_name, ctd_full.drug_inhibitor_standard_name, ctd_full.primary_endpoint_type, ctd_full.secondary_type, ctd_full.biomarker_name, ctd_full.disease_severity, ctd_full.inhaled_steroid_dose, ctd_full.fev1, ctd_full.primary_endpoint_time_period, ctd_full.primary_endpoint_change, ctd_full.primary_endpoint_p_value FROM ctd_full) t;
 
 
-ALTER TABLE biomart.ctd_full_search_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_full_search_view OWNER TO biomart;
 
 --
 -- TOC entry 269 (class 1259 OID 24648)
@@ -3276,7 +3275,7 @@ CREATE TABLE ctd_inclusion_criteria (
 );
 
 
-ALTER TABLE biomart.ctd_inclusion_criteria OWNER TO biomart;
+--ALTER TABLE biomart.ctd_inclusion_criteria OWNER TO biomart;
 
 --
 -- TOC entry 270 (class 1259 OID 24654)
@@ -3294,7 +3293,7 @@ CREATE TABLE ctd_primary_endpts (
 );
 
 
-ALTER TABLE biomart.ctd_primary_endpts OWNER TO biomart;
+--ALTER TABLE biomart.ctd_primary_endpts OWNER TO biomart;
 
 --
 -- TOC entry 271 (class 1259 OID 24660)
@@ -3305,7 +3304,7 @@ CREATE VIEW ctd_primary_endpts_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.primary_endpoint_type) AS id, v.ref_article_protocol_id, v.primary_endpoint_type, v.primary_endpoint_definition, v.primary_endpoint_change, v.primary_endpoint_time_period, v.primary_endpoint_p_value, v.primary_endpoint_stat_test FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.primary_endpoint_type, ctd_full.primary_endpoint_definition, ctd_full.primary_endpoint_change, ctd_full.primary_endpoint_time_period, ctd_full.primary_endpoint_p_value, ctd_full.primary_endpoint_stat_test FROM ctd_full WHERE (((ctd_full.primary_endpoint_type IS NOT NULL) AND ((ctd_full.primary_endpoint_type)::text <> ''::text)) OR ((ctd_full.primary_endpoint_definition IS NOT NULL) AND ((ctd_full.primary_endpoint_definition)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.primary_endpoint_type) v;
 
 
-ALTER TABLE biomart.ctd_primary_endpts_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_primary_endpts_view OWNER TO biomart;
 
 --
 -- TOC entry 272 (class 1259 OID 24665)
@@ -3316,7 +3315,7 @@ CREATE VIEW ctd_prior_med_use_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.prior_med_drug_name) AS id, v.ref_article_protocol_id, v.prior_med_drug_name, v.prior_med_pct, v.prior_med_value FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.prior_med_drug_name, ctd_full.prior_med_pct, ctd_full.prior_med_value FROM ctd_full WHERE ((ctd_full.prior_med_drug_name IS NOT NULL) AND ((ctd_full.prior_med_drug_name)::text <> ''::text)) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.prior_med_drug_name) v;
 
 
-ALTER TABLE biomart.ctd_prior_med_use_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_prior_med_use_view OWNER TO biomart;
 
 --
 -- TOC entry 273 (class 1259 OID 24670)
@@ -3327,7 +3326,7 @@ CREATE VIEW ctd_pulmonary_path_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.pulmonary_pathology_name) AS id, v.ref_article_protocol_id, v.pulmonary_pathology_name, v.pulmpath_patient_pct, v.pulmpath_value_unit, v.pulmpath_method FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.pulmonary_pathology_name, ctd_full.pulmpath_patient_pct, ctd_full.pulmpath_value_unit, ctd_full.pulmpath_method FROM ctd_full WHERE ((ctd_full.pulmonary_pathology_name IS NOT NULL) AND ((ctd_full.pulmonary_pathology_name)::text <> ''::text)) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.pulmonary_pathology_name) v;
 
 
-ALTER TABLE biomart.ctd_pulmonary_path_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_pulmonary_path_view OWNER TO biomart;
 
 --
 -- TOC entry 274 (class 1259 OID 24675)
@@ -3338,7 +3337,7 @@ CREATE VIEW ctd_quant_params_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id) AS id, v.ref_article_protocol_id, v.clinical_variable_name, v.pct_change_from_baseline, v.abs_change_from_baseline, v.rate_of_change_from_baseline, v.average_over_treatment_period, v.within_group_changes, v.stat_measure_p_value FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.clinical_variable_name, ctd_full.pct_change_from_baseline, ctd_full.abs_change_from_baseline, ctd_full.rate_of_change_from_baseline, ctd_full.average_over_treatment_period, ctd_full.within_group_changes, ctd_full.stat_measure_p_value FROM ctd_full WHERE ((ctd_full.clinical_variable_name IS NOT NULL) AND ((ctd_full.clinical_variable_name)::text <> ''::text)) ORDER BY ctd_full.ref_article_protocol_id) v;
 
 
-ALTER TABLE biomart.ctd_quant_params_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_quant_params_view OWNER TO biomart;
 
 --
 -- TOC entry 275 (class 1259 OID 24680)
@@ -3349,7 +3348,7 @@ CREATE VIEW ctd_reference_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.ref_record_id) AS id, v.ref_article_protocol_id, v.ref_article_pmid, v.ref_protocol_id, v.ref_title, v.ref_record_id, v.ref_back_reference FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.ref_article_pmid, ctd_full.ref_protocol_id, ctd_full.ref_title, ctd_full.ref_record_id, ctd_full.ref_back_reference FROM ctd_full ORDER BY ctd_full.ref_article_protocol_id, ctd_full.ref_record_id) v;
 
 
-ALTER TABLE biomart.ctd_reference_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_reference_view OWNER TO biomart;
 
 --
 -- TOC entry 276 (class 1259 OID 24685)
@@ -3360,7 +3359,7 @@ CREATE VIEW ctd_runin_therapies_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.runin_description) AS id, v.ref_article_protocol_id, v.runin_ocs, v.runin_ics, v.runin_laba, v.runin_ltra, v.runin_corticosteroids, v.runin_anti_fibrotics, v.runin_immunosuppressive, v.runin_cytotoxic, v.runin_description FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.runin_ocs, ctd_full.runin_ics, ctd_full.runin_laba, ctd_full.runin_ltra, ctd_full.runin_corticosteroids, ctd_full.runin_anti_fibrotics, ctd_full.runin_immunosuppressive, ctd_full.runin_cytotoxic, ctd_full.runin_description FROM ctd_full WHERE ((((ctd_full.runin_ocs IS NOT NULL) AND ((ctd_full.runin_ocs)::text <> ''::text)) OR ((ctd_full.runin_description IS NOT NULL) AND ((ctd_full.runin_description)::text <> ''::text))) OR ((ctd_full.runin_immunosuppressive IS NOT NULL) AND ((ctd_full.runin_immunosuppressive)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.runin_description) v;
 
 
-ALTER TABLE biomart.ctd_runin_therapies_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_runin_therapies_view OWNER TO biomart;
 
 --
 -- TOC entry 277 (class 1259 OID 24690)
@@ -3378,7 +3377,7 @@ CREATE TABLE ctd_sec_endpts (
 );
 
 
-ALTER TABLE biomart.ctd_sec_endpts OWNER TO biomart;
+--ALTER TABLE biomart.ctd_sec_endpts OWNER TO biomart;
 
 --
 -- TOC entry 278 (class 1259 OID 24696)
@@ -3389,7 +3388,7 @@ CREATE VIEW ctd_secondary_endpts_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.secondary_type) AS id, v.ref_article_protocol_id, v.secondary_type, v.secondary_type_definition, v.secondary_type_change, v.secondary_type_time_period, v.secondary_type_p_value, v.secondary_type_stat_test FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.secondary_type, ctd_full.secondary_type_definition, ctd_full.secondary_type_change, ctd_full.secondary_type_time_period, ctd_full.secondary_type_p_value, ctd_full.secondary_type_stat_test FROM ctd_full WHERE (((ctd_full.secondary_type IS NOT NULL) AND ((ctd_full.secondary_type)::text <> ''::text)) OR ((ctd_full.secondary_type_definition IS NOT NULL) AND ((ctd_full.secondary_type_definition)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.secondary_type) v;
 
 
-ALTER TABLE biomart.ctd_secondary_endpts_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_secondary_endpts_view OWNER TO biomart;
 
 --
 -- TOC entry 279 (class 1259 OID 24701)
@@ -3400,7 +3399,7 @@ CREATE VIEW ctd_stats_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.statistical_test) AS id, v.ref_article_protocol_id, v.clinical_correlation, v.statistical_test, v.statistical_coefficient_value, v.statistical_test_p_value, v.statistical_test_description FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.clinical_correlation, ctd_full.statistical_test, ctd_full.statistical_coefficient_value, ctd_full.statistical_test_p_value, ctd_full.statistical_test_description FROM ctd_full WHERE (((ctd_full.statistical_test_description IS NOT NULL) AND ((ctd_full.statistical_test_description)::text <> ''::text)) OR ((ctd_full.statistical_test IS NOT NULL) AND ((ctd_full.statistical_test)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.statistical_test) v;
 
 
-ALTER TABLE biomart.ctd_stats_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_stats_view OWNER TO biomart;
 
 --
 -- TOC entry 280 (class 1259 OID 24706)
@@ -3415,7 +3414,7 @@ CREATE TABLE ctd_study (
 );
 
 
-ALTER TABLE biomart.ctd_study OWNER TO biomart;
+--ALTER TABLE biomart.ctd_study OWNER TO biomart;
 
 --
 -- TOC entry 281 (class 1259 OID 24712)
@@ -3426,7 +3425,7 @@ CREATE VIEW ctd_study_details_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.common_name) AS id, v.ref_article_protocol_id, v.study_type, v.common_name, v.icd10, v.mesh, v.disease_type, v.physiology_name FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.study_type, ctd_full.common_name, ctd_full.icd10, ctd_full.mesh, ctd_full.disease_type, ctd_full.physiology_name FROM ctd_full WHERE ((ctd_full.common_name IS NOT NULL) AND ((ctd_full.common_name)::text <> ''::text)) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.common_name) v;
 
 
-ALTER TABLE biomart.ctd_study_details_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_study_details_view OWNER TO biomart;
 
 --
 -- TOC entry 282 (class 1259 OID 24717)
@@ -3437,7 +3436,7 @@ CREATE VIEW ctd_td_design_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.nature_of_trial, v.trial_type) AS id, v.ref_article_protocol_id, v.nature_of_trial, v.randomization, v.blinded_trial, v.trial_type, v.run_in_period, v.treatment_period, v.washout_period, v.open_label_extension FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.nature_of_trial, ctd_full.randomization, ctd_full.blinded_trial, ctd_full.trial_type, ctd_full.run_in_period, ctd_full.treatment_period, ctd_full.washout_period, ctd_full.open_label_extension FROM ctd_full WHERE (((ctd_full.trial_type IS NOT NULL) AND ((ctd_full.trial_type)::text <> ''::text)) OR ((ctd_full.nature_of_trial IS NOT NULL) AND ((ctd_full.nature_of_trial)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.nature_of_trial, ctd_full.trial_type) v;
 
 
-ALTER TABLE biomart.ctd_td_design_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_td_design_view OWNER TO biomart;
 
 --
 -- TOC entry 283 (class 1259 OID 24722)
@@ -3448,7 +3447,7 @@ CREATE VIEW ctd_td_excl_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id) AS id, v.ref_article_protocol_id, v.exclusion_criteria1, v.exclusion_criteria2, v.minimal_symptoms, v.rescue_medication_use, v.control_details, v.blinding_procedure, v.number_of_arms, v.description1, v.description2 FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, "substring"(ctd_full.exclusion_criteria, 1, 4000) AS exclusion_criteria1, "substring"(ctd_full.exclusion_criteria, 4001, 2000) AS exclusion_criteria2, ctd_full.minimal_symptoms, ctd_full.rescue_medication_use, ctd_full.control_details, ctd_full.blinding_procedure, ctd_full.number_of_arms, "substring"(ctd_full.description, 1, 4000) AS description1, "substring"(ctd_full.description, 4001, 2000) AS description2 FROM ctd_full WHERE (((ctd_full.blinding_procedure IS NOT NULL) AND ((ctd_full.blinding_procedure)::text <> ''::text)) OR ((ctd_full.number_of_arms IS NOT NULL) AND ((ctd_full.number_of_arms)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id) v;
 
 
-ALTER TABLE biomart.ctd_td_excl_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_td_excl_view OWNER TO biomart;
 
 --
 -- TOC entry 284 (class 1259 OID 24727)
@@ -3459,7 +3458,7 @@ CREATE VIEW ctd_td_inclusion_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.disease_severity, v.fev1) AS id, v.ref_article_protocol_id, v.trial_age, v.disease_severity, v.difficult_to_treat, v.asthma_diagnosis, v.inhaled_steroid_dose, v.laba, v.ocs, v.xolair, v.ltra_inhibitors, v.asthma_phenotype, v.fev1, v.fev1_reversibility, v.tlc, v.fev1_fvc, v.fvc, v.dlco, v.sgrq, v.hrct, v.biopsy, v.dyspnea_on_exertion, v.concomitant_med FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.trial_age, ctd_full.disease_severity, ctd_full.difficult_to_treat, ctd_full.asthma_diagnosis, ctd_full.inhaled_steroid_dose, ctd_full.laba, ctd_full.ocs, ctd_full.xolair, ctd_full.ltra_inhibitors, ctd_full.asthma_phenotype, ctd_full.fev1, ctd_full.fev1_reversibility, ctd_full.tlc, ctd_full.fev1_fvc, ctd_full.fvc, ctd_full.dlco, ctd_full.sgrq, ctd_full.hrct, ctd_full.biopsy, ctd_full.dyspnea_on_exertion, ctd_full.concomitant_med FROM ctd_full WHERE ((((ctd_full.fev1 IS NOT NULL) AND ((ctd_full.fev1)::text <> ''::text)) OR ((ctd_full.disease_severity IS NOT NULL) AND ((ctd_full.disease_severity)::text <> ''::text))) OR ((ctd_full.trial_age IS NOT NULL) AND ((ctd_full.trial_age)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.disease_severity, ctd_full.fev1) v;
 
 
-ALTER TABLE biomart.ctd_td_inclusion_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_td_inclusion_view OWNER TO biomart;
 
 --
 -- TOC entry 285 (class 1259 OID 24732)
@@ -3470,7 +3469,7 @@ CREATE VIEW ctd_td_smoker_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.trial_smokers_pct) AS id, v.ref_article_protocol_id, v.trial_smokers_pct, v.trial_former_smokers_pct, v.trial_never_smokers_pct, v.trial_pack_years FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.trial_smokers_pct, ctd_full.trial_former_smokers_pct, ctd_full.trial_never_smokers_pct, ctd_full.trial_pack_years FROM ctd_full WHERE (((ctd_full.trial_smokers_pct IS NOT NULL) AND ((ctd_full.trial_smokers_pct)::text <> ''::text)) OR ((ctd_full.trial_never_smokers_pct IS NOT NULL) AND ((ctd_full.trial_never_smokers_pct)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.trial_smokers_pct) v;
 
 
-ALTER TABLE biomart.ctd_td_smoker_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_td_smoker_view OWNER TO biomart;
 
 --
 -- TOC entry 286 (class 1259 OID 24737)
@@ -3481,7 +3480,7 @@ CREATE VIEW ctd_td_sponsor_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.sponsor, v.trial_nbr_of_patients_studied) AS id, v.ref_article_protocol_id, v.sponsor, v.trial_nbr_of_patients_studied, v.source_type FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.sponsor, ctd_full.trial_nbr_of_patients_studied, ctd_full.source_type FROM ctd_full WHERE (((ctd_full.sponsor IS NOT NULL) AND ((ctd_full.sponsor)::text <> ''::text)) OR ((ctd_full.trial_nbr_of_patients_studied IS NOT NULL) AND ((ctd_full.trial_nbr_of_patients_studied)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.sponsor, ctd_full.trial_nbr_of_patients_studied) v;
 
 
-ALTER TABLE biomart.ctd_td_sponsor_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_td_sponsor_view OWNER TO biomart;
 
 --
 -- TOC entry 287 (class 1259 OID 24742)
@@ -3492,7 +3491,7 @@ CREATE VIEW ctd_td_status_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id) AS id, v.ref_article_protocol_id, v.trial_status, v.trial_phase FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.trial_status, ctd_full.trial_phase FROM ctd_full WHERE (((ctd_full.trial_status IS NOT NULL) AND ((ctd_full.trial_status)::text <> ''::text)) OR ((ctd_full.trial_phase IS NOT NULL) AND ((ctd_full.trial_phase)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id) v;
 
 
-ALTER TABLE biomart.ctd_td_status_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_td_status_view OWNER TO biomart;
 
 --
 -- TOC entry 288 (class 1259 OID 24747)
@@ -3503,112 +3502,79 @@ CREATE VIEW ctd_treatment_phases_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.trtmt_description, v.trtmt_ocs) AS id, v.ref_article_protocol_id, v.trtmt_ocs, v.trtmt_ics, v.trtmt_laba, v.trtmt_ltra, v.trtmt_corticosteroids, v.trtmt_anti_fibrotics, v.trtmt_immunosuppressive, v.trtmt_cytotoxic, v.trtmt_description FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.trtmt_ocs, ctd_full.trtmt_ics, ctd_full.trtmt_laba, ctd_full.trtmt_ltra, ctd_full.trtmt_corticosteroids, ctd_full.trtmt_anti_fibrotics, ctd_full.trtmt_immunosuppressive, ctd_full.trtmt_cytotoxic, ctd_full.trtmt_description FROM ctd_full WHERE ((((ctd_full.trtmt_ocs IS NOT NULL) AND ((ctd_full.trtmt_ocs)::text <> ''::text)) OR ((ctd_full.trtmt_description IS NOT NULL) AND ((ctd_full.trtmt_description)::text <> ''::text))) OR ((ctd_full.trtmt_immunosuppressive IS NOT NULL) AND ((ctd_full.trtmt_immunosuppressive)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.trtmt_description, ctd_full.trtmt_ocs) v;
 
 
-ALTER TABLE biomart.ctd_treatment_phases_view OWNER TO biomart;
+--ALTER TABLE biomart.ctd_treatment_phases_view OWNER TO biomart;
 
 --
 -- TOC entry 289 (class 1259 OID 24752)
 -- Name: hibernate_sequence; Type: SEQUENCE; Schema: biomart; Owner: biomart
 --
 
-CREATE SEQUENCE hibernate_sequence
-    START WITH 226
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 20;
+CREATE SEQUENCE hibernate_sequence;
 
 
-ALTER TABLE biomart.hibernate_sequence OWNER TO biomart;
+--ALTER TABLE biomart.hibernate_sequence OWNER TO biomart;
 
 --
 -- TOC entry 290 (class 1259 OID 24754)
 -- Name: seq_bio_data_fact_id; Type: SEQUENCE; Schema: biomart; Owner: biomart
 --
 
-CREATE SEQUENCE seq_bio_data_fact_id
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 20;
+CREATE SEQUENCE seq_bio_data_fact_id;
 
 
-ALTER TABLE biomart.seq_bio_data_fact_id OWNER TO biomart;
+--ALTER TABLE biomart.seq_bio_data_fact_id OWNER TO biomart;
 
 --
 -- TOC entry 291 (class 1259 OID 24756)
 -- Name: seq_bio_data_id; Type: SEQUENCE; Schema: biomart; Owner: biomart
 --
 
-CREATE SEQUENCE seq_bio_data_id
-    START WITH 1082041
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 20;
+CREATE SEQUENCE seq_bio_data_id;
 
 
-ALTER TABLE biomart.seq_bio_data_id OWNER TO biomart;
+--ALTER TABLE biomart.seq_bio_data_id OWNER TO biomart;
 
 --
 -- TOC entry 292 (class 1259 OID 24758)
 -- Name: seq_clinical_trial_design_id; Type: SEQUENCE; Schema: biomart; Owner: biomart
 --
 
-CREATE SEQUENCE seq_clinical_trial_design_id
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 20;
+CREATE SEQUENCE seq_clinical_trial_design_id;
 
 
-ALTER TABLE biomart.seq_clinical_trial_design_id OWNER TO biomart;
-
---
--- TOC entry 293 (class 1259 OID 24760)
--- Name: tmp_analysis_data_tea_rank; Type: TABLE; Schema: biomart; Owner: biomart; Tablespace: biomart
---
-
-CREATE TABLE tmp_analysis_data_tea_rank (
-    analysis_data_id bigint NOT NULL,
-    analysis_id bigint NOT NULL,
-    rank1 bigint
-);
+--ALTER TABLE biomart.seq_clinical_trial_design_id OWNER TO biomart;
 
 
-ALTER TABLE biomart.tmp_analysis_data_tea_rank OWNER TO biomart;
-
-SET default_tablespace = indx;
+-- --SET default_tablespace = indx;
 
 --
 -- TOC entry 3943 (class 2606 OID 25741)
 -- Name: bio_aa_data_t_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_assay_analysis_data_tea
+ALTER TABLE bio_assay_analysis_data_tea
     ADD CONSTRAINT bio_aa_data_t_pk PRIMARY KEY (bio_asy_analysis_data_id);
 
 
-SET default_tablespace = '';
+--SET default_tablespace = '';
 
 --
 -- TOC entry 3972 (class 2606 OID 25743)
 -- Name: bio_assay_analysis_platform_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_asy_analysis_pltfm
+ALTER TABLE bio_asy_analysis_pltfm
     ADD CONSTRAINT bio_assay_analysis_platform_pk PRIMARY KEY (bio_asy_analysis_pltfm_id);
 
 
-SET default_tablespace = indx;
+--SET default_tablespace = indx;
 
 --
 -- TOC entry 3965 (class 2606 OID 25745)
 -- Name: bio_assay_platform_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_assay_platform
+ALTER TABLE bio_assay_platform
     ADD CONSTRAINT bio_assay_platform_pk PRIMARY KEY (bio_assay_platform_id);
 
 
@@ -3617,7 +3583,7 @@ ALTER TABLE ONLY bio_assay_platform
 -- Name: bio_assay_sample_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_assay_sample
+ALTER TABLE bio_assay_sample
     ADD CONSTRAINT bio_assay_sample_pk PRIMARY KEY (bio_assay_id, bio_sample_id, bio_clinic_trial_timepoint_id);
 
 
@@ -3626,7 +3592,7 @@ ALTER TABLE ONLY bio_assay_sample
 -- Name: bio_asy_dt_stats_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_asy_data_stats_all
+ALTER TABLE bio_asy_data_stats_all
     ADD CONSTRAINT bio_asy_dt_stats_pk PRIMARY KEY (bio_assay_data_stats_id);
 
 
@@ -3635,7 +3601,7 @@ ALTER TABLE ONLY bio_asy_data_stats_all
 -- Name: bio_asy_dt_stats_s_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_assay_data_stats
+ALTER TABLE bio_assay_data_stats
     ADD CONSTRAINT bio_asy_dt_stats_s_pk PRIMARY KEY (bio_assay_data_stats_id);
 
 
@@ -3644,18 +3610,18 @@ ALTER TABLE ONLY bio_assay_data_stats
 -- Name: bio_asy_feature_grp_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_assay_feature_group
+ALTER TABLE bio_assay_feature_group
     ADD CONSTRAINT bio_asy_feature_grp_pk PRIMARY KEY (bio_assay_feature_group_id);
 
 
-SET default_tablespace = '';
+--SET default_tablespace = '';
 
 --
 -- TOC entry 3984 (class 2606 OID 25755)
 -- Name: bio_cancer_gene_curation_fact_; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_cgdcp_data
+ALTER TABLE bio_cgdcp_data
     ADD CONSTRAINT bio_cancer_gene_curation_fact_ PRIMARY KEY (bio_data_id);
 
 
@@ -3664,7 +3630,7 @@ ALTER TABLE ONLY bio_cgdcp_data
 -- Name: bio_clinical_trial_patient_grp; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_clinc_trial_attr
+ALTER TABLE bio_clinc_trial_attr
     ADD CONSTRAINT bio_clinical_trial_patient_grp PRIMARY KEY (bio_clinc_trial_attr_id);
 
 
@@ -3673,7 +3639,7 @@ ALTER TABLE ONLY bio_clinc_trial_attr
 -- Name: bio_clinical_trial_pt_group; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_clinc_trial_pt_group
+ALTER TABLE bio_clinc_trial_pt_group
     ADD CONSTRAINT bio_clinical_trial_pt_group PRIMARY KEY (bio_clinical_trial_p_group_id);
 
 
@@ -3682,18 +3648,18 @@ ALTER TABLE ONLY bio_clinc_trial_pt_group
 -- Name: bio_clinical_trial_time_point_; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_clinc_trial_time_pt
+ALTER TABLE bio_clinc_trial_time_pt
     ADD CONSTRAINT bio_clinical_trial_time_point_ PRIMARY KEY (bio_clinc_trial_tm_pt_id);
 
 
-SET default_tablespace = indx;
+--SET default_tablespace = indx;
 
 --
 -- TOC entry 4002 (class 2606 OID 25763)
 -- Name: bio_concept_code_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_concept_code
+ALTER TABLE bio_concept_code
     ADD CONSTRAINT bio_concept_code_pk PRIMARY KEY (bio_concept_code_id);
 
 
@@ -3702,18 +3668,18 @@ ALTER TABLE ONLY bio_concept_code
 -- Name: bio_concept_code_uk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_concept_code
+ALTER TABLE bio_concept_code
     ADD CONSTRAINT bio_concept_code_uk UNIQUE (bio_concept_code, code_type_name);
 
 
-SET default_tablespace = '';
+--SET default_tablespace = '';
 
 --
 -- TOC entry 4010 (class 2606 OID 25767)
 -- Name: bio_content_ref_n_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_content_reference
+ALTER TABLE bio_content_reference
     ADD CONSTRAINT bio_content_ref_n_pk PRIMARY KEY (bio_content_reference_id);
 
 
@@ -3722,7 +3688,7 @@ ALTER TABLE ONLY bio_content_reference
 -- Name: bio_data_analysis_dataset_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_asy_analysis_dataset
+ALTER TABLE bio_asy_analysis_dataset
     ADD CONSTRAINT bio_data_analysis_dataset_pk PRIMARY KEY (bio_assay_dataset_id, bio_assay_analysis_id);
 
 
@@ -3731,7 +3697,7 @@ ALTER TABLE ONLY bio_asy_analysis_dataset
 -- Name: bio_data_anl_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_assay_analysis
+ALTER TABLE bio_assay_analysis
     ADD CONSTRAINT bio_data_anl_pk PRIMARY KEY (bio_assay_analysis_id);
 
 
@@ -3740,18 +3706,18 @@ ALTER TABLE ONLY bio_assay_analysis
 -- Name: bio_data_attr_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_data_attribute
+ALTER TABLE bio_data_attribute
     ADD CONSTRAINT bio_data_attr_pk PRIMARY KEY (bio_data_attribute_id);
 
 
-SET default_tablespace = indx;
+--SET default_tablespace = indx;
 
 --
 -- TOC entry 4025 (class 2606 OID 25775)
 -- Name: bio_data_compound_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_data_compound
+ALTER TABLE bio_data_compound
     ADD CONSTRAINT bio_data_compound_pk PRIMARY KEY (bio_data_id, bio_compound_id);
 
 
@@ -3760,7 +3726,7 @@ ALTER TABLE ONLY bio_data_compound
 -- Name: bio_data_correlation_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_data_correlation
+ALTER TABLE bio_data_correlation
     ADD CONSTRAINT bio_data_correlation_pk PRIMARY KEY (bio_data_correl_id);
 
 
@@ -3769,7 +3735,7 @@ ALTER TABLE ONLY bio_data_correlation
 -- Name: bio_data_disease_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_data_disease
+ALTER TABLE bio_data_disease
     ADD CONSTRAINT bio_data_disease_pk PRIMARY KEY (bio_data_id, bio_disease_id);
 
 
@@ -3778,7 +3744,7 @@ ALTER TABLE ONLY bio_data_disease
 -- Name: bio_data_ext_code_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_data_ext_code
+ALTER TABLE bio_data_ext_code
     ADD CONSTRAINT bio_data_ext_code_pk PRIMARY KEY (bio_data_ext_code_id);
 
 
@@ -3787,7 +3753,7 @@ ALTER TABLE ONLY bio_data_ext_code
 -- Name: bio_data_literature_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_data_literature
+ALTER TABLE bio_data_literature
     ADD CONSTRAINT bio_data_literature_pk PRIMARY KEY (bio_data_id);
 
 
@@ -3796,7 +3762,7 @@ ALTER TABLE ONLY bio_data_literature
 -- Name: bio_data_uid_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_data_uid
+ALTER TABLE bio_data_uid
     ADD CONSTRAINT bio_data_uid_pk PRIMARY KEY (bio_data_id);
 
 
@@ -3805,18 +3771,18 @@ ALTER TABLE ONLY bio_data_uid
 -- Name: bio_data_uid_uk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_data_uid
+ALTER TABLE bio_data_uid
     ADD CONSTRAINT bio_data_uid_uk UNIQUE (unique_id);
 
 
-SET default_tablespace = '';
+--SET default_tablespace = '';
 
 --
 -- TOC entry 3960 (class 2606 OID 25789)
 -- Name: bio_dataset_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_assay_dataset
+ALTER TABLE bio_assay_dataset
     ADD CONSTRAINT bio_dataset_pk PRIMARY KEY (bio_assay_dataset_id);
 
 
@@ -3825,7 +3791,7 @@ ALTER TABLE ONLY bio_assay_dataset
 -- Name: bio_experiment_data_fact_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_assay_data
+ALTER TABLE bio_assay_data
     ADD CONSTRAINT bio_experiment_data_fact_pk PRIMARY KEY (bio_assay_data_id);
 
 
@@ -3834,7 +3800,7 @@ ALTER TABLE ONLY bio_assay_data
 -- Name: bio_external_analysis_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_curation_dataset
+ALTER TABLE bio_curation_dataset
     ADD CONSTRAINT bio_external_analysis_pk PRIMARY KEY (bio_curation_dataset_id);
 
 
@@ -3843,18 +3809,18 @@ ALTER TABLE ONLY bio_curation_dataset
 -- Name: bio_externalanalysis_fact_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_curated_data
+ALTER TABLE bio_curated_data
     ADD CONSTRAINT bio_externalanalysis_fact_pk PRIMARY KEY (bio_data_id);
 
 
-SET default_tablespace = indx;
+--SET default_tablespace = indx;
 
 --
 -- TOC entry 4058 (class 2606 OID 25797)
 -- Name: bio_lit_alt_data_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_lit_alt_data
+ALTER TABLE bio_lit_alt_data
     ADD CONSTRAINT bio_lit_alt_data_pk PRIMARY KEY (bio_lit_alt_data_id);
 
 
@@ -3863,7 +3829,7 @@ ALTER TABLE ONLY bio_lit_alt_data
 -- Name: bio_lit_amd_data_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_lit_amd_data
+ALTER TABLE bio_lit_amd_data
     ADD CONSTRAINT bio_lit_amd_data_pk PRIMARY KEY (bio_lit_amd_data_id);
 
 
@@ -3872,7 +3838,7 @@ ALTER TABLE ONLY bio_lit_amd_data
 -- Name: bio_lit_inh_data_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_lit_inh_data
+ALTER TABLE bio_lit_inh_data
     ADD CONSTRAINT bio_lit_inh_data_pk PRIMARY KEY (bio_lit_inh_data_id);
 
 
@@ -3881,7 +3847,7 @@ ALTER TABLE ONLY bio_lit_inh_data
 -- Name: bio_lit_int_data_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_lit_int_data
+ALTER TABLE bio_lit_int_data
     ADD CONSTRAINT bio_lit_int_data_pk PRIMARY KEY (bio_lit_int_data_id);
 
 
@@ -3890,7 +3856,7 @@ ALTER TABLE ONLY bio_lit_int_data
 -- Name: bio_lit_model_data_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_lit_model_data
+ALTER TABLE bio_lit_model_data
     ADD CONSTRAINT bio_lit_model_data_pk PRIMARY KEY (bio_lit_model_data_id);
 
 
@@ -3899,7 +3865,7 @@ ALTER TABLE ONLY bio_lit_model_data
 -- Name: bio_lit_pe_data_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_lit_pe_data
+ALTER TABLE bio_lit_pe_data
     ADD CONSTRAINT bio_lit_pe_data_pk PRIMARY KEY (bio_lit_pe_data_id);
 
 
@@ -3908,7 +3874,7 @@ ALTER TABLE ONLY bio_lit_pe_data
 -- Name: bio_lit_ref_data_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_lit_ref_data
+ALTER TABLE bio_lit_ref_data
     ADD CONSTRAINT bio_lit_ref_data_pk PRIMARY KEY (bio_lit_ref_data_id);
 
 
@@ -3917,18 +3883,18 @@ ALTER TABLE ONLY bio_lit_ref_data
 -- Name: bio_lit_sum_data_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_lit_sum_data
+ALTER TABLE bio_lit_sum_data
     ADD CONSTRAINT bio_lit_sum_data_pk PRIMARY KEY (bio_lit_sum_data_id);
 
 
-SET default_tablespace = '';
+--SET default_tablespace = '';
 
 --
 -- TOC entry 4028 (class 2606 OID 25814)
 -- Name: bio_marker_relationship_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_data_correl_descr
+ALTER TABLE bio_data_correl_descr
     ADD CONSTRAINT bio_marker_relationship_pk PRIMARY KEY (bio_data_correl_descr_id);
 
 
@@ -3937,18 +3903,18 @@ ALTER TABLE ONLY bio_data_correl_descr
 -- Name: bio_patient_attribute_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_patient_event_attr
+ALTER TABLE bio_patient_event_attr
     ADD CONSTRAINT bio_patient_attribute_pk PRIMARY KEY (bio_patient_attribute_id);
 
 
-SET default_tablespace = indx;
+--SET default_tablespace = indx;
 
 --
 -- TOC entry 4085 (class 2606 OID 25818)
 -- Name: bio_patient_event_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_patient_event
+ALTER TABLE bio_patient_event
     ADD CONSTRAINT bio_patient_event_pk PRIMARY KEY (bio_patient_event_id);
 
 
@@ -3957,7 +3923,7 @@ ALTER TABLE ONLY bio_patient_event
 -- Name: bio_patient_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_patient
+ALTER TABLE bio_patient
     ADD CONSTRAINT bio_patient_pk PRIMARY KEY (bio_patient_id);
 
 
@@ -3966,7 +3932,7 @@ ALTER TABLE ONLY bio_patient
 -- Name: bio_s_e_m_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_stats_exp_marker
+ALTER TABLE bio_stats_exp_marker
     ADD CONSTRAINT bio_s_e_m_pk PRIMARY KEY (bio_marker_id, bio_experiment_id);
 
 
@@ -3975,29 +3941,29 @@ ALTER TABLE ONLY bio_stats_exp_marker
 -- Name: bio_subject_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
 --
 
-ALTER TABLE ONLY bio_subject
+ALTER TABLE bio_subject
     ADD CONSTRAINT bio_subject_pk PRIMARY KEY (bio_subject_id);
 
 
-SET default_tablespace = biomart;
+--SET default_tablespace = biomart;
 
 --
 -- TOC entry 4099 (class 2606 OID 25826)
 -- Name: bio_taxon_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: biomart
 --
 
-ALTER TABLE ONLY bio_taxonomy
+ALTER TABLE bio_taxonomy
     ADD CONSTRAINT bio_taxon_pk PRIMARY KEY (bio_taxonomy_id);
 
 
-SET default_tablespace = '';
+--SET default_tablespace = '';
 
 --
 -- TOC entry 4101 (class 2606 OID 25828)
 -- Name: biobank_sample_pkey; Type: CONSTRAINT; Schema: biomart; Owner: biomart_user; Tablespace: 
 --
 
-ALTER TABLE ONLY biobank_sample
+ALTER TABLE biobank_sample
     ADD CONSTRAINT biobank_sample_pkey PRIMARY KEY (sample_tube_id);
 
 
@@ -4006,7 +3972,7 @@ ALTER TABLE ONLY biobank_sample
 -- Name: biomarker_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_marker
+ALTER TABLE bio_marker
     ADD CONSTRAINT biomarker_pk PRIMARY KEY (bio_marker_id);
 
 
@@ -4015,7 +3981,7 @@ ALTER TABLE ONLY bio_marker
 -- Name: biosample_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_sample
+ALTER TABLE bio_sample
     ADD CONSTRAINT biosample_pk PRIMARY KEY (bio_sample_id);
 
 
@@ -4024,7 +3990,7 @@ ALTER TABLE ONLY bio_sample
 -- Name: celllinedictionary_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_cell_line
+ALTER TABLE bio_cell_line
     ADD CONSTRAINT celllinedictionary_pk PRIMARY KEY (bio_cell_line_id);
 
 
@@ -4033,7 +3999,7 @@ ALTER TABLE ONLY bio_cell_line
 -- Name: clinicaltrialdim_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_clinical_trial
+ALTER TABLE bio_clinical_trial
     ADD CONSTRAINT clinicaltrialdim_pk PRIMARY KEY (bio_experiment_id);
 
 
@@ -4042,7 +4008,7 @@ ALTER TABLE ONLY bio_clinical_trial
 -- Name: compounddim_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_compound
+ALTER TABLE bio_compound
     ADD CONSTRAINT compounddim_pk PRIMARY KEY (bio_compound_id);
 
 
@@ -4051,7 +4017,7 @@ ALTER TABLE ONLY bio_compound
 -- Name: diseasedim_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_disease
+ALTER TABLE bio_disease
     ADD CONSTRAINT diseasedim_pk PRIMARY KEY (bio_disease_id);
 
 
@@ -4060,7 +4026,7 @@ ALTER TABLE ONLY bio_disease
 -- Name: experimentdim_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_experiment
+ALTER TABLE bio_experiment
     ADD CONSTRAINT experimentdim_pk PRIMARY KEY (bio_experiment_id);
 
 
@@ -4069,7 +4035,7 @@ ALTER TABLE ONLY bio_experiment
 -- Name: external_file_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_content
+ALTER TABLE bio_content
     ADD CONSTRAINT external_file_pk PRIMARY KEY (bio_file_content_id);
 
 
@@ -4078,7 +4044,7 @@ ALTER TABLE ONLY bio_content
 -- Name: external_file_repository_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_content_repository
+ALTER TABLE bio_content_repository
     ADD CONSTRAINT external_file_repository_pk PRIMARY KEY (bio_content_repo_id);
 
 
@@ -4087,22 +4053,22 @@ ALTER TABLE ONLY bio_content_repository
 -- Name: rbmorderdim_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
 --
 
-ALTER TABLE ONLY bio_assay
+ALTER TABLE bio_assay
     ADD CONSTRAINT rbmorderdim_pk PRIMARY KEY (bio_assay_id);
 
 
-SET default_tablespace = biomart;
+--SET default_tablespace = biomart;
 
 --
 -- TOC entry 4079 (class 2606 OID 25850)
 -- Name: sys_c0020430; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: biomart
 --
 
-ALTER TABLE ONLY bio_marker
+ALTER TABLE bio_marker
     ADD CONSTRAINT sys_c0020430 UNIQUE (organism, primary_external_id);
 
 
-SET default_tablespace = indx;
+--SET default_tablespace = indx;
 
 --
 -- TOC entry 3926 (class 1259 OID 26028)
@@ -4584,7 +4550,7 @@ CREATE INDEX bio_exp_type_idx ON bio_experiment USING btree (bio_experiment_type
 CREATE UNIQUE INDEX bio_experiment_pk ON bio_experiment USING btree (bio_experiment_id);
 
 
-SET default_tablespace = biomart;
+--SET default_tablespace = biomart;
 
 --
 -- TOC entry 4080 (class 1259 OID 26092)
@@ -4602,7 +4568,7 @@ CREATE INDEX bio_marker_c_mv_idx1 ON bio_marker_correl_mv USING btree (bio_marke
 CREATE INDEX bio_marker_c_mv_idx2 ON bio_marker_correl_mv USING btree (asso_bio_marker_id, bio_marker_id);
 
 
-SET default_tablespace = indx;
+--SET default_tablespace = indx;
 
 --
 -- TOC entry 4073 (class 1259 OID 26094)
@@ -4684,7 +4650,7 @@ CREATE INDEX idx_baadt_idx10 ON bio_assay_analysis_data_tea USING btree (bio_exp
 CREATE UNIQUE INDEX pk_baad ON bio_assay_analysis_data USING btree (bio_asy_analysis_data_id);
 
 
-SET default_tablespace = biomart;
+--SET default_tablespace = biomart;
 
 --
 -- TOC entry 4102 (class 1259 OID 26104)
@@ -5059,7 +5025,7 @@ CREATE TRIGGER trig_clinical_trial_design_id BEFORE INSERT ON ctd_full FOR EACH 
 -- Name: bio_assay_analysis_data_n_fk1; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_analysis_data
+ALTER TABLE bio_assay_analysis_data
     ADD CONSTRAINT bio_assay_analysis_data_n_fk1 FOREIGN KEY (bio_assay_analysis_id) REFERENCES bio_assay_analysis(bio_assay_analysis_id);
 
 
@@ -5068,7 +5034,7 @@ ALTER TABLE ONLY bio_assay_analysis_data
 -- Name: bio_assay_analysis_data_n_fk2; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_analysis_data
+ALTER TABLE bio_assay_analysis_data
     ADD CONSTRAINT bio_assay_analysis_data_n_fk2 FOREIGN KEY (bio_experiment_id) REFERENCES bio_experiment(bio_experiment_id);
 
 
@@ -5077,7 +5043,7 @@ ALTER TABLE ONLY bio_assay_analysis_data
 -- Name: bio_assay_analysis_data_n_fk3; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_analysis_data
+ALTER TABLE bio_assay_analysis_data
     ADD CONSTRAINT bio_assay_analysis_data_n_fk3 FOREIGN KEY (bio_assay_platform_id) REFERENCES bio_assay_platform(bio_assay_platform_id);
 
 
@@ -5086,7 +5052,7 @@ ALTER TABLE ONLY bio_assay_analysis_data
 -- Name: bio_assay_analysis_data_t_fk1; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_analysis_data_tea
+ALTER TABLE bio_assay_analysis_data_tea
     ADD CONSTRAINT bio_assay_analysis_data_t_fk1 FOREIGN KEY (bio_assay_analysis_id) REFERENCES bio_assay_analysis(bio_assay_analysis_id);
 
 
@@ -5095,7 +5061,7 @@ ALTER TABLE ONLY bio_assay_analysis_data_tea
 -- Name: bio_assay_analysis_data_t_fk2; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_analysis_data_tea
+ALTER TABLE bio_assay_analysis_data_tea
     ADD CONSTRAINT bio_assay_analysis_data_t_fk2 FOREIGN KEY (bio_experiment_id) REFERENCES bio_experiment(bio_experiment_id);
 
 
@@ -5104,7 +5070,7 @@ ALTER TABLE ONLY bio_assay_analysis_data_tea
 -- Name: bio_assay_analysis_data_t_fk3; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_analysis_data_tea
+ALTER TABLE bio_assay_analysis_data_tea
     ADD CONSTRAINT bio_assay_analysis_data_t_fk3 FOREIGN KEY (bio_assay_platform_id) REFERENCES bio_assay_platform(bio_assay_platform_id);
 
 
@@ -5113,7 +5079,7 @@ ALTER TABLE ONLY bio_assay_analysis_data_tea
 -- Name: bio_assay_ans_pltfm_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_analysis
+ALTER TABLE bio_assay_analysis
     ADD CONSTRAINT bio_assay_ans_pltfm_fk FOREIGN KEY (bio_asy_analysis_pltfm_id) REFERENCES bio_asy_analysis_pltfm(bio_asy_analysis_pltfm_id);
 
 
@@ -5122,7 +5088,7 @@ ALTER TABLE ONLY bio_assay_analysis
 -- Name: bio_assay_sample_bio_assay_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_sample
+ALTER TABLE bio_assay_sample
     ADD CONSTRAINT bio_assay_sample_bio_assay_fk FOREIGN KEY (bio_assay_id) REFERENCES bio_assay(bio_assay_id);
 
 
@@ -5131,7 +5097,7 @@ ALTER TABLE ONLY bio_assay_sample
 -- Name: bio_assay_sample_bio_sample_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_sample
+ALTER TABLE bio_assay_sample
     ADD CONSTRAINT bio_assay_sample_bio_sample_fk FOREIGN KEY (bio_sample_id) REFERENCES bio_sample(bio_sample_id);
 
 
@@ -5140,7 +5106,7 @@ ALTER TABLE ONLY bio_assay_sample
 -- Name: bio_asy_ad_fg_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_analysis_data
+ALTER TABLE bio_assay_analysis_data
     ADD CONSTRAINT bio_asy_ad_fg_fk FOREIGN KEY (bio_assay_feature_group_id) REFERENCES bio_assay_feature_group(bio_assay_feature_group_id);
 
 
@@ -5149,7 +5115,7 @@ ALTER TABLE ONLY bio_assay_analysis_data
 -- Name: bio_asy_ad_tea_fg_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_analysis_data_tea
+ALTER TABLE bio_assay_analysis_data_tea
     ADD CONSTRAINT bio_asy_ad_tea_fg_fk FOREIGN KEY (bio_assay_feature_group_id) REFERENCES bio_assay_feature_group(bio_assay_feature_group_id);
 
 
@@ -5158,7 +5124,7 @@ ALTER TABLE ONLY bio_assay_analysis_data_tea
 -- Name: bio_asy_asy_pfm_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay
+ALTER TABLE bio_assay
     ADD CONSTRAINT bio_asy_asy_pfm_fk FOREIGN KEY (bio_assay_platform_id) REFERENCES bio_assay_platform(bio_assay_platform_id);
 
 
@@ -5167,7 +5133,7 @@ ALTER TABLE ONLY bio_assay
 -- Name: bio_asy_dt_ds_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_data
+ALTER TABLE bio_assay_data
     ADD CONSTRAINT bio_asy_dt_ds_fk FOREIGN KEY (bio_assay_dataset_id) REFERENCES bio_assay_dataset(bio_assay_dataset_id);
 
 
@@ -5176,7 +5142,7 @@ ALTER TABLE ONLY bio_assay_data
 -- Name: bio_asy_dt_fg_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_data_stats
+ALTER TABLE bio_assay_data_stats
     ADD CONSTRAINT bio_asy_dt_fg_fk FOREIGN KEY (bio_assay_feature_group_id) REFERENCES bio_assay_feature_group(bio_assay_feature_group_id);
 
 
@@ -5185,7 +5151,7 @@ ALTER TABLE ONLY bio_assay_data_stats
 -- Name: bio_asy_dt_stat_exp_s_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_data_stats
+ALTER TABLE bio_assay_data_stats
     ADD CONSTRAINT bio_asy_dt_stat_exp_s_fk FOREIGN KEY (bio_experiment_id) REFERENCES bio_experiment(bio_experiment_id);
 
 
@@ -5194,7 +5160,7 @@ ALTER TABLE ONLY bio_assay_data_stats
 -- Name: bio_asy_dt_stats_ds_s_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_data_stats
+ALTER TABLE bio_assay_data_stats
     ADD CONSTRAINT bio_asy_dt_stats_ds_s_fk FOREIGN KEY (bio_assay_dataset_id) REFERENCES bio_assay_dataset(bio_assay_dataset_id);
 
 
@@ -5203,7 +5169,7 @@ ALTER TABLE ONLY bio_assay_data_stats
 -- Name: bio_asy_dt_stats_smp_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_asy_data_stats_all
+ALTER TABLE bio_asy_data_stats_all
     ADD CONSTRAINT bio_asy_dt_stats_smp_fk FOREIGN KEY (bio_sample_id) REFERENCES bio_sample(bio_sample_id);
 
 
@@ -5212,7 +5178,7 @@ ALTER TABLE ONLY bio_asy_data_stats_all
 -- Name: bio_asy_dt_stats_smp_s_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_data_stats
+ALTER TABLE bio_assay_data_stats
     ADD CONSTRAINT bio_asy_dt_stats_smp_s_fk FOREIGN KEY (bio_sample_id) REFERENCES bio_sample(bio_sample_id);
 
 
@@ -5221,7 +5187,7 @@ ALTER TABLE ONLY bio_assay_data_stats
 -- Name: bio_asy_exp_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_data
+ALTER TABLE bio_assay_data
     ADD CONSTRAINT bio_asy_exp_fk FOREIGN KEY (bio_experiment_id) REFERENCES bio_experiment(bio_experiment_id);
 
 
@@ -5230,7 +5196,7 @@ ALTER TABLE ONLY bio_assay_data
 -- Name: bio_cli_trial_time_trl_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_clinc_trial_time_pt
+ALTER TABLE bio_clinc_trial_time_pt
     ADD CONSTRAINT bio_cli_trial_time_trl_fk FOREIGN KEY (bio_experiment_id) REFERENCES bio_clinical_trial(bio_experiment_id);
 
 
@@ -5239,7 +5205,7 @@ ALTER TABLE ONLY bio_clinc_trial_time_pt
 -- Name: bio_clinc_trl_pt_grp_exp_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_clinc_trial_pt_group
+ALTER TABLE bio_clinc_trial_pt_group
     ADD CONSTRAINT bio_clinc_trl_pt_grp_exp_fk FOREIGN KEY (bio_experiment_id) REFERENCES bio_clinical_trial(bio_experiment_id);
 
 
@@ -5248,7 +5214,7 @@ ALTER TABLE ONLY bio_clinc_trial_pt_group
 -- Name: bio_clinical_trial_bio_experim; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_clinical_trial
+ALTER TABLE bio_clinical_trial
     ADD CONSTRAINT bio_clinical_trial_bio_experim FOREIGN KEY (bio_experiment_id) REFERENCES bio_experiment(bio_experiment_id);
 
 
@@ -5257,7 +5223,7 @@ ALTER TABLE ONLY bio_clinical_trial
 -- Name: bio_clinical_trial_property_bi; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_clinc_trial_attr
+ALTER TABLE bio_clinc_trial_attr
     ADD CONSTRAINT bio_clinical_trial_property_bi FOREIGN KEY (bio_experiment_id) REFERENCES bio_clinical_trial(bio_experiment_id);
 
 
@@ -5266,7 +5232,7 @@ ALTER TABLE ONLY bio_clinc_trial_attr
 -- Name: bio_content_ref_cont_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_content_reference
+ALTER TABLE bio_content_reference
     ADD CONSTRAINT bio_content_ref_cont_fk FOREIGN KEY (bio_content_id) REFERENCES bio_content(bio_file_content_id);
 
 
@@ -5275,7 +5241,7 @@ ALTER TABLE ONLY bio_content_reference
 -- Name: bio_data_anl_ds_anl_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_asy_analysis_dataset
+ALTER TABLE bio_asy_analysis_dataset
     ADD CONSTRAINT bio_data_anl_ds_anl_fk FOREIGN KEY (bio_assay_analysis_id) REFERENCES bio_assay_analysis(bio_assay_analysis_id);
 
 
@@ -5284,7 +5250,7 @@ ALTER TABLE ONLY bio_asy_analysis_dataset
 -- Name: bio_data_anl_ds_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_asy_analysis_dataset
+ALTER TABLE bio_asy_analysis_dataset
     ADD CONSTRAINT bio_data_anl_ds_fk FOREIGN KEY (bio_assay_dataset_id) REFERENCES bio_assay_dataset(bio_assay_dataset_id);
 
 
@@ -5293,7 +5259,7 @@ ALTER TABLE ONLY bio_asy_analysis_dataset
 -- Name: bio_dataset_experiment_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_dataset
+ALTER TABLE bio_assay_dataset
     ADD CONSTRAINT bio_dataset_experiment_fk FOREIGN KEY (bio_experiment_id) REFERENCES bio_experiment(bio_experiment_id);
 
 
@@ -5302,7 +5268,7 @@ ALTER TABLE ONLY bio_assay_dataset
 -- Name: bio_df_cmp_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_data_compound
+ALTER TABLE bio_data_compound
     ADD CONSTRAINT bio_df_cmp_fk FOREIGN KEY (bio_compound_id) REFERENCES bio_compound(bio_compound_id);
 
 
@@ -5311,7 +5277,7 @@ ALTER TABLE ONLY bio_data_compound
 -- Name: bio_df_disease_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_data_disease
+ALTER TABLE bio_data_disease
     ADD CONSTRAINT bio_df_disease_fk FOREIGN KEY (bio_disease_id) REFERENCES bio_disease(bio_disease_id);
 
 
@@ -5320,7 +5286,7 @@ ALTER TABLE ONLY bio_data_disease
 -- Name: bio_exp_data_fact_samp_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay_data
+ALTER TABLE bio_assay_data
     ADD CONSTRAINT bio_exp_data_fact_samp_fk FOREIGN KEY (bio_sample_id) REFERENCES bio_sample(bio_sample_id);
 
 
@@ -5329,7 +5295,7 @@ ALTER TABLE ONLY bio_assay_data
 -- Name: bio_ext_analys_ext_anl_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_curated_data
+ALTER TABLE bio_curated_data
     ADD CONSTRAINT bio_ext_analys_ext_anl_fk FOREIGN KEY (bio_curation_dataset_id) REFERENCES bio_curation_dataset(bio_curation_dataset_id);
 
 
@@ -5338,7 +5304,7 @@ ALTER TABLE ONLY bio_curated_data
 -- Name: bio_ext_anl_pltfm_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_curation_dataset
+ALTER TABLE bio_curation_dataset
     ADD CONSTRAINT bio_ext_anl_pltfm_fk FOREIGN KEY (bio_asy_analysis_pltfm_id) REFERENCES bio_asy_analysis_pltfm(bio_asy_analysis_pltfm_id);
 
 
@@ -5347,7 +5313,7 @@ ALTER TABLE ONLY bio_curation_dataset
 -- Name: bio_lit_alt_ref_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_lit_alt_data
+ALTER TABLE bio_lit_alt_data
     ADD CONSTRAINT bio_lit_alt_ref_fk FOREIGN KEY (bio_lit_ref_data_id) REFERENCES bio_lit_ref_data(bio_lit_ref_data_id);
 
 
@@ -5356,7 +5322,7 @@ ALTER TABLE ONLY bio_lit_alt_data
 -- Name: bio_lit_amd_alt_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_lit_amd_data
+ALTER TABLE bio_lit_amd_data
     ADD CONSTRAINT bio_lit_amd_alt_fk FOREIGN KEY (bio_lit_alt_data_id) REFERENCES bio_lit_alt_data(bio_lit_alt_data_id);
 
 
@@ -5365,7 +5331,7 @@ ALTER TABLE ONLY bio_lit_amd_data
 -- Name: bio_lit_curation_dataset_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_data_literature
+ALTER TABLE bio_data_literature
     ADD CONSTRAINT bio_lit_curation_dataset_fk FOREIGN KEY (bio_curation_dataset_id) REFERENCES bio_curation_dataset(bio_curation_dataset_id);
 
 
@@ -5374,7 +5340,7 @@ ALTER TABLE ONLY bio_data_literature
 -- Name: bio_lit_inh_ref_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_lit_inh_data
+ALTER TABLE bio_lit_inh_data
     ADD CONSTRAINT bio_lit_inh_ref_fk FOREIGN KEY (bio_lit_ref_data_id) REFERENCES bio_lit_ref_data(bio_lit_ref_data_id);
 
 
@@ -5383,7 +5349,7 @@ ALTER TABLE ONLY bio_lit_inh_data
 -- Name: bio_lit_int_ref_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_lit_int_data
+ALTER TABLE bio_lit_int_data
     ADD CONSTRAINT bio_lit_int_ref_fk FOREIGN KEY (bio_lit_ref_data_id) REFERENCES bio_lit_ref_data(bio_lit_ref_data_id);
 
 
@@ -5392,7 +5358,7 @@ ALTER TABLE ONLY bio_lit_int_data
 -- Name: bio_lit_pe_ref_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_lit_pe_data
+ALTER TABLE bio_lit_pe_data
     ADD CONSTRAINT bio_lit_pe_ref_fk FOREIGN KEY (bio_lit_ref_data_id) REFERENCES bio_lit_ref_data(bio_lit_ref_data_id);
 
 
@@ -5401,7 +5367,7 @@ ALTER TABLE ONLY bio_lit_pe_data
 -- Name: bio_marker_link_bio_marker_rel; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_data_correlation
+ALTER TABLE bio_data_correlation
     ADD CONSTRAINT bio_marker_link_bio_marker_rel FOREIGN KEY (bio_data_correl_descr_id) REFERENCES bio_data_correl_descr(bio_data_correl_descr_id);
 
 
@@ -5410,7 +5376,7 @@ ALTER TABLE ONLY bio_data_correlation
 -- Name: bio_patient_bio_clinic_tri_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_patient
+ALTER TABLE bio_patient
     ADD CONSTRAINT bio_patient_bio_clinic_tri_fk FOREIGN KEY (bio_clinical_trial_p_group_id) REFERENCES bio_clinc_trial_pt_group(bio_clinical_trial_p_group_id);
 
 
@@ -5419,7 +5385,7 @@ ALTER TABLE ONLY bio_patient
 -- Name: bio_patient_bio_clinical_trial; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_patient
+ALTER TABLE bio_patient
     ADD CONSTRAINT bio_patient_bio_clinical_trial FOREIGN KEY (bio_experiment_id) REFERENCES bio_clinical_trial(bio_experiment_id);
 
 
@@ -5428,7 +5394,7 @@ ALTER TABLE ONLY bio_patient
 -- Name: bio_patient_bio_subject_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_patient
+ALTER TABLE bio_patient
     ADD CONSTRAINT bio_patient_bio_subject_fk FOREIGN KEY (bio_patient_id) REFERENCES bio_subject(bio_subject_id);
 
 
@@ -5437,7 +5403,7 @@ ALTER TABLE ONLY bio_patient
 -- Name: bio_pt_attr_trl_attr_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_patient_event_attr
+ALTER TABLE bio_patient_event_attr
     ADD CONSTRAINT bio_pt_attr_trl_attr_fk FOREIGN KEY (bio_clinic_trial_attr_id) REFERENCES bio_clinc_trial_attr(bio_clinc_trial_attr_id);
 
 
@@ -5446,7 +5412,7 @@ ALTER TABLE ONLY bio_patient_event_attr
 -- Name: bio_pt_event_attr_evt_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_patient_event_attr
+ALTER TABLE bio_patient_event_attr
     ADD CONSTRAINT bio_pt_event_attr_evt_fk FOREIGN KEY (bio_patient_event_id) REFERENCES bio_patient_event(bio_patient_event_id);
 
 
@@ -5455,7 +5421,7 @@ ALTER TABLE ONLY bio_patient_event_attr
 -- Name: bio_pt_event_bio_pt_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_patient_event
+ALTER TABLE bio_patient_event
     ADD CONSTRAINT bio_pt_event_bio_pt_fk FOREIGN KEY (bio_patient_id) REFERENCES bio_patient(bio_patient_id);
 
 
@@ -5464,7 +5430,7 @@ ALTER TABLE ONLY bio_patient_event
 -- Name: bio_pt_event_bio_trl_tp_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_patient_event
+ALTER TABLE bio_patient_event
     ADD CONSTRAINT bio_pt_event_bio_trl_tp_fk FOREIGN KEY (bio_clinic_trial_timepoint_id) REFERENCES bio_clinc_trial_time_pt(bio_clinc_trial_tm_pt_id);
 
 
@@ -5473,7 +5439,7 @@ ALTER TABLE ONLY bio_patient_event
 -- Name: bio_sample_bio_subject_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_sample
+ALTER TABLE bio_sample
     ADD CONSTRAINT bio_sample_bio_subject_fk FOREIGN KEY (bio_subject_id) REFERENCES bio_subject(bio_subject_id);
 
 
@@ -5482,7 +5448,7 @@ ALTER TABLE ONLY bio_sample
 -- Name: bio_sample_cl_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_sample
+ALTER TABLE bio_sample
     ADD CONSTRAINT bio_sample_cl_fk FOREIGN KEY (bio_cell_line_id) REFERENCES bio_cell_line(bio_cell_line_id);
 
 
@@ -5491,7 +5457,7 @@ ALTER TABLE ONLY bio_sample
 -- Name: bio_sample_pt_evt_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_sample
+ALTER TABLE bio_sample
     ADD CONSTRAINT bio_sample_pt_evt_fk FOREIGN KEY (bio_patient_event_id) REFERENCES bio_patient_event(bio_patient_event_id);
 
 
@@ -5500,7 +5466,7 @@ ALTER TABLE ONLY bio_sample
 -- Name: bio_taxon_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_data_taxonomy
+ALTER TABLE bio_data_taxonomy
     ADD CONSTRAINT bio_taxon_fk FOREIGN KEY (bio_taxonomy_id) REFERENCES bio_taxonomy(bio_taxonomy_id);
 
 
@@ -5509,7 +5475,7 @@ ALTER TABLE ONLY bio_data_taxonomy
 -- Name: cd_disease_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_cell_line
+ALTER TABLE bio_cell_line
     ADD CONSTRAINT cd_disease_fk FOREIGN KEY (bio_disease_id) REFERENCES bio_disease(bio_disease_id);
 
 
@@ -5518,7 +5484,7 @@ ALTER TABLE ONLY bio_cell_line
 -- Name: dataset_experiment_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_assay
+ALTER TABLE bio_assay
     ADD CONSTRAINT dataset_experiment_fk FOREIGN KEY (experiment_id) REFERENCES bio_experiment(bio_experiment_id);
 
 
@@ -5527,7 +5493,7 @@ ALTER TABLE ONLY bio_assay
 -- Name: ext_file_cnt_cnt_repo_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
 --
 
-ALTER TABLE ONLY bio_content
+ALTER TABLE bio_content
     ADD CONSTRAINT ext_file_cnt_cnt_repo_fk FOREIGN KEY (repository_id) REFERENCES bio_content_repository(bio_content_repo_id);
 
 
