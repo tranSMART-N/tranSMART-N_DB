@@ -3458,13 +3458,6 @@ CREATE VIEW ctd_td_inclusion_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.disease_severity, v.fev1) AS id, v.ref_article_protocol_id, v.trial_age, v.disease_severity, v.difficult_to_treat, v.asthma_diagnosis, v.inhaled_steroid_dose, v.laba, v.ocs, v.xolair, v.ltra_inhibitors, v.asthma_phenotype, v.fev1, v.fev1_reversibility, v.tlc, v.fev1_fvc, v.fvc, v.dlco, v.sgrq, v.hrct, v.biopsy, v.dyspnea_on_exertion, v.concomitant_med FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.trial_age, ctd_full.disease_severity, ctd_full.difficult_to_treat, ctd_full.asthma_diagnosis, ctd_full.inhaled_steroid_dose, ctd_full.laba, ctd_full.ocs, ctd_full.xolair, ctd_full.ltra_inhibitors, ctd_full.asthma_phenotype, ctd_full.fev1, ctd_full.fev1_reversibility, ctd_full.tlc, ctd_full.fev1_fvc, ctd_full.fvc, ctd_full.dlco, ctd_full.sgrq, ctd_full.hrct, ctd_full.biopsy, ctd_full.dyspnea_on_exertion, ctd_full.concomitant_med FROM ctd_full WHERE ((((ctd_full.fev1 IS NOT NULL) AND ((ctd_full.fev1)::text <> ''::text)) OR ((ctd_full.disease_severity IS NOT NULL) AND ((ctd_full.disease_severity)::text <> ''::text))) OR ((ctd_full.trial_age IS NOT NULL) AND ((ctd_full.trial_age)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.disease_severity, ctd_full.fev1) v;
 
 
---ALTER TABLE biomart.ctd_td_inclusion_view OWNER TO biomart;
-
---
--- TOC entry 285 (class 1259 OID 24732)
--- Name: ctd_td_smoker_view; Type: VIEW; Schema: biomart; Owner: biomart
---
-
 CREATE VIEW ctd_td_smoker_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.trial_smokers_pct) AS id, v.ref_article_protocol_id, v.trial_smokers_pct, v.trial_former_smokers_pct, v.trial_never_smokers_pct, v.trial_pack_years FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.trial_smokers_pct, ctd_full.trial_former_smokers_pct, ctd_full.trial_never_smokers_pct, ctd_full.trial_pack_years FROM ctd_full WHERE (((ctd_full.trial_smokers_pct IS NOT NULL) AND ((ctd_full.trial_smokers_pct)::text <> ''::text)) OR ((ctd_full.trial_never_smokers_pct IS NOT NULL) AND ((ctd_full.trial_never_smokers_pct)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.trial_smokers_pct) v;
 
@@ -3502,66 +3495,18 @@ CREATE VIEW ctd_treatment_phases_view AS
     SELECT row_number() OVER (ORDER BY v.ref_article_protocol_id, v.trtmt_description, v.trtmt_ocs) AS id, v.ref_article_protocol_id, v.trtmt_ocs, v.trtmt_ics, v.trtmt_laba, v.trtmt_ltra, v.trtmt_corticosteroids, v.trtmt_anti_fibrotics, v.trtmt_immunosuppressive, v.trtmt_cytotoxic, v.trtmt_description FROM (SELECT DISTINCT ctd_full.ref_article_protocol_id, ctd_full.trtmt_ocs, ctd_full.trtmt_ics, ctd_full.trtmt_laba, ctd_full.trtmt_ltra, ctd_full.trtmt_corticosteroids, ctd_full.trtmt_anti_fibrotics, ctd_full.trtmt_immunosuppressive, ctd_full.trtmt_cytotoxic, ctd_full.trtmt_description FROM ctd_full WHERE ((((ctd_full.trtmt_ocs IS NOT NULL) AND ((ctd_full.trtmt_ocs)::text <> ''::text)) OR ((ctd_full.trtmt_description IS NOT NULL) AND ((ctd_full.trtmt_description)::text <> ''::text))) OR ((ctd_full.trtmt_immunosuppressive IS NOT NULL) AND ((ctd_full.trtmt_immunosuppressive)::text <> ''::text))) ORDER BY ctd_full.ref_article_protocol_id, ctd_full.trtmt_description, ctd_full.trtmt_ocs) v;
 
 
---ALTER TABLE biomart.ctd_treatment_phases_view OWNER TO biomart;
-
---
--- TOC entry 289 (class 1259 OID 24752)
--- Name: hibernate_sequence; Type: SEQUENCE; Schema: biomart; Owner: biomart
---
-
 CREATE SEQUENCE hibernate_sequence;
-
-
---ALTER TABLE biomart.hibernate_sequence OWNER TO biomart;
-
---
--- TOC entry 290 (class 1259 OID 24754)
--- Name: seq_bio_data_fact_id; Type: SEQUENCE; Schema: biomart; Owner: biomart
---
 
 CREATE SEQUENCE seq_bio_data_fact_id;
 
-
---ALTER TABLE biomart.seq_bio_data_fact_id OWNER TO biomart;
-
---
--- TOC entry 291 (class 1259 OID 24756)
--- Name: seq_bio_data_id; Type: SEQUENCE; Schema: biomart; Owner: biomart
---
-
 CREATE SEQUENCE seq_bio_data_id;
-
-
---ALTER TABLE biomart.seq_bio_data_id OWNER TO biomart;
-
---
--- TOC entry 292 (class 1259 OID 24758)
--- Name: seq_clinical_trial_design_id; Type: SEQUENCE; Schema: biomart; Owner: biomart
---
 
 CREATE SEQUENCE seq_clinical_trial_design_id;
 
 
---ALTER TABLE biomart.seq_clinical_trial_design_id OWNER TO biomart;
-
-
--- --SET default_tablespace = indx;
-
---
--- TOC entry 3943 (class 2606 OID 25741)
--- Name: bio_aa_data_t_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
---
-
 ALTER TABLE bio_assay_analysis_data_tea
     ADD CONSTRAINT bio_aa_data_t_pk PRIMARY KEY (bio_asy_analysis_data_id);
 
-
---SET default_tablespace = '';
-
---
--- TOC entry 3972 (class 2606 OID 25743)
--- Name: bio_assay_analysis_platform_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
---
 
 ALTER TABLE bio_asy_analysis_pltfm
     ADD CONSTRAINT bio_assay_analysis_platform_pk PRIMARY KEY (bio_asy_analysis_pltfm_id);
@@ -3569,75 +3514,28 @@ ALTER TABLE bio_asy_analysis_pltfm
 
 --SET default_tablespace = indx;
 
---
--- TOC entry 3965 (class 2606 OID 25745)
--- Name: bio_assay_platform_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
---
-
 ALTER TABLE bio_assay_platform
     ADD CONSTRAINT bio_assay_platform_pk PRIMARY KEY (bio_assay_platform_id);
 
-
---
--- TOC entry 3967 (class 2606 OID 25747)
--- Name: bio_assay_sample_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
---
 
 ALTER TABLE bio_assay_sample
     ADD CONSTRAINT bio_assay_sample_pk PRIMARY KEY (bio_assay_id, bio_sample_id, bio_clinic_trial_timepoint_id);
 
 
---
--- TOC entry 3978 (class 2606 OID 25749)
--- Name: bio_asy_dt_stats_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
---
-
 ALTER TABLE bio_asy_data_stats_all
     ADD CONSTRAINT bio_asy_dt_stats_pk PRIMARY KEY (bio_assay_data_stats_id);
-
-
---
--- TOC entry 3957 (class 2606 OID 25751)
--- Name: bio_asy_dt_stats_s_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
---
 
 ALTER TABLE bio_assay_data_stats
     ADD CONSTRAINT bio_asy_dt_stats_s_pk PRIMARY KEY (bio_assay_data_stats_id);
 
-
---
--- TOC entry 3963 (class 2606 OID 25753)
--- Name: bio_asy_feature_grp_pk; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: indx
---
-
 ALTER TABLE bio_assay_feature_group
     ADD CONSTRAINT bio_asy_feature_grp_pk PRIMARY KEY (bio_assay_feature_group_id);
-
-
---SET default_tablespace = '';
-
---
--- TOC entry 3984 (class 2606 OID 25755)
--- Name: bio_cancer_gene_curation_fact_; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
---
 
 ALTER TABLE bio_cgdcp_data
     ADD CONSTRAINT bio_cancer_gene_curation_fact_ PRIMARY KEY (bio_data_id);
 
-
---
--- TOC entry 3988 (class 2606 OID 25757)
--- Name: bio_clinical_trial_patient_grp; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
---
-
 ALTER TABLE bio_clinc_trial_attr
     ADD CONSTRAINT bio_clinical_trial_patient_grp PRIMARY KEY (bio_clinc_trial_attr_id);
-
-
---
--- TOC entry 3991 (class 2606 OID 25759)
--- Name: bio_clinical_trial_pt_group; Type: CONSTRAINT; Schema: biomart; Owner: biomart; Tablespace: 
---
 
 ALTER TABLE bio_clinc_trial_pt_group
     ADD CONSTRAINT bio_clinical_trial_pt_group PRIMARY KEY (bio_clinical_trial_p_group_id);
@@ -5433,72 +5331,26 @@ ALTER TABLE bio_patient_event
 ALTER TABLE bio_patient_event
     ADD CONSTRAINT bio_pt_event_bio_trl_tp_fk FOREIGN KEY (bio_clinic_trial_timepoint_id) REFERENCES bio_clinc_trial_time_pt(bio_clinc_trial_tm_pt_id);
 
-
---
--- TOC entry 4153 (class 2606 OID 26462)
--- Name: bio_sample_bio_subject_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
---
-
 ALTER TABLE bio_sample
     ADD CONSTRAINT bio_sample_bio_subject_fk FOREIGN KEY (bio_subject_id) REFERENCES bio_subject(bio_subject_id);
-
-
---
--- TOC entry 4154 (class 2606 OID 26467)
--- Name: bio_sample_cl_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
---
 
 ALTER TABLE bio_sample
     ADD CONSTRAINT bio_sample_cl_fk FOREIGN KEY (bio_cell_line_id) REFERENCES bio_cell_line(bio_cell_line_id);
 
-
---
--- TOC entry 4155 (class 2606 OID 26472)
--- Name: bio_sample_pt_evt_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
---
-
 ALTER TABLE bio_sample
     ADD CONSTRAINT bio_sample_pt_evt_fk FOREIGN KEY (bio_patient_event_id) REFERENCES bio_patient_event(bio_patient_event_id);
-
-
---
--- TOC entry 4140 (class 2606 OID 26477)
--- Name: bio_taxon_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
---
 
 ALTER TABLE bio_data_taxonomy
     ADD CONSTRAINT bio_taxon_fk FOREIGN KEY (bio_taxonomy_id) REFERENCES bio_taxonomy(bio_taxonomy_id);
 
-
---
--- TOC entry 4127 (class 2606 OID 26482)
--- Name: cd_disease_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
---
-
 ALTER TABLE bio_cell_line
     ADD CONSTRAINT cd_disease_fk FOREIGN KEY (bio_disease_id) REFERENCES bio_disease(bio_disease_id);
-
-
---
--- TOC entry 4104 (class 2606 OID 26487)
--- Name: dataset_experiment_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
---
 
 ALTER TABLE bio_assay
     ADD CONSTRAINT dataset_experiment_fk FOREIGN KEY (experiment_id) REFERENCES bio_experiment(bio_experiment_id);
 
-
---
--- TOC entry 4132 (class 2606 OID 26492)
--- Name: ext_file_cnt_cnt_repo_fk; Type: FK CONSTRAINT; Schema: biomart; Owner: biomart
---
-
 ALTER TABLE bio_content
     ADD CONSTRAINT ext_file_cnt_cnt_repo_fk FOREIGN KEY (repository_id) REFERENCES bio_content_repository(bio_content_repo_id);
-
-
-
-
 
 -- Completed on 2013-07-24 09:35:24 BST
 
