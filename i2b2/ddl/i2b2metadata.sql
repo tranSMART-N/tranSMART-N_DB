@@ -2,6 +2,8 @@
 CREATE SCHEMA i2b2metadata authorization TO i2b2metadata;
 
 
+drop table birn;
+
 CREATE TABLE birn (
     c_hlevel int NOT NULL,
     c_fullname character varying(700) NOT NULL,
@@ -32,6 +34,8 @@ CREATE TABLE birn (
 
 ALTER TABLE i2b2metadata.birn OWNER TO i2b2metadata;
 
+
+drop table custom_meta;
 
 CREATE TABLE custom_meta (
     c_hlevel int NOT NULL,
@@ -64,6 +68,8 @@ CREATE TABLE custom_meta (
 ALTER TABLE i2b2metadata.custom_meta OWNER TO i2b2metadata;
 
 
+drop table i2b2;
+
 CREATE TABLE i2b2 (
     c_hlevel int NOT NULL,
     c_fullname character varying(700) NOT NULL,
@@ -94,6 +100,8 @@ CREATE TABLE i2b2 (
 
 ALTER TABLE i2b2metadata.i2b2 OWNER TO i2b2metadata;
 
+
+drop table i2b2_secure;
 
 CREATE TABLE i2b2_secure (
     c_hlevel int,
@@ -128,6 +136,8 @@ CREATE TABLE i2b2_secure (
 ALTER TABLE i2b2metadata.i2b2_secure OWNER TO i2b2metadata;
 
 
+drop table i2b2_tags;
+
 CREATE TABLE i2b2_tags (
     tag_id integer NOT NULL,
     path character varying(400),
@@ -139,11 +149,14 @@ CREATE TABLE i2b2_tags (
 ALTER TABLE i2b2metadata.i2b2_tags OWNER TO i2b2metadata;
 
 
-CREATE SEQUENCE ont_sq_ps_prid;
+drop sequence ont_sq_ps_prid;
 
+CREATE SEQUENCE ont_sq_ps_prid;
 
 ALTER TABLE i2b2metadata.ont_sq_ps_prid OWNER TO i2b2metadata;
 
+
+drop table ont_process_status;
 
 CREATE TABLE ont_process_status (
     process_id byteint NOT NULL,
@@ -163,6 +176,8 @@ CREATE TABLE ont_process_status (
 ALTER TABLE i2b2metadata.ont_process_status OWNER TO i2b2metadata;
 
 
+drop table schemes;
+
 CREATE TABLE schemes (
     c_key character varying(50) NOT NULL,
     c_name character varying(50) NOT NULL,
@@ -171,6 +186,8 @@ CREATE TABLE schemes (
 
 ALTER TABLE i2b2metadata.schemes OWNER TO i2b2metadata;
 
+
+drop table table_access;
 
 CREATE TABLE table_access (
     c_table_cd character varying(50) NOT NULL,
