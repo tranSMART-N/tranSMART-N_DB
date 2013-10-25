@@ -6,7 +6,7 @@ DROP TABLE ARCHIVE_OBSERVATION_FACT;
 
 CREATE TABLE archive_observation_fact (
     encounter_num bigint,
-    patient_num int,
+    patient_num bigint,
     concept_cd character varying(50),
     provider_id character varying(50),
     start_date date,
@@ -172,12 +172,12 @@ drop table  observation_fact;
 
 CREATE TABLE observation_fact (
     encounter_num bigint,
-    patient_num int NOT NULL,
+    patient_num bigint NOT NULL,
     concept_cd character varying(50) NOT NULL,
     provider_id character varying(50) NOT NULL,
     start_date date,
     modifier_cd character varying(100) NOT NULL,
-    instance_num int NOT NULL,
+    instance_num int,
     valtype_cd character varying(50),
     tval_char character varying(255),
     nval_num numeric(18,5),
@@ -448,7 +448,7 @@ CREATE SEQUENCE qt_sq_qri_qriid;
 ALTER TABLE i2b2demodata.qt_sq_qri_qriid OWNER TO i2b2demodata;
 
 
-drop sequence qt_query_result_instance;
+drop table qt_query_result_instance;
 
 CREATE TABLE qt_query_result_instance (
     result_instance_id int  NOT NULL,
