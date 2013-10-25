@@ -2,6 +2,8 @@
 CREATE SCHEMA i2b2workdata authorization TO i2b2workdata;
 
 
+drop table workplace;
+
 CREATE TABLE workplace (
     c_name character varying(255) NOT NULL,
     c_user_id character varying(255) NOT NULL,
@@ -23,6 +25,8 @@ CREATE TABLE workplace (
 ALTER TABLE i2b2workdata.workplace OWNER TO i2b2workdata;
 
 
+drop table workplace_access;
+
 CREATE TABLE workplace_access (
     c_table_cd character varying(255) NOT NULL,
     c_table_name character varying(255) NOT NULL,
@@ -43,10 +47,8 @@ CREATE TABLE workplace_access (
 
 ALTER TABLE i2b2workdata.workplace_access OWNER TO i2b2workdata;
 
-
 ALTER TABLE workplace_access
     ADD CONSTRAINT workplace_access_pk PRIMARY KEY (c_index);
-
 
 ALTER TABLE workplace
     ADD CONSTRAINT workplace_pk PRIMARY KEY (c_index);
