@@ -1,6 +1,8 @@
 
 CREATE SCHEMA i2b2hive authorization TO i2b2hive;
 
+drop table crc_analysis_job;
+
 CREATE TABLE crc_analysis_job (
     job_id character varying(10) NOT NULL,
     queue_name character varying(50),
@@ -15,6 +17,8 @@ CREATE TABLE crc_analysis_job (
 
 ALTER TABLE i2b2hive.crc_analysis_job OWNER TO i2b2hive;
 
+
+drop table crc_db_lookup;
 
 CREATE TABLE crc_db_lookup (
     c_domain_id character varying(255) NOT NULL,
@@ -34,6 +38,8 @@ CREATE TABLE crc_db_lookup (
 ALTER TABLE i2b2hive.crc_db_lookup OWNER TO i2b2hive;
 
 
+drop table hilosequences;
+
 CREATE TABLE hilosequences (
     sequencename character varying(50) NOT NULL,
     highvalues integer NOT NULL
@@ -41,6 +47,8 @@ CREATE TABLE hilosequences (
 
 ALTER TABLE i2b2hive.hilosequences OWNER TO i2b2hive;
 
+
+drop table jms_messages;
 
 CREATE TABLE jms_messages (
     messageid integer NOT NULL,
@@ -52,6 +60,8 @@ CREATE TABLE jms_messages (
 
 ALTER TABLE i2b2hive.jms_messages OWNER TO i2b2hive;
 
+
+drop table jms_roles;
 
 CREATE TABLE jms_roles (
     roleid character varying(32) NOT NULL,
@@ -71,12 +81,16 @@ CREATE TABLE jms_subscriptions (
 ALTER TABLE i2b2hive.jms_subscriptions OWNER TO i2b2hive;
 
 
+drop table jms_transactions;
+
 CREATE TABLE jms_transactions (
     txid integer NOT NULL
 );
 
 ALTER TABLE i2b2hive.jms_transactions OWNER TO i2b2hive;
 
+
+drop table jms_users;
 
 CREATE TABLE jms_users (
     userid character varying(32) NOT NULL,
@@ -86,6 +100,8 @@ CREATE TABLE jms_users (
 
 ALTER TABLE i2b2hive.jms_users OWNER TO i2b2hive;
 
+
+drop table ont_db_lookup;
 
 CREATE TABLE ont_db_lookup (
     c_domain_id character varying(255) NOT NULL,
@@ -105,6 +121,8 @@ CREATE TABLE ont_db_lookup (
 ALTER TABLE i2b2hive.ont_db_lookup OWNER TO i2b2hive;
 
 
+drop table timers;
+
 CREATE TABLE timers (
     timerid character varying(80) NOT NULL,
     targetid character varying(250) NOT NULL,
@@ -116,6 +134,8 @@ CREATE TABLE timers (
 
 ALTER TABLE i2b2hive.timers OWNER TO i2b2hive;
 
+
+drop table  work_db_lookup;
 
 CREATE TABLE work_db_lookup (
     c_domain_id character varying(255) NOT NULL,
