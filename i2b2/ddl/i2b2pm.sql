@@ -1,6 +1,9 @@
 
 CREATE SCHEMA i2b2pm authorization to i2b2pm;
 
+
+drop table  pm_cell_data;
+
 CREATE TABLE pm_cell_data (
     cell_id character varying(50) NOT NULL,
     project_path character varying(255) NOT NULL,
@@ -17,10 +20,14 @@ CREATE TABLE pm_cell_data (
 ALTER TABLE i2b2pm.pm_cell_data OWNER TO i2b2pm;
 
 
+drop sequence pm_params;
+
 CREATE SEQUENCE pm_params;
 
 ALTER TABLE i2b2pm.pm_params OWNER TO i2b2pm;
 
+
+drop table pm_cell_params;
 
 CREATE TABLE pm_cell_params (
     id byteint NOT NULL,
@@ -39,6 +46,8 @@ CREATE TABLE pm_cell_params (
 ALTER TABLE i2b2pm.pm_cell_params OWNER TO i2b2pm;
 
 
+drop table pm_global_params;
+
 CREATE TABLE pm_global_params (
     id byteint NOT NULL,
     datatype_cd character varying(50),
@@ -55,6 +64,8 @@ CREATE TABLE pm_global_params (
 ALTER TABLE i2b2pm.pm_global_params OWNER TO i2b2pm;
 
 
+drop table pm_hive_data;
+
 CREATE TABLE pm_hive_data (
     domain_id character varying(50) NOT NULL,
     helpurl character varying(255),
@@ -70,6 +81,8 @@ CREATE TABLE pm_hive_data (
 ALTER TABLE i2b2pm.pm_hive_data OWNER TO i2b2pm;
 
 
+drop table pm_hive_params;
+
 CREATE TABLE pm_hive_params (
     id byteint NOT NULL,
     datatype_cd character varying(50),
@@ -84,6 +97,8 @@ CREATE TABLE pm_hive_params (
 
 ALTER TABLE i2b2pm.pm_hive_params OWNER TO i2b2pm;
 
+
+drop table  pm_project_data;
 
 CREATE TABLE pm_project_data (
     project_id character varying(50) NOT NULL,
@@ -101,6 +116,8 @@ CREATE TABLE pm_project_data (
 ALTER TABLE i2b2pm.pm_project_data OWNER TO i2b2pm;
 
 
+drop table pm_project_params;
+
 CREATE TABLE pm_project_params (
     id byteint NOT NULL,
     datatype_cd character varying(50),
@@ -115,6 +132,8 @@ CREATE TABLE pm_project_params (
 
 ALTER TABLE i2b2pm.pm_project_params OWNER TO i2b2pm;
 
+
+drop table pm_project_user_params;
 
 CREATE TABLE pm_project_user_params (
     id byteint NOT NULL,
@@ -132,6 +151,8 @@ CREATE TABLE pm_project_user_params (
 ALTER TABLE i2b2pm.pm_project_user_params OWNER TO i2b2pm;
 
 
+drop table pm_project_user_roles;
+
 CREATE TABLE pm_project_user_roles (
     project_id character varying(50) NOT NULL,
     user_id character varying(50) NOT NULL,
@@ -144,6 +165,8 @@ CREATE TABLE pm_project_user_roles (
 
 ALTER TABLE i2b2pm.pm_project_user_roles OWNER TO i2b2pm;
 
+
+drop table pm_role_requirement;
 
 CREATE TABLE pm_role_requirement (
     table_cd character varying(50) NOT NULL,
@@ -160,6 +183,8 @@ CREATE TABLE pm_role_requirement (
 ALTER TABLE i2b2pm.pm_role_requirement OWNER TO i2b2pm;
 
 
+drop table pm_user_data;
+
 CREATE TABLE pm_user_data (
     user_id character varying(50) NOT NULL,
     full_name character varying(255),
@@ -175,6 +200,8 @@ CREATE TABLE pm_user_data (
 ALTER TABLE i2b2pm.pm_user_data OWNER TO i2b2pm;
 
 
+drop table  pm_user_params;
+
 CREATE TABLE pm_user_params (
     id byteint NOT NULL,
     datatype_cd character varying(50),
@@ -189,6 +216,8 @@ CREATE TABLE pm_user_params (
 
 ALTER TABLE i2b2pm.pm_user_params OWNER TO i2b2pm;
 
+
+drop table pm_user_session;
 
 CREATE TABLE pm_user_session (
     user_id character varying(50) NOT NULL,
@@ -243,10 +272,8 @@ ALTER TABLE  pm_role_requirement
     ADD CONSTRAINT pm_role_requirement_pkey PRIMARY KEY (table_cd, column_cd, read_hivemgmt_cd, write_hivemgmt_cd);
 
 
-
 ALTER TABLE  pm_user_data
     ADD CONSTRAINT pm_user_data_pkey PRIMARY KEY (user_id);
-
 
 
 ALTER TABLE  pm_user_params
@@ -255,4 +282,3 @@ ALTER TABLE  pm_user_params
 
 ALTER TABLE  pm_user_session
     ADD CONSTRAINT pm_user_session_pkey PRIMARY KEY (session_id, user_id);
-
