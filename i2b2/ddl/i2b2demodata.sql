@@ -2,6 +2,8 @@
 CREATE SCHEMA i2b2demodata authorization TO i2b2demodata;
 
 
+DROP TABLE ARCHIVE_OBSERVATION_FACT;
+
 CREATE TABLE archive_observation_fact (
     encounter_num bigint,
     patient_num int,
@@ -31,6 +33,8 @@ CREATE TABLE archive_observation_fact (
 ALTER TABLE i2b2demodata.archive_observation_fact OWNER TO i2b2demodata;
 
 
+DROP TABLE async_job;
+
 CREATE TABLE async_job (
     id integer,
     job_name character varying(200),
@@ -45,6 +49,8 @@ CREATE TABLE async_job (
 
 ALTER TABLE i2b2demodata.async_job OWNER TO i2b2demodata;
 
+
+drop table code_lookup;
 
 CREATE TABLE code_lookup (
     table_cd character varying(100) NOT NULL,
@@ -63,6 +69,8 @@ CREATE TABLE code_lookup (
 ALTER TABLE i2b2demodata.code_lookup OWNER TO i2b2demodata;
 
 
+drop table concept_counts;
+
 CREATE TABLE concept_counts (
     concept_path character varying(500),
     parent_concept_path character varying(500),
@@ -71,6 +79,8 @@ CREATE TABLE concept_counts (
 
 ALTER TABLE i2b2demodata.concept_counts OWNER TO i2b2demodata;
 
+
+drop table concept_dimension;
 
 CREATE TABLE concept_dimension (
     concept_path character varying(700) NOT NULL,
@@ -87,10 +97,14 @@ CREATE TABLE concept_dimension (
 ALTER TABLE i2b2demodata.concept_dimension OWNER TO i2b2demodata;
 
 
+drop sequence concept_id;
+
 CREATE SEQUENCE concept_id;
 
 ALTER TABLE i2b2demodata.concept_id OWNER TO i2b2demodata;
 
+
+drop table datamart_report;
 
 CREATE TABLE datamart_report (
     total_patient int,
@@ -101,6 +115,8 @@ CREATE TABLE datamart_report (
 
 ALTER TABLE i2b2demodata.datamart_report OWNER TO i2b2demodata;
 
+
+drop table encounter_mapping;
 
 CREATE TABLE encounter_mapping (
     encounter_ide character varying(200) NOT NULL,
@@ -120,6 +136,8 @@ CREATE TABLE encounter_mapping (
 ALTER TABLE i2b2demodata.encounter_mapping OWNER TO i2b2demodata;
 
 
+drop table modifier_dimension;
+
 CREATE TABLE modifier_dimension (
     modifier_path character varying(700) NOT NULL,
     modifier_cd character varying(50),
@@ -135,6 +153,8 @@ CREATE TABLE modifier_dimension (
 ALTER TABLE i2b2demodata.modifier_dimension OWNER TO i2b2demodata;
 
 
+drop table  news_updates;
+
 CREATE TABLE news_updates (
     newsid integer,
     ranbyuser character varying(200),
@@ -147,6 +167,8 @@ CREATE TABLE news_updates (
 
 ALTER TABLE i2b2demodata.news_updates OWNER TO i2b2demodata;
 
+
+drop table  observation_fact;
 
 CREATE TABLE observation_fact (
     encounter_num bigint,
@@ -176,6 +198,8 @@ CREATE TABLE observation_fact (
 ALTER TABLE i2b2demodata.observation_fact OWNER TO i2b2demodata;
 
 
+drop table patient_dimension;
+
 CREATE TABLE patient_dimension (
     patient_num int NOT NULL,
     vital_status_cd character varying(50),
@@ -201,6 +225,8 @@ CREATE TABLE patient_dimension (
 ALTER TABLE i2b2demodata.patient_dimension OWNER TO i2b2demodata;
 
 
+drop table patient_mapping;
+
 CREATE TABLE patient_mapping (
     patient_ide character varying(200) NOT NULL,
     patient_ide_source character varying(50) NOT NULL,
@@ -217,6 +243,8 @@ CREATE TABLE patient_mapping (
 ALTER TABLE i2b2demodata.patient_mapping OWNER TO i2b2demodata;
 
 
+drop table patient_trial;
+
 CREATE TABLE patient_trial (
     patient_num int,
     trial character varying(30),
@@ -225,6 +253,8 @@ CREATE TABLE patient_trial (
 
 ALTER TABLE i2b2demodata.patient_trial OWNER TO i2b2demodata;
 
+
+drop table provider_dimension;
 
 CREATE TABLE provider_dimension (
     provider_id character varying(50) NOT NULL,
@@ -240,6 +270,8 @@ CREATE TABLE provider_dimension (
 
 ALTER TABLE i2b2demodata.provider_dimension OWNER TO i2b2demodata;
 
+
+drop table  qt_analysis_plugin;
 
 CREATE TABLE qt_analysis_plugin (
     plugin_id int NOT NULL,
@@ -262,6 +294,8 @@ CREATE TABLE qt_analysis_plugin (
 ALTER TABLE i2b2demodata.qt_analysis_plugin OWNER TO i2b2demodata;
 
 
+drop table  qt_analysis_plugin_result_type;
+
 CREATE TABLE qt_analysis_plugin_result_type (
     plugin_id int NOT NULL,
     result_type_id int NOT NULL
@@ -269,6 +303,8 @@ CREATE TABLE qt_analysis_plugin_result_type (
 
 ALTER TABLE i2b2demodata.qt_analysis_plugin_result_type OWNER TO i2b2demodata;
 
+
+drop table  qt_breakdown_path;
 
 CREATE TABLE qt_breakdown_path (
     name character varying(100),
@@ -281,10 +317,14 @@ CREATE TABLE qt_breakdown_path (
 ALTER TABLE i2b2demodata.qt_breakdown_path OWNER TO i2b2demodata;
 
 
+drop sequence qt_sq_qper_pecid;
+
 CREATE SEQUENCE qt_sq_qper_pecid;
 
 ALTER TABLE i2b2demodata.qt_sq_qper_pecid OWNER TO i2b2demodata;
 
+
+drop table qt_patient_enc_collection;
 
 CREATE TABLE qt_patient_enc_collection (
     patient_enc_coll_id int NOT NULL,
@@ -297,10 +337,14 @@ CREATE TABLE qt_patient_enc_collection (
 ALTER TABLE i2b2demodata.qt_patient_enc_collection OWNER TO i2b2demodata;
 
 
+dro psequence qt_sq_qpr_pcid;
+
 CREATE SEQUENCE qt_sq_qpr_pcid;
 
 ALTER TABLE i2b2demodata.qt_sq_qpr_pcid OWNER TO i2b2demodata;
 
+
+drop table qt_patient_set_collection;
 
 CREATE TABLE qt_patient_set_collection (
     patient_set_coll_id int NOT NULL,
@@ -312,10 +356,14 @@ CREATE TABLE qt_patient_set_collection (
 ALTER TABLE i2b2demodata.qt_patient_set_collection OWNER TO i2b2demodata;
 
 
+drop sequence qt_sq_pqm_qmid;
+
 CREATE SEQUENCE qt_sq_pqm_qmid;
 
 ALTER TABLE i2b2demodata.qt_sq_pqm_qmid OWNER TO i2b2demodata;
 
+
+drop table qt_pdo_query_master;
 
 CREATE TABLE qt_pdo_query_master (
     query_master_id int NOT NULL,
@@ -329,6 +377,8 @@ CREATE TABLE qt_pdo_query_master (
 ALTER TABLE i2b2demodata.qt_pdo_query_master OWNER TO i2b2demodata;
 
 
+drop table  qt_privilege;
+
 CREATE TABLE qt_privilege (
     protection_label_cd character varying(1500),
     dataprot_cd character varying(1000),
@@ -339,10 +389,14 @@ CREATE TABLE qt_privilege (
 ALTER TABLE i2b2demodata.qt_privilege OWNER TO i2b2demodata;
 
 
+drop sequence qt_sq_qi_qiid;
+
 CREATE SEQUENCE qt_sq_qi_qiid;
 
 ALTER TABLE i2b2demodata.qt_sq_qi_qiid OWNER TO i2b2demodata;
 
+
+drop table qt_query_instance;
 
 CREATE TABLE qt_query_instance (
     query_instance_id int NOT NULL,
@@ -360,10 +414,14 @@ CREATE TABLE qt_query_instance (
 ALTER TABLE i2b2demodata.qt_query_instance OWNER TO i2b2demodata;
 
 
+drop sequence qt_sq_qm_qmid;
+
 CREATE SEQUENCE qt_sq_qm_qmid;
 
 ALTER TABLE i2b2demodata.qt_sq_qm_qmid OWNER TO i2b2demodata;
 
+
+drop table qt_query_master;
 
 CREATE TABLE qt_query_master (
     query_master_id int  NOT NULL,
@@ -383,10 +441,14 @@ CREATE TABLE qt_query_master (
 ALTER TABLE i2b2demodata.qt_query_master OWNER TO i2b2demodata;
 
 
+drop sequence qt_sq_qri_qriid;
+
 CREATE SEQUENCE qt_sq_qri_qriid;
 
 ALTER TABLE i2b2demodata.qt_sq_qri_qriid OWNER TO i2b2demodata;
 
+
+drop sequence qt_query_result_instance;
 
 CREATE TABLE qt_query_result_instance (
     result_instance_id int  NOT NULL,
@@ -406,10 +468,14 @@ CREATE TABLE qt_query_result_instance (
 ALTER TABLE i2b2demodata.qt_query_result_instance OWNER TO i2b2demodata;
 
 
+drop sequence qt_sq_qr_qrid;
+
 CREATE SEQUENCE qt_sq_qr_qrid;
 
 ALTER TABLE i2b2demodata.qt_sq_qr_qrid OWNER TO i2b2demodata;
 
+
+drop table qt_query_result_type;
 
 CREATE TABLE qt_query_result_type (
     result_type_id int  NOT NULL,
@@ -422,10 +488,14 @@ CREATE TABLE qt_query_result_type (
 ALTER TABLE i2b2demodata.qt_query_result_type OWNER TO i2b2demodata;
 
 
+drop sequence qt_sq_qs_qsid;
+
 CREATE SEQUENCE qt_sq_qs_qsid;
 
 ALTER TABLE i2b2demodata.qt_sq_qs_qsid OWNER TO i2b2demodata;
 
+
+drop table qt_query_status_type;
 
 CREATE TABLE qt_query_status_type (
     status_type_id int NOT NULL,
@@ -436,10 +506,14 @@ CREATE TABLE qt_query_status_type (
 ALTER TABLE i2b2demodata.qt_query_status_type OWNER TO i2b2demodata;
 
 
+drop sequence qt_sq_qxr_xrid;
+
 CREATE SEQUENCE qt_sq_qxr_xrid;
 
 ALTER TABLE i2b2demodata.qt_sq_qxr_xrid OWNER TO i2b2demodata;
 
+
+drop table qt_xml_result;
 
 CREATE TABLE qt_xml_result (
     xml_result_id int  NOT NULL,
@@ -449,6 +523,8 @@ CREATE TABLE qt_xml_result (
 
 ALTER TABLE i2b2demodata.qt_xml_result OWNER TO i2b2demodata;
 
+
+drop table sample_categories;
 
 CREATE TABLE sample_categories (
     trial_name character varying(100),
@@ -468,15 +544,21 @@ CREATE TABLE sample_categories (
 ALTER TABLE i2b2demodata.sample_categories OWNER TO i2b2demodata;
 
 
+drop sequence seq_patient_num;
+
 CREATE SEQUENCE seq_patient_num;
 
 ALTER TABLE i2b2demodata.seq_patient_num OWNER TO i2b2demodata;
 
 
+drop sequence sq_up_patdim_patientnum;
+
 CREATE SEQUENCE sq_up_patdim_patientnum;
 
 ALTER TABLE i2b2demodata.sq_up_patdim_patientnum OWNER TO i2b2demodata;
 
+
+drop table set_type;
 
 CREATE TABLE set_type (
     id integer  NOT NULL,
@@ -486,6 +568,8 @@ CREATE TABLE set_type (
 
 ALTER TABLE i2b2demodata.set_type OWNER TO i2b2demodata;
 
+
+drop table set_upload_status;
 
 CREATE TABLE set_upload_status (
     upload_id int NOT NULL,
@@ -506,6 +590,8 @@ CREATE TABLE set_upload_status (
 ALTER TABLE i2b2demodata.set_upload_status OWNER TO i2b2demodata;
 
 
+drop table source_master;
+
 CREATE TABLE source_master (
     source_cd character varying(50) NOT NULL,
     description character varying(300),
@@ -515,15 +601,21 @@ CREATE TABLE source_master (
 ALTER TABLE i2b2demodata.source_master OWNER TO i2b2demodata;
 
 
+drop sequence sq_up_encdim_encounternum;
+
 CREATE SEQUENCE sq_up_encdim_encounternum;
 
 ALTER TABLE i2b2demodata.sq_up_encdim_encounternum OWNER TO i2b2demodata;
 
 
+drop sequence sq_uploadstatus_uploadid;
+
 CREATE SEQUENCE sq_uploadstatus_uploadid;
 
 ALTER TABLE i2b2demodata.sq_uploadstatus_uploadid OWNER TO i2b2demodata;
 
+
+drop table upload_status;
 
 CREATE TABLE upload_status (
     upload_id int NOT NULL,
@@ -544,6 +636,8 @@ CREATE TABLE upload_status (
 
 ALTER TABLE i2b2demodata.upload_status OWNER TO i2b2demodata;
 
+
+drop table visit_dimension;
 
 CREATE TABLE visit_dimension (
     encounter_num bigint NOT NULL,
