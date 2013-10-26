@@ -1,5 +1,5 @@
-delete from searchapp.plugin_module;
-delete from searchapp.plugin;
+truncate table searchapp.plugin_module;
+truncate table searchapp.plugin;
 
 
 -- insert into searchapp.PLUGIN 

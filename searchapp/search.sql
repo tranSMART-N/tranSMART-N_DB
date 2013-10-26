@@ -1,5 +1,5 @@
 
-delete from searchapp.search_gene_sig_file_schema;
+truncate table searchapp.search_gene_sig_file_schema;
 
 insert into searchapp.search_gene_sig_file_schema 
 (SEARCH_GENE_SIG_FILE_SCHEMA_ID, NAME, DESCRIPTION, NUMBER_COLUMNS, SUPPORTED)

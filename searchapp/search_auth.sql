@@ -1,13 +1,16 @@
-delete from searchapp.SEARCH_ROLE_AUTH_USER;
-delete from searchapp.SEARCH_ROLE;
 
-delete from searchapp.SEARCH_REQUEST_MAP;
+truncate table  searchapp.SEARCH_ROLE_AUTH_USER;
+truncate table  searchapp.SEARCH_ROLE;
 
-delete from searchapp.SEARCH_AUTH_USER;
-delete from searchapp.SEARCH_AUTH_GROUP;
-delete from searchapp.SEARCH_AUTH_PRINCIPAL;
+truncate table  searchapp.SEARCH_REQUEST_MAP;
 
--- insert into searchapp.SEARCH_AUTH_PRINCIPAL
+truncate table  searchapp.SEARCH_AUTH_USER;
+truncate table  searchapp.SEARCH_AUTH_GROUP;
+truncate table  searchapp.SEARCH_AUTH_PRINCIPAL;
+
+truncate table search_sec_access_level;
+
+-- insert into searchapp.SEARCH_AUTH_PRINCIPAL: 6
 insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESCRIPTION,LAST_UPDATED,NAME,UNIQUE_ID,ENABLED)
 values (1,'USER',now(),'system admin',now(),'Sys Admin','admin',true);
 
@@ -27,11 +30,11 @@ Insert into searchapp.SEARCH_AUTH_PRINCIPAL (ID,PRINCIPAL_TYPE,DATE_CREATED,DESC
 values (12345,'USER',now(),'guest account',now(),'Guest',null,true);
 
 
--- insert into searchapp.SEARCH_AUTH_GROUP
+-- insert into searchapp.SEARCH_AUTH_GROUP: 1
 Insert into searchapp.SEARCH_AUTH_GROUP (ID,GROUP_CATEGORY) values (-1,'EVERYONE GROUP');
 
 
--- insert into  into searchapp.SEARCH_AUTH_USER
+-- insert into  into searchapp.SEARCH_AUTH_USER: 5
 Insert into searchapp.SEARCH_AUTH_USER (ID,EMAIL,EMAIL_SHOW,PASSWD,USER_REAL_NAME,USERNAME)
 values (1,null,false,'bff5811e373694ac401008f1e6ddb65ee3e69fb2','Sys Admin','admin');
 Insert into searchapp.SEARCH_AUTH_USER (ID,EMAIL,EMAIL_SHOW,PASSWD,USER_REAL_NAME,USERNAME)
@@ -44,7 +47,7 @@ Insert into searchapp.SEARCH_AUTH_USER (ID,EMAIL,EMAIL_SHOW,PASSWD,USER_REAL_NAM
 values (12345,null,false,'e97709e39773ebf126d2176080f38a2d45f03dfd','Guest','guest');
 
 
--- insert into into searchapp.SEARCH_REQUEST_MAP
+-- insert into into searchapp.SEARCH_REQUEST_MAP: 17
 Insert into searchapp.SEARCH_REQUEST_MAP (ID,VERSION,CONFIG_ATTRIBUTE,URL) values (1,0,'ROLE_ADMIN','/requestmap/**');
 Insert into searchapp.SEARCH_REQUEST_MAP (ID,VERSION,CONFIG_ATTRIBUTE,URL) values (2,0,'ROLE_ADMIN','/role/**');
 Insert into searchapp.SEARCH_REQUEST_MAP (ID,VERSION,CONFIG_ATTRIBUTE,URL) values (3,2,'ROLE_ADMIN','/authUser/**');
@@ -82,3 +85,14 @@ Insert into searchapp.SEARCH_ROLE_AUTH_USER (PEOPLE_ID,AUTHORITIES_ID) values (5
 Insert into searchapp.SEARCH_ROLE_AUTH_USER (PEOPLE_ID,AUTHORITIES_ID) values (5027,12345);
 Insert into searchapp.SEARCH_ROLE_AUTH_USER (PEOPLE_ID,AUTHORITIES_ID) values (6,12345);
 Insert into searchapp.SEARCH_ROLE_AUTH_USER (PEOPLE_ID,AUTHORITIES_ID) values (5,12345);
+
+
+-- insert into  search_sec_access_level: 3
+insert into search_sec_access_level (search_sec_access_level_id, access_level_name, access_level_value)
+values(263801,	'OWN',	255);
+
+insert into search_sec_access_level (search_sec_access_level_id, access_level_name, access_level_value)
+values(263802,	'EXPORT',	8);
+
+insert into search_sec_access_level (search_sec_access_level_id, access_level_name, access_level_value)
+values(263803,	'VIEW',	1);
