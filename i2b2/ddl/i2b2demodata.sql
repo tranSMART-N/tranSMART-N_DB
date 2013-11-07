@@ -433,9 +433,9 @@ CREATE TABLE qt_query_master (
     create_date date NOT NULL,
     delete_date date,
     delete_flag character varying(3),
-    generated_sql character varying(500),
-    request_xml character varying(500),
-    i2b2_request_xml character varying(500)
+    generated_sql character varying(2000),
+    request_xml character varying(2000),
+    i2b2_request_xml character varying(2000)
 );
 
 ALTER TABLE i2b2demodata.qt_query_master OWNER TO i2b2demodata;
