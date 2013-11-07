@@ -251,7 +251,7 @@ CREATE TABLE de_gpl_info (
     platform character varying(50) NOT NULL,
     title character varying(500),
     organism character varying(100),
-    annotation_date timestamp, -- without time zone,
+    annotation_date date, -- timestamp without time zone,
     marker_type character varying(100),
     genome_build character varying(20),
     release_nbr numeric
@@ -785,7 +785,7 @@ CREATE TABLE haploview_data (
     chromosome character varying(10),
     gene character varying(50),
     release smallint,
-    release_date timestamp, -- without time zone,
+    release_date date, -- timestamp without time zone,
     trial_name character varying(50),
     snp_data varchar(4000)
 );
