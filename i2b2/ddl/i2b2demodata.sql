@@ -97,11 +97,11 @@ CREATE TABLE concept_dimension (
 ALTER TABLE i2b2demodata.concept_dimension OWNER TO i2b2demodata;
 
 
-drop sequence concept_id;
+drop sequence sq_concept_cd;
 
-CREATE SEQUENCE concept_id;
+CREATE SEQUENCE sq_concept_cd;
 
-ALTER TABLE i2b2demodata.concept_id OWNER TO i2b2demodata;
+ALTER TABLE i2b2demodata.sq_concept_cd OWNER TO i2b2demodata;
 
 
 drop table datamart_report;
@@ -544,11 +544,11 @@ CREATE TABLE sample_categories (
 ALTER TABLE i2b2demodata.sample_categories OWNER TO i2b2demodata;
 
 
-drop sequence seq_patient_num;
+drop sequence sq_patient_num;
 
-CREATE SEQUENCE seq_patient_num;
+CREATE SEQUENCE sq_patient_num;
 
-ALTER TABLE i2b2demodata.seq_patient_num OWNER TO i2b2demodata;
+ALTER TABLE i2b2demodata.sq_patient_num OWNER TO i2b2demodata;
 
 
 drop sequence sq_up_patdim_patientnum;
