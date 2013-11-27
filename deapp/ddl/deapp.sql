@@ -245,6 +245,8 @@ CREATE SEQUENCE de_chromosomal_region_region_id_seq;
 --
 -- TOC entry 296 (class 1259 OID 24768)
 -- Name: de_gpl_info; Type: TABLE; Schema: deapp; Owner: deapp; Tablespace: deapp
+
+--	changed release_nbr to character varying  20131127 jea
 --
 
 CREATE TABLE de_gpl_info (
@@ -254,7 +256,7 @@ CREATE TABLE de_gpl_info (
     annotation_date date, -- timestamp without time zone,
     marker_type character varying(100),
     genome_build character varying(20),
-    release_nbr numeric
+    release_nbr character varying(50)
 );
 
 
@@ -699,7 +701,7 @@ CREATE TABLE de_subject_sample_mapping (
     omic_source_study character varying(200),
     omic_patient_id bigint,
     partition_id numeric
-);
+) distribute on (assay_id);
 
 
 --ALTER TABLE deapp.de_subject_sample_mapping OWNER TO deapp;
@@ -1204,4 +1206,33 @@ ALTER TABLE   de_snp_probe
 --
 -- PostgreSQL database dump complete
 --
+
+
+--	added 2013/11/20	J Avitabile
+
+CREATE TABLE "DEAPP"."DE_OBS_ENROLL_DAYS" 
+   ("ENCOUNTER_NUM" numeric(38,0), 
+	"DAYS_SINCE_ENROLL" numeric(18,5), 
+	"STUDY_ID" VARCHAR(200), 
+	"VISIT_DATE" timestamp
+   )  ;
+  
+CREATE TABLE "DEAPP"."DE_CONCEPT_VISIT" 
+   ("CONCEPT_CD" VARCHAR(50) NOT NULL, 
+	"VISIT_NAME" VARCHAR(100) NOT NULL, 
+	"SOURCESYSTEM_CD" VARCHAR(50)
+   )   ;  
+  
+CREATE TABLE "DEAPP"."DE_ENCOUNTER_LEVEL" 
+   (	"STUDY_ID" VARCHAR(50), 
+	"CONCEPT_CD" VARCHAR(500), 
+	"LINK_TYPE" VARCHAR(50)
+   )   ;
+   
+CREATE TABLE "DEAPP"."DE_ENCOUNTER_TYPE" 
+   (	"STUDY_ID" VARCHAR(200), 
+	"LINK_TYPE" VARCHAR(50), 
+	"LINK_VALUE" VARCHAR(200), 
+	"ENCOUNTER_NUM" numeric(38,0)
+   )  ;
 

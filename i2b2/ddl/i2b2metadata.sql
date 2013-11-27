@@ -70,6 +70,8 @@ ALTER TABLE i2b2metadata.custom_meta OWNER TO i2b2metadata;
 
 drop table i2b2;
 
+-- changed c_metadataxml to character varying(4000) 21031127 jea
+
 CREATE TABLE i2b2 (
     c_hlevel int NOT NULL,
     c_fullname character varying(700) NOT NULL,
@@ -78,7 +80,7 @@ CREATE TABLE i2b2 (
     c_visualattributes character(3) NOT NULL,
     c_totalnum int,
     c_basecode character varying(50),
-    c_metadataxml character varying(1000),
+    c_metadataxml character varying(4000),
     c_facttablecolumn character varying(50) NOT NULL,
     c_tablename character varying(150) NOT NULL,
     c_columnname character varying(50) NOT NULL,
@@ -103,6 +105,8 @@ ALTER TABLE i2b2metadata.i2b2 OWNER TO i2b2metadata;
 
 drop table i2b2_secure;
 
+--	changed c_metadataxml to character varying(4000) 20121127 jea
+
 CREATE TABLE i2b2_secure (
     c_hlevel int,
     c_fullname character varying(700),
@@ -111,7 +115,7 @@ CREATE TABLE i2b2_secure (
     c_visualattributes character(3),
     c_totalnum int,
     c_basecode character varying(50),
-    c_metadataxml character varying(1000),
+    c_metadataxml character varying(4000),
     c_facttablecolumn character varying(50),
     c_tablename character varying(150),
     c_columnname character varying(50),
