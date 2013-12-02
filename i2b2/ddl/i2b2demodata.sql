@@ -4,12 +4,14 @@ CREATE SCHEMA i2b2demodata authorization TO i2b2demodata;
 
 DROP TABLE ARCHIVE_OBSERVATION_FACT;
 
+--	changed start_date, end_date to timestamp  20131127 JEA
+
 CREATE TABLE archive_observation_fact (
     encounter_num bigint,
     patient_num bigint,
     concept_cd character varying(50),
     provider_id character varying(50),
-    start_date date,
+    start_date timestamp,
     modifier_cd character varying(100),
     instance_num int,
     valtype_cd character varying(50),
@@ -18,7 +20,7 @@ CREATE TABLE archive_observation_fact (
     valueflag_cd character varying(50),
     quantity_num numeric(18,5),
     units_cd character varying(50),
-    end_date date,
+    end_date timestamp,
     location_cd character varying(50),
     observation_blob character varying(500),
     confidence_num numeric(18,5),
@@ -138,6 +140,9 @@ ALTER TABLE i2b2demodata.encounter_mapping OWNER TO i2b2demodata;
 
 drop table modifier_dimension;
 
+--	updated 2013/11/20	J Avitabile
+--	added modifier_level and modifier_node_type
+
 CREATE TABLE modifier_dimension (
     modifier_path character varying(700) NOT NULL,
     modifier_cd character varying(50),
@@ -147,8 +152,12 @@ CREATE TABLE modifier_dimension (
     download_date date,
     import_date date,
     sourcesystem_cd character varying(50),
-    upload_id int
+    upload_id int,
+	modifier_level numeric(18,0),	
+	modifier_node_type varchar(10)
 );
+
+
 
 ALTER TABLE i2b2demodata.modifier_dimension OWNER TO i2b2demodata;
 
@@ -170,12 +179,14 @@ ALTER TABLE i2b2demodata.news_updates OWNER TO i2b2demodata;
 
 drop table  observation_fact;
 
+--	changed start_date, end_date to timestamp  20131127 jea
+
 CREATE TABLE observation_fact (
     encounter_num bigint,
     patient_num bigint NOT NULL,
     concept_cd character varying(50) NOT NULL,
     provider_id character varying(50) NOT NULL,
-    start_date date,
+    start_date timestamp,
     modifier_cd character varying(100) NOT NULL,
     instance_num int,
     valtype_cd character varying(50),
@@ -184,7 +195,7 @@ CREATE TABLE observation_fact (
     valueflag_cd character varying(50),
     quantity_num numeric(18,5),
     units_cd character varying(50),
-    end_date date,
+    end_date timestamp,
     location_cd character varying(50),
     observation_blob character varying(500),
     confidence_num numeric(18,5),
@@ -199,6 +210,7 @@ ALTER TABLE i2b2demodata.observation_fact OWNER TO i2b2demodata;
 
 
 drop table patient_dimension;
+
 
 CREATE TABLE patient_dimension (
     patient_num int NOT NULL,
@@ -639,12 +651,14 @@ ALTER TABLE i2b2demodata.upload_status OWNER TO i2b2demodata;
 
 drop table visit_dimension;
 
+--	changed start_date, end_date to timestamp  20131127 JEA
+
 CREATE TABLE visit_dimension (
     encounter_num bigint NOT NULL,
     patient_num int NOT NULL,
     active_status_cd character varying(50),
-    start_date date,
-    end_date date,
+    start_date timestamp,
+    end_date timestamp,
     inout_cd character varying(50),
     location_cd character varying(50),
     location_path character varying(900),
@@ -789,3 +803,14 @@ ALTER TABLE qt_query_result_instance
 
 ALTER TABLE qt_xml_result
     ADD CONSTRAINT qt_fk_xmlr_riid FOREIGN KEY (result_instance_id) REFERENCES qt_query_result_instance(result_instance_id);
+	
+	
+--	added 2013/11/20	J Avitabile
+
+
+CREATE TABLE i2b2demodata.MODIFIER_METADATA 
+   (           MODIFIER_CD VARCHAR(50), 
+                VALTYPE_CD VARCHAR(10), 
+                STD_UNITS VARCHAR(50), 
+                VISIT_IND CHAR(1)
+   );
