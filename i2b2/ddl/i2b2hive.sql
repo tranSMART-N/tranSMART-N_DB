@@ -1,5 +1,5 @@
 
-CREATE SCHEMA i2b2hive authorization TO i2b2hive;
+-- CREATE SCHEMA i2b2hive authorization TO i2b2hive;
 
 drop table crc_analysis_job;
 

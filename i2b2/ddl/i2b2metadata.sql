@@ -1,5 +1,5 @@
 
-CREATE SCHEMA i2b2metadata authorization TO i2b2metadata;
+-- CREATE SCHEMA i2b2metadata authorization TO i2b2metadata;
 
 
 drop table birn;

@@ -1,5 +1,5 @@
 
-CREATE SCHEMA i2b2workdata authorization TO i2b2workdata;
+-- CREATE SCHEMA i2b2workdata authorization TO i2b2workdata;
 
 
 drop table workplace;
