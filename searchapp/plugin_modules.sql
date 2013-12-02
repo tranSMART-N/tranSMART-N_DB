@@ -6,7 +6,7 @@ truncate table searchapp.plugin;
  Insert into SEARCHAPP.PLUGIN (PLUGIN_SEQ,NAME,PLUGIN_NAME,HAS_MODULES,HAS_FORM,DEFAULT_LINK,FORM_LINK,FORM_PAGE,ACTIVE) values (1,'R-Modules','R Modules','Y','N','/RModules/default',null,null,'Y');
 
 
-
+ -- insert into searchapp.PLUGIN_MODULE
  Insert into SEARCHAPP.PLUGIN_MODULE (MODULE_SEQ,PLUGIN_SEQ,NAME,VERSION,ACTIVE,HAS_FORM,FORM_LINK,FORM_PAGE,MODULE_NAME,CATEGORY) values (3,1,'Box Plot with ANOVA','0.1','Y','N','null','BoxPlot','boxPlot','DEFAULT');
 
  Insert into SEARCHAPP.PLUGIN_MODULE (MODULE_SEQ,PLUGIN_SEQ,NAME,VERSION,ACTIVE,HAS_FORM,FORM_LINK,FORM_PAGE,MODULE_NAME,CATEGORY) values (22,1,'Correlation Analysis','0.1','Y','N','null','CorrelationAnalysis','correlationAnalysis','DEFAULT');
@@ -95,14 +95,8 @@ truncate table searchapp.plugin;
  where module_name = 'tableWithFisher';
 
 
-
-
   update searchapp.plugin_module
  set params='{"id":"hclust","converter":{"R":["source(''||PLUGINSCRIPTDIRECTORY||Common/dataBuilders.R'')","source(''||PLUGINSCRIPTDIRECTORY||Common/ExtractConcepts.R'')","source(''||PLUGINSCRIPTDIRECTORY||Common/collapsingData.R'')","source(''||PLUGINSCRIPTDIRECTORY||Common/parseDirectory.R'')","source(''||PLUGINSCRIPTDIRECTORY||Heatmap/BuildHeatmapData.R'')","parseDirectory(topLevelDirectory=''||TOPLEVELDIRECTORY||'')","HeatmapData.build(input.gexFile=''||TOPLEVELDIRECTORY||/workingDirectory/mRNA.trans'',genes=''||GENES||'',genes.aggregate=''||AGGREGATE||'',sample.subset1=''||SAMPLE1||'',time.subset1=''||TIMEPOINTS1||'',tissues.subset1=''||TISSUES1||'',platform.subset1=''||GPL1||'',sample.subset2=''||SAMPLE2||'',time.subset2=''||TIMEPOINTS2||'',tissues.subset2=''||TISSUES2||'',platform.subset2=''||GPL2||'')"]},"name":"Hierarchical Clustering","dataFileInputMapping":{"CLINICAL.TXT":"FALSE","SNP.TXT":"snpData","MRNA_DETAILED.TXT":"TRUE"},"dataTypes":{"subset1":["CLINICAL.TXT"]},"pivotData":false,"view":"HClust","processor":{"R":["source(''||PLUGINSCRIPTDIRECTORY||Heatmap/HClusteredHeatmapLoader.R'')","HClusteredHeatmap.loader(input.filename=''outputfile'',imageWidth=||IMAGE_WIDTH||,imageHeight=||IMAGE_HEIGHT||,pointsize=||TEXT_POINT_SIZE||,maxDrawNumber=||MAXDRAWNUMBER||)"]},"renderer":{"GSP":"/RHClust/heatmapOut"},"variableMapping":{"||GENES||":"divIndependentVariablePathway","||AGGREGATE||":"divIndependentVariableprobesAggregation","||TIMEPOINTS1||":"divIndependentVariabletimepoints","||TISSUES1||":"divIndependentVariabletissues","||SAMPLE1||":"divIndependentVariablesamples","||GPL1||":"divIndependentVariablegplsValue","||TIMEPOINTS2||":"divIndependentVariabletimepoints2","||TISSUES2||":"divIndependentVariabletissues2","||SAMPLE2||":"divIndependentVariablesamples2","||GPL2||":"divIndependentVariablegplsValue2","||IMAGE_HEIGHT||":"txtImageHeight","||IMAGE_WIDTH||":"txtImageWidth","||TEXT_POINT_SIZE||":"txtImagePointsize","||MAXDRAWNUMBER||":"txtMaxDrawNumber"}}'
  where module_name = 'hclust';
 
-
-SELECT pg_catalog.setval('searchapp.plugin_module_seq', 1, false);
-
-SELECT pg_catalog.setval('searchapp.plugin_seq', 1, false);
 
