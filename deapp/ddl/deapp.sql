@@ -396,7 +396,7 @@ CREATE TABLE de_snp_data_by_probe (
     snp_id bigint,
     snp_name character varying(255),
     trial_name character varying(255),
-    data_by_probe varchar(4000)
+    data_by_probe varchar(63000)
 );
 
 
