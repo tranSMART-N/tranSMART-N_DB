@@ -39,8 +39,8 @@ INSERT INTO SCHEMES(C_KEY, C_NAME, C_DESCRIPTION) VALUES(null, 'None', 'No schem
 --   table_access
 -- ***********************************
 
-insert into table_access (c_table_cd, c_table_name, c_protected_access, c_hlevel, c_fullname, c_name, c_synonym_cd, c_visualattributes,
-  c_totalnum, c_basecode, c_metadataxml, c_facttablecolumn, c_dimtablename, c_columnname, c_columndatatype, c_operator, c_dimcode,
-  c_comment, c_tooltip, c_entry_date, c_change_date, c_status_cd, valuetype_cd)
-values ('Public Studies', 'i2b2', 'N', '0', '\Public Studies\', 'Public Studies', 'N', 'CA', 0, null, null, 'concept_cd', 'concept_dimension',
-        'concept_path', 'T', 'LIKE', '\Public Studies\', null, '\Public Studies\', null, null, null, null);
+-- insert into table_access (c_table_cd, c_table_name, c_protected_access, c_hlevel, c_fullname, c_name, c_synonym_cd, c_visualattributes,
+--   c_totalnum, c_basecode, c_metadataxml, c_facttablecolumn, c_dimtablename, c_columnname, c_columndatatype, c_operator, c_dimcode,
+--   c_comment, c_tooltip, c_entry_date, c_change_date, c_status_cd, valuetype_cd)
+-- values ('Public Studies', 'i2b2', 'N', '0', '\Public Studies\', 'Public Studies', 'N', 'CA', 0, null, null, 'concept_cd', 'concept_dimension',
+--         'concept_path', 'T', 'LIKE', '\Public Studies\', null, '\Public Studies\', null, null, null, null);
