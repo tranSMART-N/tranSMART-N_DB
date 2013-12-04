@@ -1,5 +1,5 @@
 
-CREATE SCHEMA i2b2demodata authorization TO i2b2demodata;
+-- CREATE SCHEMA i2b2demodata authorization TO i2b2demodata;
 
 
 DROP TABLE ARCHIVE_OBSERVATION_FACT;
@@ -33,6 +33,11 @@ CREATE TABLE archive_observation_fact (
 );
 
 ALTER TABLE i2b2demodata.archive_observation_fact OWNER TO i2b2demodata;
+
+
+drop sequence sq_async_job;
+
+create sequence sq_async_job;
 
 
 DROP TABLE async_job;

@@ -1,5 +1,5 @@
 
-CREATE SCHEMA i2b2pm authorization to i2b2pm;
+-- CREATE SCHEMA i2b2pm authorization to i2b2pm;
 
 
 drop table  pm_cell_data;
