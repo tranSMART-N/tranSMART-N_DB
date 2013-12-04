@@ -1356,7 +1356,8 @@ CREATE TABLE bio_assay_platform (
     platform_array character varying(50),
     platform_accession character varying(20),
     platform_organism character varying(200),
-    platform_vendor character varying(200)
+    platform_vendor character varying(200),
+	platform_type character varying(100)
 );
 
 
@@ -2463,9 +2464,32 @@ CREATE TABLE bio_marker_correl_mv (
 -- Name: bio_marker_correl_view; Type: VIEW; Schema: biomart; Owner: biomart
 --
 
-CREATE VIEW bio_marker_correl_view AS
-    (SELECT DISTINCT b.bio_marker_id, b.bio_marker_id AS asso_bio_marker_id, 'GENE'::text AS correl_type, 1 AS mv_id FROM bio_marker b WHERE ((b.bio_marker_type)::text = 'GENE'::text) UNION SELECT DISTINCT c.bio_data_id AS bio_marker_id, c.asso_bio_data_id AS asso_bio_marker_id, 'PATHWAY_GENE'::text AS correl_type, 2 AS mv_id FROM bio_marker b, bio_data_correlation c, bio_data_correl_descr d WHERE ((((b.bio_marker_id = c.bio_data_id) AND (c.bio_data_correl_descr_id = d.bio_data_correl_descr_id)) AND ((b.primary_source_code)::text <> 'ARIADNE'::text)) AND ((d.correlation)::text = 'PATHWAY GENE'::text))) UNION SELECT DISTINCT c.bio_data_id AS bio_marker_id, c.asso_bio_data_id AS asso_bio_marker_id, 'HOMOLOGENE_GENE'::text AS correl_type, 3 AS mv_id FROM bio_marker b, bio_data_correlation c, bio_data_correl_descr d WHERE (((b.bio_marker_id = c.bio_data_id) AND (c.bio_data_correl_descr_id = d.bio_data_correl_descr_id)) AND ((d.correlation)::text = 'HOMOLOGENE GENE'::text));
+--CREATE VIEW bio_marker_correl_view AS
+--    (SELECT DISTINCT b.bio_marker_id, b.bio_marker_id AS asso_bio_marker_id, 'GENE'::text AS correl_type, 1 AS mv_id FROM bio_marker b WHERE ((b.bio_marker_type)::text = 'GENE'::text) UNION SELECT DISTINCT c.bio_data_id AS bio_marker_id, c.asso_bio_data_id AS asso_bio_marker_id, 'PATHWAY_GENE'::text AS correl_type, 2 AS mv_id FROM bio_marker b, bio_data_correlation c, bio_data_correl_descr d WHERE ((((b.bio_marker_id = c.bio_data_id) AND (c.bio_data_correl_descr_id = d.bio_data_correl_descr_id)) AND ((b.primary_source_code)::text <> 'ARIADNE'::text)) AND ((d.correlation)::text = 'PATHWAY GENE'::text))) UNION SELECT DISTINCT c.bio_data_id AS bio_marker_id, c.asso_bio_data_id AS asso_bio_marker_id, 'HOMOLOGENE_GENE'::text AS correl_type, 3 AS mv_id FROM bio_marker b, bio_data_correlation c, bio_data_correl_descr d WHERE (((b.bio_marker_id = c.bio_data_id) AND (c.bio_data_correl_descr_id = d.bio_data_correl_descr_id)) AND ((d.correlation)::text = 'HOMOLOGENE GENE'::text));
+--	replaced all text conversions, Netezza treated as CLOB
 
+CREATE OR REPLACE VIEW BIOMART.BIO_MARKER_CORREL_VIEW AS 
+(SELECT DISTINCT B.BIO_MARKER_ID, B.BIO_MARKER_ID AS ASSO_BIO_MARKER_ID, 'GENE' AS CORREL_TYPE, 1 AS MV_ID 
+ FROM BIOMART.BIO_MARKER B 
+ WHERE B.BIO_MARKER_TYPE = 'GENE'
+UNION 
+ SELECT DISTINCT C.BIO_DATA_ID AS BIO_MARKER_ID, C.ASSO_BIO_DATA_ID AS ASSO_BIO_MARKER_ID, 'PATHWAY_GENE' AS CORREL_TYPE, 2 AS MV_ID 
+ FROM BIOMART.BIO_MARKER B
+     ,BIOMART.BIO_DATA_CORRELATION C
+	 ,BIOMART.BIO_DATA_CORREL_DESCR D 
+ WHERE B.BIO_MARKER_ID = C.BIO_DATA_ID
+   AND C.BIO_DATA_CORREL_DESCR_ID = D.BIO_DATA_CORREL_DESCR_ID
+   AND B.PRIMARY_SOURCE_CODE <> 'ARIADNE'
+   AND D.CORRELATION = 'PATHWAY GENE'
+UNION 
+ SELECT DISTINCT C.BIO_DATA_ID AS BIO_MARKER_ID, C.ASSO_BIO_DATA_ID AS ASSO_BIO_MARKER_ID, 'HOMOLOGENE_GENE' AS CORREL_TYPE, 3 AS MV_ID 
+ FROM BIOMART.BIO_MARKER B
+	 ,BIOMART.BIO_DATA_CORRELATION C
+	 ,BIOMART.BIO_DATA_CORREL_DESCR D 
+ WHERE B.BIO_MARKER_ID = C.BIO_DATA_ID
+   AND C.BIO_DATA_CORREL_DESCR_ID = D.BIO_DATA_CORREL_DESCR_ID
+   AND D.CORRELATION = 'HOMOLOGENE GENE'
+);
 
 -- ALTER TABLE biomart.bio_marker_correl_view OWNER TO biomart;
 
@@ -5462,4 +5486,12 @@ CREATE TABLE BIOMART.BIO_ASY_ANALYSIS_GWAS_TOP50
 	RNUM BIGINT
 )
 DISTRIBUTE ON (BIO_ASSAY_ANALYSIS_ID);
+
+  CREATE TABLE BIOMART.BIO_SPECIES_ORGANISM
+   (ID BIGINT, 
+    SPECIES character varying(200), 
+    ORGANISM character varying(200)
+   ) 
+  distribute on (id);
+
 
