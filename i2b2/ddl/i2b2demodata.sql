@@ -223,7 +223,7 @@ CREATE TABLE patient_dimension (
     birth_date date,
     death_date date,
     sex_cd character varying(50),
-    age_in_years_num int,
+    age_in_years_num int default 0,
     language_cd character varying(50),
     race_cd character varying(50),
     marital_status_cd character varying(50),
