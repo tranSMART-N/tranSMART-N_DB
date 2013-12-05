@@ -85,6 +85,7 @@ grant all on external table to transmartdb with grant option;
 grant create table, create synonym, create sequence, create synonym, create temp table, create procedure, create view, create function, create external table to transmartdb;
 
 
+\o create_synonym.sq
 
 SELECT 'create synonym '||table_name||' for '||table_schema||'.'||table_name||';'
 FROM information_schema.tables
@@ -92,11 +93,13 @@ where table_schema in ('BIOMART', 'DEAPP', 'I2B2DEMODATA', 'I2B2HIVE', 'I2B2META
 
 SELECT 'create synonym '||sequence_name||' for '||sequence_schema||'.'||sequence_name||';'
 FROM information_schema.sequences
-where table_schema in ('BIOMART', 'DEAPP', 'I2B2DEMODATA', 'I2B2HIVE', 'I2B2METADATA', 'I2B2PM', 'I2B2WORKDATA', 'SEARCHAPP');
+where sequence_schema in ('BIOMART', 'DEAPP', 'I2B2DEMODATA', 'I2B2HIVE', 'I2B2METADATA', 'I2B2PM', 'I2B2WORKDATA', 'SEARCHAPP');
 
 SELECT 'create synonym '||table_name||' for '||table_schema||'.'||table_name||';'
 FROM information_schema.views
 where table_schema in ('BIOMART', 'DEAPP', 'I2B2DEMODATA', 'I2B2HIVE', 'I2B2METADATA', 'I2B2PM', 'I2B2WORKDATA', 'SEARCHAPP');
+
+\i create_synonym.sql
 
 
 \o reassign_owner.sql
