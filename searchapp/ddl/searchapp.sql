@@ -29,7 +29,7 @@ CREATE TABLE plugin_module (
     module_seq bigint NOT NULL,
     plugin_seq bigint NOT NULL,
     name character varying(70) NOT NULL,
-    params varchar(4000),
+    params varchar(16000),
     version character varying(10) DEFAULT 0.1,
     active character(1) DEFAULT 'Y',
     has_form character(1) DEFAULT 'N',
