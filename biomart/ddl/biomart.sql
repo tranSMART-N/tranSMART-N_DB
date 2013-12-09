@@ -38,7 +38,8 @@ CREATE TABLE bio_assay_analysis (
     long_description character varying(4000),
     qa_criteria character varying(4000),
     data_count bigint,
-    tea_data_count bigint
+    tea_data_count bigint,
+	etl_id_source	bigint
 );
 
 
@@ -1273,6 +1274,11 @@ CREATE TABLE biobank_sample (
     source_type character varying(255) NOT NULL
 );
 
+ CREATE TABLE BIOMART.BIO_DATA_PLATFORM
+   (BIO_DATA_ID bigint, 
+	BIO_ASSAY_PLATFORM_ID bigint, 
+	ETL_SOURCE character varying(100)
+   );
 
 --ALTER TABLE biomart.biobank_sample OWNER TO biomart_user;
 
