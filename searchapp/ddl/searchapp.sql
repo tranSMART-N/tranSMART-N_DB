@@ -413,6 +413,20 @@ CREATE TABLE search_user_settings (
 
 ALTER TABLE searchapp.search_user_settings OWNER TO biomart_user;
 
+  CREATE TABLE SEARCHAPP.SUBSET 
+   (SUBSET_ID BIGINT NOT NULL, 
+	DESCRIPTION character varying(1000) NOT NULL , 
+	CREATE_DATE TIMESTAMP NOT NULL , 
+	CREATING_USER character varying(200) NOT NULL , 
+	PUBLIC_FLAG int4 DEFAULT 0 NOT NULL , 
+	DELETED_FLAG int4 DEFAULT 0 NOT NULL , 
+	QUERY_MASTER_ID_1 bigint NOT NULL , 
+	QUERY_MASTER_ID_2 bigint, 
+	STUDY character varying(200) 
+   ) ;
+  
+
+
 
 drop sequence  seq_search_data_id;
 

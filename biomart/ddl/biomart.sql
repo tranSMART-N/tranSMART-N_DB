@@ -18,29 +18,29 @@ CREATE TABLE bio_assay (
 -- ALTER TABLE biomart.bio_assay OWNER TO biomart;
 
 
-CREATE TABLE bio_assay_analysis (
-    analysis_name character varying(500),
-    short_description character varying(510),
-    analysis_create_date timestamp, --without time zone,
-    analyst_id character varying(510),
-    bio_assay_analysis_id bigint NOT NULL,
-    analysis_version character varying(200),
-    fold_change_cutoff double precision,
-    pvalue_cutoff double precision,
-    rvalue_cutoff double precision,
-    bio_asy_analysis_pltfm_id bigint,
-    bio_source_import_id bigint,
-    analysis_type character varying(200),
-    analyst_name character varying(250),
-    analysis_method_cd character varying(50),
-    bio_assay_data_type character varying(50),
-    etl_id character varying(100),
-    long_description character varying(4000),
-    qa_criteria character varying(4000),
-    data_count bigint,
-    tea_data_count bigint,
-	etl_id_source	bigint
-);
+CREATE TABLE BIO_ASSAY_ANALYSIS (
+    ANALYSIS_NAME CHARACTER VARYING(500),
+    SHORT_DESCRIPTION CHARACTER VARYING(510),
+    ANALYSIS_CREATE_DATE TIMESTAMP, --WITHOUT TIME ZONE,
+    ANALYST_ID CHARACTER VARYING(510),
+    BIO_ASSAY_ANALYSIS_ID BIGINT NOT NULL,
+    ANALYSIS_VERSION CHARACTER VARYING(200),
+    FOLD_CHANGE_CUTOFF DOUBLE PRECISION,
+    PVALUE_CUTOFF DOUBLE PRECISION,
+    RVALUE_CUTOFF DOUBLE PRECISION,
+    BIO_ASY_ANALYSIS_PLTFM_ID BIGINT,
+    BIO_SOURCE_IMPORT_ID BIGINT,
+    ANALYSIS_TYPE CHARACTER VARYING(200),
+    ANALYST_NAME CHARACTER VARYING(250),
+    ANALYSIS_METHOD_CD CHARACTER VARYING(50),
+    BIO_ASSAY_DATA_TYPE CHARACTER VARYING(50),
+    ETL_ID CHARACTER VARYING(100),
+    LONG_DESCRIPTION CHARACTER VARYING(4000),
+    QA_CRITERIA CHARACTER VARYING(4000),
+    DATA_COUNT BIGINT,
+    TEA_DATA_COUNT BIGINT,
+	ETL_ID_SOURCE	BIGINT
+) DISTRIBUTE ON (BIO_ASSAY_ANALYSIS_ID);
 
 
 -- ALTER TABLE biomart.bio_assay_analysis OWNER TO biomart;
@@ -1279,6 +1279,22 @@ CREATE TABLE biobank_sample (
 	BIO_ASSAY_PLATFORM_ID bigint, 
 	ETL_SOURCE character varying(100)
    );
+   
+     CREATE TABLE BIOMART.BIO_DATA_OBSERVATION 
+   (	BIO_DATA_ID bigint, 
+	BIO_OBSERVATION_ID bigint, 
+	ETL_SOURCE character varying(100)
+   ) ;
+   
+     CREATE TABLE BIOMART.BIO_OBSERVATION 
+   (	BIO_OBSERVATION_ID bigint, 
+	OBS_NAME character varying(200), 
+	OBS_CODE character varying(50), 
+	OBS_DESCR character varying(1000), 
+	OBS_TYPE character varying(20), 
+	OBS_CODE_SOURCE character varying(20), 
+	ETL_ID character varying(50)
+   ) ;
 
 --ALTER TABLE biomart.biobank_sample OWNER TO biomart_user;
 
