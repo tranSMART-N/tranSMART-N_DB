@@ -29,7 +29,7 @@ CREATE TABLE plugin_module (
     module_seq bigint NOT NULL,
     plugin_seq bigint NOT NULL,
     name character varying(70) NOT NULL,
-    params varchar(4000),
+    params varchar(16000),
     version character varying(10) DEFAULT 0.1,
     active character(1) DEFAULT 'Y',
     has_form character(1) DEFAULT 'N',
@@ -231,7 +231,23 @@ CREATE TABLE search_gene_signature (
     upload_file character varying(255) NOT NULL,
     search_gene_sig_file_schema_id bigint DEFAULT 1,
     fold_chg_metric_concept_id bigint,
-    experiment_type_cell_line_id bigint
+    experiment_type_cell_line_id bigint,
+	QC_PERFORMED NUMERIC(1,0),
+    QC_DATE DATE,
+	QC_INFO CHARACTER VARYING(255),
+	DATA_SOURCE CHARACTER VARYING(255),
+	CUSTOM_VALUE1 CHARACTER VARYING(255),
+	CUSTOM_NAME1 CHARACTER VARYING(255),
+	CUSTOM_VALUE2 CHARACTER VARYING(255),
+	CUSTOM_NAME2 CHARACTER VARYING(255),
+	CUSTOM_VALUE3 CHARACTER VARYING(255),
+	CUSTOM_NAME3 CHARACTER VARYING(255),
+	CUSTOM_VALUE4 CHARACTER VARYING(255),
+	CUSTOM_NAME4 CHARACTER VARYING(255),
+	CUSTOM_VALUE5 CHARACTER VARYING(255),
+	CUSTOM_NAME5 CHARACTER VARYING(255),
+	VERSION CHARACTER VARYING(255)
+
 );
 
 ALTER TABLE searchapp.search_gene_signature OWNER TO searchapp;
@@ -413,6 +429,20 @@ CREATE TABLE search_user_settings (
 
 ALTER TABLE searchapp.search_user_settings OWNER TO biomart_user;
 
+  CREATE TABLE SEARCHAPP.SUBSET 
+   (SUBSET_ID BIGINT NOT NULL, 
+	DESCRIPTION character varying(1000) NOT NULL , 
+	CREATE_DATE TIMESTAMP NOT NULL , 
+	CREATING_USER character varying(200) NOT NULL , 
+	PUBLIC_FLAG boolean DEFAULT false NOT NULL , 
+	DELETED_FLAG boolean DEFAULT false NOT NULL , 
+	QUERY_MASTER_ID_1 bigint NOT NULL , 
+	QUERY_MASTER_ID_2 bigint, 
+	STUDY character varying(200) 
+   ) ;
+  
+
+
 
 drop sequence  seq_search_data_id;
 
@@ -427,7 +457,7 @@ CREATE TABLE SEARCHAPP.REPORT
 	DESCRIPTION CHARACTER VARYING(1000),
 	CREATINGUSER CHARACTER VARYING(200),
 	PUBLIC_FLAG CHARACTER(1),
-	CREATE_DATE DATE,
+	CREATE_DATE TIMESTAMP,
 	STUDY CHARACTER VARYING(200)
 )
 DISTRIBUTE ON (REPORT_ID);

@@ -47,10 +47,10 @@ CREATE TABLE async_job (
     job_name character varying(200),
     job_status character varying(200),
     run_time character varying(200),
-    last_run_on date,
+    last_run_on timestamp,
     viewer_url character varying(4000),
     alt_viewer_url character varying(600),
-    job_results character varying(500)
+    job_results character varying(500),
     job_type character varying(20)
 );
 
@@ -223,7 +223,7 @@ CREATE TABLE patient_dimension (
     birth_date date,
     death_date date,
     sex_cd character varying(50),
-    age_in_years_num int,
+    age_in_years_num int default 0,
     language_cd character varying(50),
     race_cd character varying(50),
     marital_status_cd character varying(50),

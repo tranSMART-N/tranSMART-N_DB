@@ -70,6 +70,9 @@ ALTER TABLE i2b2metadata.custom_meta OWNER TO i2b2metadata;
 
 drop table i2b2;
 
+drop sequence I2B2METADATA.SQ_I2B2_ID;
+create sequence I2B2METADATA.SQ_I2B2_ID;
+
 -- changed c_metadataxml to character varying(4000) 21031127 jea
 
 CREATE TABLE i2b2 (
@@ -97,7 +100,8 @@ CREATE TABLE i2b2 (
     valuetype_cd character varying(50),
     m_exclusion_cd character varying(25),
     c_path character varying(700),
-    c_symbol character varying(50)
+    c_symbol character varying(50).
+	i2b2_id	bigint
 );
 
 ALTER TABLE i2b2metadata.i2b2 OWNER TO i2b2metadata;

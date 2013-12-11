@@ -18,28 +18,29 @@ CREATE TABLE bio_assay (
 -- ALTER TABLE biomart.bio_assay OWNER TO biomart;
 
 
-CREATE TABLE bio_assay_analysis (
-    analysis_name character varying(500),
-    short_description character varying(510),
-    analysis_create_date timestamp, --without time zone,
-    analyst_id character varying(510),
-    bio_assay_analysis_id bigint NOT NULL,
-    analysis_version character varying(200),
-    fold_change_cutoff double precision,
-    pvalue_cutoff double precision,
-    rvalue_cutoff double precision,
-    bio_asy_analysis_pltfm_id bigint,
-    bio_source_import_id bigint,
-    analysis_type character varying(200),
-    analyst_name character varying(250),
-    analysis_method_cd character varying(50),
-    bio_assay_data_type character varying(50),
-    etl_id character varying(100),
-    long_description character varying(4000),
-    qa_criteria character varying(4000),
-    data_count bigint,
-    tea_data_count bigint
-);
+CREATE TABLE BIO_ASSAY_ANALYSIS (
+    ANALYSIS_NAME CHARACTER VARYING(500),
+    SHORT_DESCRIPTION CHARACTER VARYING(510),
+    ANALYSIS_CREATE_DATE TIMESTAMP, --WITHOUT TIME ZONE,
+    ANALYST_ID CHARACTER VARYING(510),
+    BIO_ASSAY_ANALYSIS_ID BIGINT NOT NULL,
+    ANALYSIS_VERSION CHARACTER VARYING(200),
+    FOLD_CHANGE_CUTOFF DOUBLE PRECISION,
+    PVALUE_CUTOFF DOUBLE PRECISION,
+    RVALUE_CUTOFF DOUBLE PRECISION,
+    BIO_ASY_ANALYSIS_PLTFM_ID BIGINT,
+    BIO_SOURCE_IMPORT_ID BIGINT,
+    ANALYSIS_TYPE CHARACTER VARYING(200),
+    ANALYST_NAME CHARACTER VARYING(250),
+    ANALYSIS_METHOD_CD CHARACTER VARYING(50),
+    BIO_ASSAY_DATA_TYPE CHARACTER VARYING(50),
+    ETL_ID CHARACTER VARYING(100),
+    LONG_DESCRIPTION CHARACTER VARYING(4000),
+    QA_CRITERIA CHARACTER VARYING(4000),
+    DATA_COUNT BIGINT,
+    TEA_DATA_COUNT BIGINT,
+	ETL_ID_SOURCE	BIGINT
+) DISTRIBUTE ON (BIO_ASSAY_ANALYSIS_ID);
 
 
 -- ALTER TABLE biomart.bio_assay_analysis OWNER TO biomart;
@@ -191,7 +192,11 @@ CREATE TABLE bio_assay_platform (
     platform_accession character varying(20),
     platform_organism character varying(200),
     platform_vendor character varying(200),
+<<<<<<< HEAD
+	platform_type character varying(100)
+=======
     platform_type character varying(200)
+>>>>>>> 0e8862703ddae12f727f93a0495805e7879c683e
 );
 
 
@@ -1122,30 +1127,32 @@ CREATE TABLE bio_marker (
 -- ALTER TABLE biomart.bio_marker OWNER TO biomart;
 
 
-CREATE TABLE bio_marker_correl_mv (
-    bio_marker_id bigint,
-    asso_bio_marker_id bigint,
-    correl_type character varying(15),
-    mv_id bigint
+--CREATE VIEW bio_marker_correl_view AS
+--    (SELECT DISTINCT b.bio_marker_id, b.bio_marker_id AS asso_bio_marker_id, 'GENE'::text AS correl_type, 1 AS mv_id FROM bio_marker b WHERE ((b.bio_marker_type)::text = 'GENE'::text) UNION SELECT DISTINCT c.bio_data_id AS bio_marker_id, c.asso_bio_data_id AS asso_bio_marker_id, 'PATHWAY_GENE'::text AS correl_type, 2 AS mv_id FROM bio_marker b, bio_data_correlation c, bio_data_correl_descr d WHERE ((((b.bio_marker_id = c.bio_data_id) AND (c.bio_data_correl_descr_id = d.bio_data_correl_descr_id)) AND ((b.primary_source_code)::text <> 'ARIADNE'::text)) AND ((d.correlation)::text = 'PATHWAY GENE'::text))) UNION SELECT DISTINCT c.bio_data_id AS bio_marker_id, c.asso_bio_data_id AS asso_bio_marker_id, 'HOMOLOGENE_GENE'::text AS correl_type, 3 AS mv_id FROM bio_marker b, bio_data_correlation c, bio_data_correl_descr d WHERE (((b.bio_marker_id = c.bio_data_id) AND (c.bio_data_correl_descr_id = d.bio_data_correl_descr_id)) AND ((d.correlation)::text = 'HOMOLOGENE GENE'::text));
+--	replaced all text conversions, Netezza treated as CLOB
+
+CREATE OR REPLACE VIEW BIOMART.BIO_MARKER_CORREL_MV AS 
+(SELECT DISTINCT B.BIO_MARKER_ID, B.BIO_MARKER_ID AS ASSO_BIO_MARKER_ID, 'GENE' AS CORREL_TYPE, 1 AS MV_ID 
+ FROM BIOMART.BIO_MARKER B 
+ WHERE B.BIO_MARKER_TYPE = 'GENE'
+UNION 
+ SELECT DISTINCT C.BIO_DATA_ID AS BIO_MARKER_ID, C.ASSO_BIO_DATA_ID AS ASSO_BIO_MARKER_ID, 'PATHWAY_GENE' AS CORREL_TYPE, 2 AS MV_ID 
+ FROM BIOMART.BIO_MARKER B
+     ,BIOMART.BIO_DATA_CORRELATION C
+	 ,BIOMART.BIO_DATA_CORREL_DESCR D 
+ WHERE B.BIO_MARKER_ID = C.BIO_DATA_ID
+   AND C.BIO_DATA_CORREL_DESCR_ID = D.BIO_DATA_CORREL_DESCR_ID
+   AND B.PRIMARY_SOURCE_CODE <> 'ARIADNE'
+   AND D.CORRELATION = 'PATHWAY GENE'
+UNION 
+ SELECT DISTINCT C.BIO_DATA_ID AS BIO_MARKER_ID, C.ASSO_BIO_DATA_ID AS ASSO_BIO_MARKER_ID, 'HOMOLOGENE_GENE' AS CORREL_TYPE, 3 AS MV_ID 
+ FROM BIOMART.BIO_MARKER B
+	 ,BIOMART.BIO_DATA_CORRELATION C
+	 ,BIOMART.BIO_DATA_CORREL_DESCR D 
+ WHERE B.BIO_MARKER_ID = C.BIO_DATA_ID
+   AND C.BIO_DATA_CORREL_DESCR_ID = D.BIO_DATA_CORREL_DESCR_ID
+   AND D.CORRELATION = 'HOMOLOGENE GENE'
 );
-
-
--- ALTER TABLE biomart.bio_marker_correl_mv OWNER TO biomart;
-
-
-CREATE VIEW bio_marker_correl_view AS
-    (SELECT DISTINCT b.bio_marker_id, b.bio_marker_id AS asso_bio_marker_id, 'GENE'::text AS correl_type, 1 AS mv_id
-     FROM bio_marker b
-     WHERE ((b.bio_marker_type)::text = 'GENE'::text)
-     UNION
-     SELECT DISTINCT c.bio_data_id AS bio_marker_id, c.asso_bio_data_id AS asso_bio_marker_id, 'PATHWAY_GENE'::text AS correl_type, 2 AS mv_id
-     FROM bio_marker b, bio_data_correlation c, bio_data_correl_descr d
-     WHERE ((((b.bio_marker_id = c.bio_data_id) AND (c.bio_data_correl_descr_id = d.bio_data_correl_descr_id)) AND ((b.primary_source_code)::text <> 'ARIADNE'::text)) AND ((d.correlation)::text = 'PATHWAY GENE'::text)))
-     UNION
-     SELECT DISTINCT c.bio_data_id AS bio_marker_id, c.asso_bio_data_id AS asso_bio_marker_id, 'HOMOLOGENE_GENE'::text AS correl_type, 3 AS mv_id
-     FROM bio_marker b, bio_data_correlation c, bio_data_correl_descr d
-     WHERE (((b.bio_marker_id = c.bio_data_id) AND (c.bio_data_correl_descr_id = d.bio_data_correl_descr_id)) AND ((d.correlation)::text = 'HOMOLOGENE GENE'::text));
-
 
 -- ALTER TABLE biomart.bio_marker_correl_view OWNER TO biomart;
 
@@ -1267,6 +1274,27 @@ CREATE TABLE biobank_sample (
     source_type character varying(255) NOT NULL
 );
 
+ CREATE TABLE BIOMART.BIO_DATA_PLATFORM
+   (BIO_DATA_ID bigint, 
+	BIO_ASSAY_PLATFORM_ID bigint, 
+	ETL_SOURCE character varying(100)
+   );
+   
+     CREATE TABLE BIOMART.BIO_DATA_OBSERVATION 
+   (	BIO_DATA_ID bigint, 
+	BIO_OBSERVATION_ID bigint, 
+	ETL_SOURCE character varying(100)
+   ) ;
+   
+     CREATE TABLE BIOMART.BIO_OBSERVATION 
+   (	BIO_OBSERVATION_ID bigint, 
+	OBS_NAME character varying(200), 
+	OBS_CODE character varying(50), 
+	OBS_DESCR character varying(1000), 
+	OBS_TYPE character varying(20), 
+	OBS_CODE_SOURCE character varying(20), 
+	ETL_ID character varying(50)
+   ) ;
 
 --ALTER TABLE biomart.biobank_sample OWNER TO biomart_user;
 
@@ -2023,4 +2051,12 @@ CREATE TABLE BIOMART.BIO_ASY_ANALYSIS_GWAS_TOP50
 	RNUM BIGINT
 )
 DISTRIBUTE ON (BIO_ASSAY_ANALYSIS_ID);
+
+  CREATE TABLE BIOMART.BIO_SPECIES_ORGANISM
+   (ID BIGINT, 
+    SPECIES character varying(200), 
+    ORGANISM character varying(200)
+   ) 
+  distribute on (id);
+
 
