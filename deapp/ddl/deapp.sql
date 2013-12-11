@@ -578,3 +578,35 @@ CREATE TABLE DEAPP.DE_ENCOUNTER_TYPE
 	ENCOUNTER_NUM numeric(38,0)
    )  ;
 
+
+ -- added 2013/12/10 HX
+
+create table  DE_RC_SNP_INFO
+(
+ SNP_INFO_ID           bigint,
+ RS_ID                 VARCHAR(50),
+ CHROM                 VARCHAR(4),
+ POS                   bigint,
+ REF                   VARCHAR(1000),
+ ALT                   VARCHAR(1000),
+ GENE_INFO             VARCHAR(1000),
+ VARIATION_CLASS       VARCHAR(10),
+ STRAND                VARCHAR(1),
+ -- CLINSIG               VARCHAR(100),
+ -- DISEASE               VARCHAR(500),
+ GMAF                  int,
+ GENE_BIOTYPE          VARCHAR(100),
+ IMPACT                VARCHAR(50),
+ TRANSCRIPT_ID         VARCHAR(100),
+ FUNCTIONAL_CLASS      VARCHAR(100),
+ EFFECT                VARCHAR(100),
+ EXON_ID               VARCHAR(100),
+ AMINO_ACID_CHANGE     VARCHAR(50),
+ CODON_CHANGE          VARCHAR(100),
+ HG_VERSION            VARCHAR(10),
+ GENE_NAME             VARCHAR(50),
+ ENTREZ_ID             VARCHAR(50),
+ RECOMBINATION_RATE    numeric(18,6),
+ RECOMBINATION_MAP     numeric(18,6),
+ REGULOME_SCORE        VARCHAR(10)
+);
