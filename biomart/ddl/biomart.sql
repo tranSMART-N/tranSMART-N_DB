@@ -192,11 +192,7 @@ CREATE TABLE bio_assay_platform (
     platform_accession character varying(20),
     platform_organism character varying(200),
     platform_vendor character varying(200),
-<<<<<<< HEAD
-	platform_type character varying(100)
-=======
     platform_type character varying(200)
->>>>>>> 0e8862703ddae12f727f93a0495805e7879c683e
 );
 
 
