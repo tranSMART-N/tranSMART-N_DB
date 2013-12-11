@@ -47,10 +47,10 @@ CREATE TABLE async_job (
     job_name character varying(200),
     job_status character varying(200),
     run_time character varying(200),
-    last_run_on date,
+    last_run_on timestamp,
     viewer_url character varying(4000),
     alt_viewer_url character varying(600),
-    job_results character varying(500)
+    job_results character varying(500),
     job_type character varying(20)
 );
 
