@@ -143,6 +143,16 @@ CREATE TABLE i2b2_secure (
 
 ALTER TABLE i2b2metadata.i2b2_secure OWNER TO i2b2metadata;
 
+drop sequence I2B2METADATA.SQ_I2B2_TAG_ID;
+
+CREATE SEQUENCE I2B2METADATA.SQ_I2B2_TAG_ID AS BIGINT
+	START WITH 1
+	INCREMENT BY 1
+	NO MINVALUE 
+	NO MAXVALUE 
+	NO CYCLE;
+	
+	alter sequence i2b2metadata.sq_i2b2_tag_id owner to i2b2metadata;
 
 drop table i2b2_tags;
 
