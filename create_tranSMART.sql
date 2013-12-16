@@ -85,7 +85,7 @@ grant all on external table to transmartdb with grant option;
 grant create table, create synonym, create sequence, create synonym, create temp table, create procedure, create view, create function, create external table to transmartdb;
 
 
-\o create_synonym.sq
+\o create_synonym.sql
 
 SELECT 'create synonym '||table_name||' for '||table_schema||'.'||table_name||';'
 FROM information_schema.tables
