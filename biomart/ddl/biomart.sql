@@ -2056,3 +2056,24 @@ DISTRIBUTE ON (BIO_ASSAY_ANALYSIS_ID);
   distribute on (id);
 
 
+-- added for GWAS by HX 2013-12-16
+
+CREATE TABLE BIOMART.BIO_ANALYSIS_ATTRIBUTE
+(
+  STUDY_ID                   character varying(255),
+  BIO_ASSAY_ANALYSIS_ID      bigint         NOT NULL,
+  TERM_ID                    bigint,
+  SOURCE_CD                  character varying(255),
+  BIO_ANALYSIS_ATTRIBUTE_ID  bigint             NOT NULL
+);
+
+
+
+CREATE TABLE BIOMART.BIO_ANALYSIS_ATTRIBUTE_LINEAGE
+(
+  BIO_ANALYSIS_ATT_LINEAGE_ID  bigint           NOT NULL,
+  BIO_ANALYSIS_ATTRIBUTE_ID    bigint           NOT NULL,
+  ANCESTOR_TERM_ID             bigint           NOT NULL,
+  ANCESTOR_SEARCH_KEYWORD_ID   bigint           NOT NULL
+);
+
