@@ -330,7 +330,8 @@ CREATE TABLE search_keyword (
     source_code character varying(100),
     display_data_category character varying(200),
     owner_auth_user_id bigint
-);
+)
+DISTRIBUTE ON (search_keyword_id);
 
 ALTER TABLE searchapp.search_keyword OWNER TO searchapp;
 
@@ -344,7 +345,8 @@ CREATE TABLE search_keyword_term (
     search_keyword_term_id bigint NOT NULL,
     term_length bigint,
     owner_auth_user_id bigint
-);
+)
+DISTRIBUTE ON (search_keyword_term_id);
 
 ALTER TABLE searchapp.search_keyword_term OWNER TO searchapp;
 

@@ -30,7 +30,9 @@ CREATE TABLE archive_observation_fact (
     sourcesystem_cd character varying(50),
     upload_id int,
     archive_upload_id int
-);
+)
+DISTRIBUTE ON (patient_num);
+
 
 ALTER TABLE i2b2demodata.archive_observation_fact OWNER TO i2b2demodata;
 
@@ -71,7 +73,8 @@ CREATE TABLE code_lookup (
     import_date date,
     sourcesystem_cd character varying(50),
     upload_id int
-);
+)
+DISTRIBUTE ON (code_cd);
 
 ALTER TABLE i2b2demodata.code_lookup OWNER TO i2b2demodata;
 
@@ -99,7 +102,8 @@ CREATE TABLE concept_dimension (
     import_date date,
     sourcesystem_cd character varying(50),
     upload_id int
-);
+)
+DISTRIBUTE ON (concept_cd);
 
 ALTER TABLE i2b2demodata.concept_dimension OWNER TO i2b2demodata;
 
@@ -118,7 +122,8 @@ CREATE TABLE datamart_report (
     total_observationfact int,
     total_event int,
     report_date date
-);
+)
+DISTRIBUTE ON (report_date);
 
 ALTER TABLE i2b2demodata.datamart_report OWNER TO i2b2demodata;
 
@@ -138,7 +143,8 @@ CREATE TABLE encounter_mapping (
     import_date date,
     sourcesystem_cd character varying(50),
     upload_id int
-);
+)
+DISTRIBUTE ON (encounter_num);
 
 ALTER TABLE i2b2demodata.encounter_mapping OWNER TO i2b2demodata;
 
@@ -209,7 +215,8 @@ CREATE TABLE observation_fact (
     import_date date,
     sourcesystem_cd character varying(50),
     upload_id int
-);
+)
+DISTRIBUTE ON (patient_num);
 
 ALTER TABLE i2b2demodata.observation_fact OWNER TO i2b2demodata;
 
@@ -255,7 +262,8 @@ CREATE TABLE patient_mapping (
     import_date date,
     sourcesystem_cd character varying(50),
     upload_id int
-);
+)
+DISTRIBUTE ON (patient_num);
 
 ALTER TABLE i2b2demodata.patient_mapping OWNER TO i2b2demodata;
 
@@ -556,7 +564,8 @@ CREATE TABLE sample_categories (
     sample_treatment character varying(2000),
     subject_treatment character varying(2000),
     timepoint character varying(250)
-);
+)
+DISTRIBUTE ON (sample_id);
 
 ALTER TABLE i2b2demodata.sample_categories OWNER TO i2b2demodata;
 
@@ -674,7 +683,8 @@ CREATE TABLE visit_dimension (
     import_date date,
     sourcesystem_cd character varying(50),
     upload_id int
-);
+)
+DISTRIBUTE ON (patient_num);
 
 ALTER TABLE i2b2demodata.visit_dimension OWNER TO i2b2demodata;
 

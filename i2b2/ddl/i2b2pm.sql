@@ -227,7 +227,8 @@ CREATE TABLE pm_user_session (
     entry_date date,
     changeby_char character varying(50),
     status_cd character varying(50)
-);
+)
+DISTRIBUTE ON (session_id);
 
 ALTER TABLE i2b2pm.pm_user_session OWNER TO i2b2pm;
 

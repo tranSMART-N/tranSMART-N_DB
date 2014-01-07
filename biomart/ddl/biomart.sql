@@ -113,7 +113,8 @@ CREATE TABLE bio_assay_data (
     bio_assay_dataset_id bigint,
     bio_assay_id bigint,
     etl_id bigint
-);
+)
+DISTRIBUTE ON (bio_assay_data_id);
 
 
 -- ALTER TABLE biomart.bio_assay_data OWNER TO biomart;
@@ -264,7 +265,8 @@ CREATE TABLE bio_cell_line (
     disease_stage character varying(100),
     disease_subtype character varying(200),
     etl_reference_link character varying(300)
-);
+)
+DISTRIBUTE ON (bio_cell_line_id);
 
 
 -- ALTER TABLE biomart.bio_cell_line OWNER TO biomart;
@@ -278,7 +280,8 @@ CREATE TABLE bio_cgdcp_data (
     nci_role_code character varying(200),
     nci_drug_concept_code character varying(200),
     bio_data_id bigint NOT NULL
-);
+)
+DISTRIBUTE ON (bio_data_id);
 
 
 -- ALTER TABLE biomart.bio_cgdcp_data OWNER TO biomart;
@@ -350,7 +353,8 @@ CREATE TABLE bio_clinical_trial (
     main_findings character varying(2000),
     platform_name character varying(200),
     search_area character varying(100)
-);
+)
+DISTRIBUTE ON (bio_experiment_id);
 
 
 -- ALTER TABLE biomart.bio_clinical_trial OWNER TO biomart;
@@ -568,7 +572,8 @@ CREATE TABLE bio_concept_code (
     code_description character varying(1000),
     code_type_name character varying(200),
     bio_concept_code_id bigint NOT NULL
-);
+)
+DISTRIBUTE ON (bio_concept_code_id);
 
 
 -- ALTER TABLE biomart.bio_concept_code OWNER TO biomart;
@@ -600,7 +605,8 @@ CREATE TABLE bio_content_reference (
     content_reference_type character varying(200) NOT NULL,
     etl_id bigint,
     etl_id_c character varying(30)
-);
+)
+DISTRIBUTE ON (bio_data_id);
 
 
 -- ALTER TABLE biomart.bio_content_reference OWNER TO biomart;
@@ -625,7 +631,8 @@ CREATE TABLE bio_curated_data (
     bio_curation_dataset_id bigint NOT NULL,
     reference_id bigint,
     data_type character varying(200)
-);
+)
+DISTRIBUTE ON (bio_data_id);
 
 
 -- ALTER TABLE biomart.bio_curated_data OWNER TO biomart;
@@ -652,7 +659,8 @@ CREATE TABLE bio_data_attribute (
     property_value character varying(200),
     bio_data_id bigint NOT NULL,
     property_unit character varying(100)
-);
+)
+DISTRIBUTE ON (bio_data_id);
 
 
 -- ALTER TABLE biomart.bio_data_attribute OWNER TO biomart;
@@ -744,7 +752,8 @@ CREATE TABLE bio_data_taxonomy (
     bio_taxonomy_id bigint NOT NULL,
     bio_data_id bigint NOT NULL,
     etl_source character varying(100)
-);
+)
+DISTRIBUTE ON (bio_data_id);
 
 
 -- ALTER TABLE biomart.bio_data_taxonomy OWNER TO biomart;
@@ -1189,7 +1198,8 @@ CREATE TABLE bio_patient_event (
     event_date timestamp, --without time zone,
     site character varying(400),
     bio_clinic_trial_timepoint_id bigint NOT NULL
-);
+)
+DISTRIBUTE ON (bio_patient_id);
 
 
 --ALTER TABLE biomart.bio_patient_event OWNER TO biomart;
@@ -1202,7 +1212,8 @@ CREATE TABLE bio_patient_event_attr (
     bio_clinic_trial_attr_id bigint NOT NULL,
     bio_patient_attribute_id bigint NOT NULL,
     bio_patient_event_id bigint NOT NULL
-);
+)
+DISTRIBUTE ON (bio_patient_event_id);
 
 
 --ALTER TABLE biomart.bio_patient_event_attr OWNER TO biomart;

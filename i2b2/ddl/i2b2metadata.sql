@@ -102,7 +102,8 @@ CREATE TABLE i2b2 (
     c_path character varying(700),
     c_symbol character varying(50).
 	i2b2_id	bigint
-);
+)
+DISTRIBUTE ON (c_fullname);
 
 ALTER TABLE i2b2metadata.i2b2 OWNER TO i2b2metadata;
 
@@ -139,7 +140,8 @@ CREATE TABLE i2b2_secure (
     c_symbol character varying(50),
     i2b2_id numeric(18,0),
     secure_obj_token character varying(50)
-);
+)
+DISTRIBUTE ON (c_fullname);
 
 ALTER TABLE i2b2metadata.i2b2_secure OWNER TO i2b2metadata;
 

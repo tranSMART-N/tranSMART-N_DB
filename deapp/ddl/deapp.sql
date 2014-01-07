@@ -44,11 +44,11 @@ CREATE TABLE de_gpl_info (
 
 
 CREATE TABLE de_mrna_annotation (
+    gene_id bigint,
     gpl_id character varying(100),
     probe_id character varying(100),
     gene_symbol character varying(100),
     probeset_id bigint,
-    gene_id bigint,
     organism character varying(200)
 );
 
@@ -63,9 +63,9 @@ CREATE SEQUENCE de_parent_cd_seq;
 
 
 CREATE TABLE de_pathway (
+    id bigint NOT NULL,
     name character varying(300),
     description character varying(510),
-    id bigint NOT NULL,
     type character varying(100),
     source character varying(100),
     externalid character varying(100),
@@ -99,8 +99,8 @@ CREATE TABLE de_saved_comparison (
 
 
 CREATE TABLE de_snp_calls_by_gsm (
-    gsm_num character varying(10),
     patient_num bigint,
+    gsm_num character varying(10),
     snp_name character varying(100),
     snp_calls character varying(4)
 );
@@ -230,7 +230,8 @@ CREATE TABLE de_subject_acgh_data (
     probnorm double precision,
     probgain double precision,
     probamp double precision
-);
+)
+DISTRIBUTE ON (patient_id);
 
 
 --ALTER TABLE deapp.de_subject_acgh_data OWNER TO deapp;
@@ -255,7 +256,8 @@ CREATE TABLE de_subject_microarray_data (
     zscore double precision,
     raw_intensity_4 double precision,
     partition_id numeric
-);
+)
+DISTRIBUTE ON (patient_id);
 
 
 --ALTER TABLE deapp.de_subject_microarray_data OWNER TO deapp;
@@ -295,7 +297,8 @@ CREATE TABLE de_subject_microarray_med (
     stddev_intensity bigint,
     median_intensity bigint,
     zscore bigint
-);
+)
+DISTRIBUTE ON (patient_id);
 
 
 --ALTER TABLE deapp.de_subject_microarray_med OWNER TO deapp;
@@ -316,7 +319,8 @@ CREATE TABLE de_subject_protein_data (
     stddev_intensity bigint,
     median_intensity bigint,
     zscore bigint
-);
+)
+DISTRIBUTE ON (patient_id);
 
 
 --ALTER TABLE deapp.de_subject_protein_data OWNER TO deapp;
@@ -341,7 +345,8 @@ CREATE TABLE de_subject_rbm_data (
     median_intensity bigint,
     zscore bigint,
     rbm_panel character varying(50)
-);
+)
+DISTRIBUTE ON (patient_id);
 
 
 --ALTER TABLE deapp.de_subject_rbm_data OWNER TO deapp;
@@ -393,7 +398,8 @@ CREATE TABLE de_subject_snp_dataset (
     sample_type character varying(255),
     paired_dataset_id bigint,
     patient_gender character varying(1)
-);
+)
+DISTRIBUTE ON (patient_num);
 
 
 --ALTER TABLE deapp.de_subject_snp_dataset OWNER TO deapp;
@@ -425,7 +431,8 @@ CREATE TABLE deapp_annotation (
     annotation_value character varying(100),
     gene_id bigint,
     gene_symbol character varying(200)
-);
+)
+DISTRIBUTE ON (gene_id);
 
 
 --ALTER TABLE deapp.deapp_annotation OWNER TO deapp;
